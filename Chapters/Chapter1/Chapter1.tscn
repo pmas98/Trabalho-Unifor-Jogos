@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbg6x7dedq185"]
+
+[ext_resource type="Script" uid="uid://c1drmmnhs1jlm" path="res://Chapters/Chapter1/chapter_1.gd" id="1_bmr2h"]
+[ext_resource type="PackedScene" uid="uid://l08au552gm3a" path="res://Template/dialogue_base.tscn" id="1_oljnv"]
+
+[node name="Chapter1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bmr2h")
+
+[node name="DialogueBase" parent="." instance=ExtResource("1_oljnv")]

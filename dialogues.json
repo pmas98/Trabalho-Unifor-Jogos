@@ -1,0 +1,15 @@
+{
+  "chapters": [
+	{
+	  "scenes": [
+		{
+		  "speaker": "Doctor",
+		  "text": "Oi.",
+		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "transition": "fade_in",
+		  "position": "left"
+		},
+	  ]
+	}
+  ]
+}
