@@ -54,3 +54,11 @@ offset_right = 704.0
 offset_bottom = 107.0
 text = "Olá"
 fit_content = true
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 290.0
+offset_right = 887.0
+offset_bottom = 330.0
+alignment = 1
