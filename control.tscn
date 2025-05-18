@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cwq5unpjcuc7x" path="res://Assets/background.png" id="1_7telq"]
 [ext_resource type="FontFile" uid="uid://dhi0h2gdkf5aj" path="res://Assets/PressStart2P-Regular.ttf" id="1_rfaqq"]
 
-[node name="Control" type="Control"]
+[node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,19 +87,26 @@ alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rfaqq")
 theme_override_font_sizes/font_size = 30
-text = "START"
+text = "NOVO JOGO"
 flat = true
 
 [node name="Button2" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rfaqq")
 theme_override_font_sizes/font_size = 30
-text = "SOUNDS"
+text = "CONTINUAR"
 flat = true
 
 [node name="Button3" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rfaqq")
 theme_override_font_sizes/font_size = 30
-text = "CONTROLS"
+text = "CONFIGURAÇÕES"
+flat = true
+
+[node name="Button4" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_rfaqq")
+theme_override_font_sizes/font_size = 30
+text = "Sair"
 flat = true
