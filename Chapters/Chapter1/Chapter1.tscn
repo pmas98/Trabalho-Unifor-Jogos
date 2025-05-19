@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbg6x7dedq185"]
 
-[ext_resource type="Script" path="res://Chapters/Chapter1/chapter_1.gd" id="1_bmr2h"]
+[ext_resource type="Script" uid="uid://c1drmmnhs1jlm" path="res://Chapters/Chapter1/chapter_1.gd" id="1_bmr2h"]
 [ext_resource type="PackedScene" uid="uid://l08au552gm3a" path="res://Template/dialogue_base.tscn" id="1_oljnv"]
 
 [node name="Chapter1" type="Control"]

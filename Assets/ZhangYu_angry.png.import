@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgwcuds54eb1s"
-path="res://.godot/imported/original.png-6cb6ac921bb7c027a4f20f8f21d0a4b9.ctex"
+uid="uid://dvclo4l10sjxu"
+path="res://.godot/imported/ZhangYu_angry.png-44eb90b67c10271322b5ac0e2a1fee7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/original.png"
-dest_files=["res://.godot/imported/original.png-6cb6ac921bb7c027a4f20f8f21d0a4b9.ctex"]
+source_file="res://Assets/ZhangYu_angry.png"
+dest_files=["res://.godot/imported/ZhangYu_angry.png-44eb90b67c10271322b5ac0e2a1fee7d.ctex"]
 
 [params]
 
