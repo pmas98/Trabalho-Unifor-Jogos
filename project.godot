@@ -12,5 +12,5 @@ config_version=5
 
 config/name="ProjetoFinalJogos"
 run/main_scene="uid://bbg6x7dedq185"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
