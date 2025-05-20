@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://l08au552gm3a"]
 
 [ext_resource type="Script" uid="uid://dlquy00v3kdro" path="res://Template/dialogue_base.gd" id="1_k4dtq"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rgrmh"]
-load_path = "res://.godot/imported/main_char_resize.png-07cff88fc27b6766c52011520964e7d6.ctex"
+[ext_resource type="Texture2D" uid="uid://ch2uvtujpheey" path="res://Assets/main_char.png" id="2_lch7t"]
 
 [node name="DialogueBase" type="Control"]
 layout_mode = 3
@@ -17,7 +15,7 @@ offset_top = 187.0
 offset_right = 5432.0
 offset_bottom = 4787.0
 scale = Vector2(0.1, 0.1)
-texture = SubResource("CompressedTexture2D_rgrmh")
+texture = ExtResource("2_lch7t")
 
 [node name="DialoguePanel" type="Panel" parent="."]
 layout_mode = 1

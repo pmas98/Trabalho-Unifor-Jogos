@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="ProjetoFinalJogos"
-run/main_scene="uid://bbg6x7dedq185"
+run/main_scene="uid://c031i1etrg2n"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SaveSystem="*res://Scripts/save.gd"

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c031i1etrg2n"]
 
-[ext_resource type="Script" path="res://Menu.gd" id="1_0fjlj"]
-[ext_resource type="Texture2D" uid="uid://cwq5unpjcuc7x" path="res://Assets/background.png" id="1_7telq"]
-[ext_resource type="FontFile" uid="uid://dhi0h2gdkf5aj" path="res://Assets/PressStart2P-Regular.ttf" id="1_rfaqq"]
+[ext_resource type="Script" uid="uid://dog2e35541ov2" path="res://Menu/Menu.gd" id="1_ylpcl"]
+[ext_resource type="Texture2D" uid="uid://cwq5unpjcuc7x" path="res://Assets/background.png" id="2_cx167"]
+[ext_resource type="FontFile" uid="uid://dhi0h2gdkf5aj" path="res://Assets/PressStart2P-Regular.ttf" id="3_dolsu"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0fjlj")
+script = ExtResource("1_ylpcl")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -24,7 +24,7 @@ offset_right = 6.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_7telq")
+texture = ExtResource("2_cx167")
 
 [node name="MadeBy" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -67,7 +67,7 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="MainContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_rfaqq")
+theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 50
 text = "Day Zero"
 horizontal_alignment = 1
@@ -90,7 +90,7 @@ alignment = 1
 [node name="Novo Jogo" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("1_rfaqq")
+theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
 action_mode = 0
 text = "NOVO JOGO"
@@ -99,7 +99,7 @@ flat = true
 [node name="Continuar" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("1_rfaqq")
+theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
 action_mode = 0
 text = "CONTINUAR"
@@ -108,7 +108,7 @@ flat = true
 [node name="Configuracoes" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("1_rfaqq")
+theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
 text = "CONFIGURAÇÕES"
 flat = true
@@ -116,7 +116,7 @@ flat = true
 [node name="Sair" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("1_rfaqq")
+theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
 text = "Sair"
 flat = true

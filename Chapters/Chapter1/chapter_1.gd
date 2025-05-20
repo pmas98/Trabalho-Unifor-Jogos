@@ -1,7 +1,10 @@
 extends Control
-# 1) Reference your DialogueBase instance
+
+# Reference your DialogueBase instance
 @onready var dialogue = $DialogueBase
-# 2) Storage for all chapters/scenes parsed from JSON
+@onready var save_system = get_node("/root/SaveSystem")
+
+# Storage for all chapters/scenes parsed from JSON
 var dialogue_data : Dictionary
 # Current position
 var cur_chapter : int = 0
@@ -26,7 +29,13 @@ func _ready():
 	dialogue.dialogue_finished.connect(_on_dialogue_finished)
 	dialogue.choice_made.connect(_on_choice_made)
 	
-	# Kick off scene 0
+	# Load saved game if exists
+	var save_data = save_system.load_game()
+	if save_data.has("chapter") and save_data.has("scene_id"):
+		cur_chapter = save_data["chapter"]
+		cur_scene = save_data["scene_id"]
+	
+	# Kick off scene
 	start_current_scene()
 
 func start_current_scene():
@@ -38,6 +47,14 @@ func start_current_scene():
 	var scene = dialogue_data["chapters"][cur_chapter]["scenes"][cur_scene]
 	# Wrap the scene in an array since dialogue.start expects an Array of Dictionaries
 	dialogue.start([scene])
+	
+	# Save current progress
+	var save_info = {
+		"chapter": cur_chapter,
+		"scene_id": cur_scene,
+		"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
+	}
+	save_system.update_save_data(save_info)
 
 func _on_dialogue_finished():
 	# Only handle automatic progression if no choice was made
@@ -80,9 +97,33 @@ func _on_choice_made(scene_id):
 				cur_scene = i
 				found = true
 				print("Set cur_scene to:", cur_scene)
+				
+				# Save the choice data
+				var current_scene = dialogue_data["chapters"][cur_chapter]["scenes"][cur_scene - 1]  # Get the scene with choices
+				if current_scene.has("choices"):
+					for choice in current_scene["choices"]:
+						if choice["next_scene"] == scene_id:
+							var choice_data = {
+								"chapter": cur_chapter,
+								"scene_id": cur_scene - 1,
+								"choice_text": choice["text"],
+								"next_scene": scene_id,
+								"timestamp": Time.get_unix_time_from_system()
+							}
+							save_system.add_choice(choice_data)
+							break
+				
 				# Start the new scene immediately
 				var new_scene = dialogue_data["chapters"][cur_chapter]["scenes"][cur_scene]
 				dialogue.start([new_scene])
+				
+				# Save progress after choice
+				var save_info = {
+					"chapter": cur_chapter,
+					"scene_id": cur_scene,
+					"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
+				}
+				save_system.update_save_data(save_info)
 				break
 		else:
 			print("Warning: Scene at index", i, "does not have an 'id' key")
