@@ -3,16 +3,20 @@
 	{
 	  "scenes": [
 		{
-		  "speaker": "Dr. Zhang",
-		  "text": "Dr. Lin, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
-		  "sprite": "res://Assets/output-onlinepngtools.png",
-		  "transition": "fade_in",
-		  "position": "left"
+         "speaker": "Dr. Zhang",
+          "text": "Dr. Lin, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
+          "sprite": "res://Assets/Dr_Zhang.png",
+          "background": "res://Assets/background1_1.png",
+          "music": "res://Assets/Audio/Nomearquivo.mp3",
+          "transition": "fade_in",
+          "position": "left"
 		},
 		{
 		  "speaker": "Você",
 		  "text": "Vou dar uma olhada. Onde está o prontuário dele?",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "right"
 		},
@@ -20,6 +24,8 @@
 		  "speaker": "Nurse",
 		  "text": "Aqui está, doutor. Ele visitou um mercado de frutos do mar recentemente.",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "left"
 		},
@@ -27,6 +33,8 @@
 		  "speaker": "Você",
 		  "text": "Hmm... os sintomas estão agressivos demais para uma gripe comum. O raio-X mostra opacidade em vidro fosco...",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "right"
 		},
@@ -34,6 +42,8 @@
 		  "speaker": "Dr. Zhang",
 		  "text": "Concordo, Lin. Isso não está normal.",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "left"
 		},
@@ -41,6 +51,8 @@
 		  "speaker": "Você",
 		  "text": "Você tem duas opções. O que vai fazer?",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "right",
 		  "choices": [
@@ -59,6 +71,8 @@
 		  "speaker": "Você",
 		  "text": "Isso não se parece com nada que vi ultimamente. Melhor investigarmos mais a fundo.",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "right"
 		},
@@ -67,6 +81,8 @@
 		  "speaker": "Você",
 		  "text": "Provavelmente é só uma gripe. Vamos esperar os próximos exames para confirmar.",
 		  "sprite": "res://Assets/output-onlinepngtools.png",
+		  "background": "res://Assets/background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
 		  "transition": "fade_in",
 		  "position": "right"
 		}
