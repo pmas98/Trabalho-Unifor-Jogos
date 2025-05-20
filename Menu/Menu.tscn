@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c031i1etrg2n"]
+[gd_scene load_steps=6 format=3 uid="uid://c031i1etrg2n"]
 
 [ext_resource type="Script" uid="uid://dog2e35541ov2" path="res://Menu/Menu.gd" id="1_ylpcl"]
 [ext_resource type="Texture2D" uid="uid://cwq5unpjcuc7x" path="res://Assets/background.png" id="2_cx167"]
 [ext_resource type="FontFile" uid="uid://dhi0h2gdkf5aj" path="res://Assets/PressStart2P-Regular.ttf" id="3_dolsu"]
+[ext_resource type="AudioStream" uid="uid://c18gouhg1gmuj" path="res://Assets/Audio/BGM/bgm_menuCalmo.ogg" id="4_crea4"]
+[ext_resource type="AudioStream" uid="uid://bs4u3f00sxwbs" path="res://Assets/Audio/SFX/buttonpress.wav" id="5_w32jx"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -120,3 +122,13 @@ theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
 text = "Sair"
 flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_crea4")
+autoplay = true
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_w32jx")
+volume_db = 10.049
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

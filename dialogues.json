@@ -9,6 +9,7 @@
 		  "sprite": "res://Assets/Nurse.png",
 		  "transition": "fade_in",
 		  "position": "left",
+		  "audio": "res://Assets/Audio/BGM/bgm_hospital.ogg",
 		  "next_scene": 1
 		},
 		{
@@ -54,6 +55,7 @@
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "fade_in",
 		  "position": "right",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "choices": [
 			{
 			  "text": "Isso não se parece com nada que vi ultimamente. Vamos investigar. (Curiosidade)",
@@ -153,6 +155,7 @@
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "fade_in",
 		  "position": "right",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "requires_flag": "more_tests",
 		  "choices": [
 			{
@@ -175,6 +178,7 @@
 		  "transition": "fade_in",
 		  "position": "right",
 		  "requires_flag": "alerted_authorities",
+		  "audio": "res://Assets/Audio/BGM/bgm_final_truth.ogg",
 		  "next_scene": 16
 		},
 		{
@@ -185,6 +189,7 @@
 		  "transition": "fade_in",
 		  "position": "right",
 		  "requires_flag": "kept_quiet",
+		  "audio": "res://Assets/Audio/BGM/bgm_suppression.ogg",
 		  "next_scene": 16
 		},
 		{
