@@ -1,13 +1,15 @@
 extends Control
-# 1) Reference your DialogueBase instance
+
+# Reference your DialogueBase instance
 @onready var dialogue = $DialogueBase
-# 2) Storage for all chapters/scenes parsed from JSON
+@onready var save_system = get_node("/root/SaveSystem")
+
+# Storage for all chapters/scenes parsed from JSON
 var dialogue_data : Dictionary
 # Current position
 var cur_chapter : int = 0
-var cur_scene   : int = 0
-# To track which choice was selected
-var next_scene_id : int = -1
+var cur_scene_id : int = 0  # Changed from cur_scene to cur_scene_id to be more explicit
+var next_scene_id : int = -1  # Track the next scene we should go to
 
 func _ready():
 	# Load+parse the JSON once
@@ -26,67 +28,88 @@ func _ready():
 	dialogue.dialogue_finished.connect(_on_dialogue_finished)
 	dialogue.choice_made.connect(_on_choice_made)
 	
-	# Kick off scene 0
-	start_current_scene()
+	# Load saved game if exists
+	var save_data = save_system.load_game()
+	if save_data.has("chapter") and save_data.has("scene_id"):
+		cur_chapter = save_data["chapter"]
+		cur_scene_id = save_data["scene_id"]
+		# Start with the saved scene instead of always scene 0
+		start_scene_by_id(cur_scene_id)
+	else:
+		# Only start with scene 0 if there's no save data
+		start_scene_by_id(0)
 
-func start_current_scene():
-	# Check if the scene index is valid
-	if cur_scene >= dialogue_data["chapters"][cur_chapter]["scenes"].size():
-		print("End of chapter reached")
+func find_scene_by_id(scene_id: int) -> Dictionary:
+	print("Finding scene with ID: ", scene_id)
+	# Search through all scenes in the current chapter to find the one with matching ID
+	for scene in dialogue_data["chapters"][cur_chapter]["scenes"]:
+		if scene.has("id") and scene["id"] == scene_id:
+			print("Found scene: ", scene)
+			return scene
+	print("Scene not found!")
+	return {}
+
+func start_scene_by_id(scene_id: int) -> void:
+	print("Starting scene with ID: ", scene_id)
+	var scene = find_scene_by_id(scene_id)
+	if scene.is_empty():
+		print("Error: Scene with ID ", scene_id, " not found")
 		return
 		
-	var scene = dialogue_data["chapters"][cur_chapter]["scenes"][cur_scene]
-	# Wrap the scene in an array since dialogue.start expects an Array of Dictionaries
+	cur_scene_id = scene_id
+	# Start the dialogue with the found scene
 	dialogue.start([scene])
+	
+	# Save current progress
+	var save_info = {
+		"chapter": cur_chapter,
+		"scene_id": cur_scene_id,
+		"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
+	}
+	save_system.update_save_data(save_info)
 
 func _on_dialogue_finished():
-	# Only handle automatic progression if no choice was made
-	if next_scene_id < 0:
-		cur_scene += 1
-		# Wrap to next chapter if needed
-		if cur_scene >= dialogue_data["chapters"][cur_chapter]["scenes"].size():
-			cur_chapter += 1
-			cur_scene = 0
+	print("Dialogue finished for scene: ", cur_scene_id)
+	
+	# If we have a next scene ID set (from a choice), use that
+	if next_scene_id >= 0:
+		print("Using next scene from choice: ", next_scene_id)
+		start_scene_by_id(next_scene_id)
+		next_scene_id = -1  # Reset the next scene ID
+		return
+	
+	# Otherwise, try to find the next scene in the current path
+	var current_scene = find_scene_by_id(cur_scene_id)
+	if current_scene.has("next_scene"):
+		print("Using next scene from current scene: ", current_scene.next_scene)
+		start_scene_by_id(current_scene.next_scene)
+		return
+	
+	# If no next scene is specified, try to find the next scene in sequence
+	# that matches our current path's requirements
+	var next_scene_id = cur_scene_id + 1
+	while true:
+		var next_scene = find_scene_by_id(next_scene_id)
+		if next_scene.is_empty():
+			print("No more scenes in sequence")
+			break
 			
-			# Check if we've reached the end of all chapters
-			if cur_chapter >= dialogue_data["chapters"].size():
-				print("End of dialogue reached")
+		# Check if this scene has any requirements
+		if next_scene.has("requires_flag"):
+			# If we have the required flag, show this scene
+			if dialogue.active_flags.has(next_scene.requires_flag):
+				print("Found next valid scene with required flag: ", next_scene_id)
+				start_scene_by_id(next_scene_id)
 				return
-				
-		start_current_scene()
-	else:
-		# Reset the choice flag
-		next_scene_id = -1
-
-func _on_choice_made(scene_id):
-	print("===> _on_choice_made called with scene_id:", scene_id)
-	next_scene_id = scene_id
-	print("Set next_scene_id to:", next_scene_id)
-	
-	# Find the scene with the specified ID in the current chapter
-	var found = false
-	print("Current chapter index:", cur_chapter)
-	var scenes = dialogue_data["chapters"][cur_chapter]["scenes"]
-	print("Number of scenes in current chapter:", scenes.size())
-	
-	for i in range(scenes.size()):
-		var scene = scenes[i]
-		print("Checking scene at index", i, "with contents:", scene)
-		
-		if scene.has("id"):
-			print("Scene has ID:", scene["id"])
-			if float(scene["id"]) == float(scene_id):
-				print("Match found! Scene index:", i)
-				cur_scene = i
-				found = true
-				print("Set cur_scene to:", cur_scene)
-				# Start the new scene immediately
-				var new_scene = dialogue_data["chapters"][cur_chapter]["scenes"][cur_scene]
-				dialogue.start([new_scene])
-				break
 		else:
-			print("Warning: Scene at index", i, "does not have an 'id' key")
-	
-	# If the scene ID wasn't found, print an error
-	if not found:
-		print("Error: Could not find scene with ID ", scene_id)
+			# If no requirements, show this scene
+			print("Found next valid scene without requirements: ", next_scene_id)
+			start_scene_by_id(next_scene_id)
+			return
+			
+		next_scene_id += 1
+
+func _on_choice_made(scene_id: int) -> void:
+	print("Choice made, transitioning to scene: ", scene_id)
+	next_scene_id = scene_id  # Store the next scene ID
+	start_scene_by_id(scene_id)

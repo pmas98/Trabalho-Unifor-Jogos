@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://c031i1etrg2n"]
+
+[ext_resource type="Script" uid="uid://dog2e35541ov2" path="res://Menu/Menu.gd" id="1_ylpcl"]
+[ext_resource type="Texture2D" uid="uid://cwq5unpjcuc7x" path="res://Assets/background.png" id="2_cx167"]
+[ext_resource type="FontFile" uid="uid://dhi0h2gdkf5aj" path="res://Assets/PressStart2P-Regular.ttf" id="3_dolsu"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ylpcl")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -9.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cx167")
+
+[node name="MadeBy" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.5
+offset_top = -40.0
+offset_right = 132.5
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="PlaceHolder" type="Label" parent="MadeBy"]
+layout_mode = 2
+text = "Feito por "
+
+[node name="DevBiel" type="Button" parent="MadeBy" groups=["buttongroup"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Bielzada do brawl"
+flat = true
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24
+anchor_top = 0.144
+anchor_right = 0.76
+anchor_bottom = 0.891
+offset_left = -0.480011
+offset_top = -0.312004
+offset_right = 0.47998
+offset_bottom = 0.632019
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_dolsu")
+theme_override_font_sizes/font_size = 50
+text = "Day Zero"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Novo Jogo" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_dolsu")
+theme_override_font_sizes/font_size = 30
+action_mode = 0
+text = "NOVO JOGO"
+flat = true
+
+[node name="Continuar" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_dolsu")
+theme_override_font_sizes/font_size = 30
+action_mode = 0
+text = "CONTINUAR"
+flat = true
+
+[node name="Configuracoes" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_dolsu")
+theme_override_font_sizes/font_size = 30
+text = "CONFIGURAÇÕES"
+flat = true
+
+[node name="Sair" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_dolsu")
+theme_override_font_sizes/font_size = 30
+text = "Sair"
+flat = true
