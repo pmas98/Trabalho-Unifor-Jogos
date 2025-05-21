@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bmr2h")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BackgroundGame" type="TextureRect" parent="."]
 layout_mode = 0
 offset_top = -2.0
 offset_right = 1151.0

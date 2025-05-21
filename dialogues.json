@@ -3,15 +3,15 @@
 	{
 	  "scenes": [
 		{
-      "id": 0,
-      "speaker": "Dr. Zhang",
-      "text": "Dr. Lin, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
-      "background": "res://Assets/background1_1.png",
-      "music": "res://Assets/Audio/Nomearquivo.mp3",
-      "transition": "fade_in",
-      "position": "left"
-		  "sprite": "res://Assets/Nurse.png",
-		  "next_scene": 1
+	  "id": 0,
+	  "speaker": "Dr. Zhang",
+	  "text": "Dr. Lin, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
+	  "background": "res://Assets/background1_1.png",
+	  "music": "res://Assets/Audio/Nomearquivo.mp3",
+	  "transition": "fade_in",
+	  "position": "left",
+	  "sprite": "res://Assets/Nurse.png",
+	  "next_scene": 1
 		},
 		{
 		  "id": 1,
