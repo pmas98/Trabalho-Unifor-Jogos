@@ -21,7 +21,6 @@ func _on_mouse_interaction(button: Button, state: String) -> void:
 			button.modulate.a = 0.5
 			play_button_sound()
 
-
 func _on_button_pressed(button: Button) -> void:
 	# TOCAR SOM DE CLIQUE
 	play_button_sound()
@@ -43,8 +42,6 @@ func _on_button_pressed(button: Button) -> void:
 func _on_botao_qualquer_pressed():
 	$ClickSound.stream = load("res://Assets/Audio/SFX/buttonpress.wav")
 	$ClickSound.play()
-
-
 
 func _on_botao_qualquer_mouse_entered():
 	$ClickSound.stream = load("res://Assets/Audio/SFX/buttonpress.wav")
