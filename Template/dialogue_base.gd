@@ -86,6 +86,16 @@ func show_line(line: Dictionary) -> void:
 	tween.tween_property($DialoguePanel/DialogueText, "visible_ratio", 1.0, duration)
 	tween.tween_callback(_on_line_complete)
 
+		# TOCAR ÁUDIO SE EXISTIR NA CENA
+	if line.has("audio"):
+		var audio_path = line.audio
+		if audio_path != "":
+			var audio_player = $DialogueAudioPlayer
+			audio_player.stop() # Para o anterior, se estiver tocando
+			audio_player.stream = load(audio_path)
+			audio_player.play()
+
+
 func _on_line_complete() -> void:
 	print("Line complete. Current index: ", current_index)
 	# If this line has choices, show them instead of normal input

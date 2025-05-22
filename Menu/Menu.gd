@@ -19,11 +19,16 @@ func _on_mouse_interaction(button: Button, state: String) -> void:
 			button.modulate.a = 1.0
 		"entered":
 			button.modulate.a = 0.5
+			play_button_sound()
 
 func _on_button_pressed(button: Button) -> void:
+	# TOCAR SOM DE CLIQUE
+	play_button_sound()
+
+	# AÇÕES DO BOTÃO
 	match button.text:
 		"NOVO JOGO":
-			save_system.clear_save_data()  # Clear save data before starting new game
+			save_system.clear_save_data()
 			get_tree().change_scene_to_file("res://Chapters/Chapter1/Chapter1.tscn")
 		"CONTINUAR":
 			var save_data = save_system.load_game()
@@ -33,3 +38,16 @@ func _on_button_pressed(button: Button) -> void:
 			print("Abrir menu de configurações")
 		"SAIR":
 			get_tree().quit()
+			
+func _on_botao_qualquer_pressed():
+	$ClickSound.stream = load("res://Assets/Audio/SFX/buttonpress.wav")
+	$ClickSound.play()
+
+func _on_botao_qualquer_mouse_entered():
+	$ClickSound.stream = load("res://Assets/Audio/SFX/buttonpress.wav")
+	$ClickSound.play()
+	
+func play_button_sound():
+	var sound = $ClickSound
+	sound.stream = load("res://Assets/Audio/SFX/buttonpress.wav")
+	sound.play()
