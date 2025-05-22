@@ -3,6 +3,7 @@ extends Control
 # Reference your DialogueBase instance
 @onready var dialogue = $DialogueBase
 @onready var save_system = get_node("/root/SaveSystem")
+@onready var background_node = $BackgroundGame
 
 # Storage for all chapters/scenes parsed from JSON
 var dialogue_data : Dictionary
@@ -49,6 +50,13 @@ func find_scene_by_id(scene_id: int) -> Dictionary:
 	print("Scene not found!")
 	return {}
 
+func set_background(texture_path: String) -> void:
+	if ResourceLoader.exists(texture_path):
+		var texture = load(texture_path)
+		background_node.texture = texture
+	else:
+		print("Background não encontrado: ", texture_path)
+
 func start_scene_by_id(scene_id: int) -> void:
 	print("Starting scene with ID: ", scene_id)
 	var scene = find_scene_by_id(scene_id)
@@ -57,6 +65,10 @@ func start_scene_by_id(scene_id: int) -> void:
 		return
 		
 	cur_scene_id = scene_id
+
+	if scene.has("background"):
+		set_background(scene["background"])
+
 	# Start the dialogue with the found scene
 	dialogue.start([scene])
 	
