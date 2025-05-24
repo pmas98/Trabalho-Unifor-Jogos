@@ -49,7 +49,7 @@ text = "Feito por "
 [node name="DevBiel" type="Button" parent="MadeBy" groups=["buttongroup"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "Bielzada do brawl"
+text = "Bielzin do brawl"
 flat = true
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
@@ -86,10 +86,10 @@ custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/separation = 30
+theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Novo Jogo" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+[node name="NOVO JOGO" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("3_dolsu")
@@ -98,7 +98,7 @@ action_mode = 0
 text = "NOVO JOGO"
 flat = true
 
-[node name="Continuar" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+[node name="CONTINUAR" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("3_dolsu")
@@ -107,20 +107,21 @@ action_mode = 0
 text = "CONTINUAR"
 flat = true
 
-[node name="Configuracoes" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+[node name="CONFIGURACOES" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
-text = "CONFIGURAÇÕES"
+text = "CONFIGURACOES"
 flat = true
 
-[node name="Sair" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
+[node name="SAIR" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["buttongroup"]]
 layout_mode = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("3_dolsu")
 theme_override_font_sizes/font_size = 30
-text = "Sair"
+text = "SAIR
+"
 flat = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
