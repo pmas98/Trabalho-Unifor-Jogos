@@ -18,3 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 SaveSystem="*res://Scripts/save.gd"
+AutoLoad="*res://Scripts/auto_load.gd"
+
+[display]
+
+window/size/mode=3
