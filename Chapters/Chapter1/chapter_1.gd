@@ -4,6 +4,7 @@ extends Control
 @onready var dialogue = $DialogueBase
 @onready var save_system = get_node("/root/SaveSystem")
 @onready var background_node = $BackgroundGame
+@onready var interactive_background = $InteractiveBackground
 
 # Storage for all chapters/scenes parsed from JSON
 var dialogue_data : Dictionary
@@ -28,7 +29,8 @@ func _ready():
 	# Connect signals
 	dialogue.dialogue_finished.connect(_on_dialogue_finished)
 	dialogue.choice_made.connect(_on_choice_made)
-	
+	# Add this line in your chapter_1.gd _ready() function
+	interactive_background.area_clicked.connect(_on_interactive_area_clicked)
 	# Load saved game if exists
 	var save_data = save_system.load_game()
 	if save_data.has("chapter") and save_data.has("scene_id"):
@@ -59,17 +61,39 @@ func set_background(texture_path: String) -> void:
 
 func start_scene_by_id(scene_id: int) -> void:
 	print("Starting scene with ID: ", scene_id)
+	print("Current chapter: ", cur_chapter)
+	
+	# Always clear interactive areas first, regardless of whether the new scene has them
+	print("Clearing all interactive areas")
+	interactive_background.clear_areas()
+	
 	var scene = find_scene_by_id(scene_id)
+	print("Found scene data: ", scene)
+	
 	if scene.is_empty():
 		print("Error: Scene with ID ", scene_id, " not found")
 		return
 		
 	cur_scene_id = scene_id
+	print("Updated current scene ID to: ", cur_scene_id)
 
 	if scene.has("background"):
+		print("Setting background: ", scene["background"])
 		set_background(scene["background"])
+	
+	# Set up new interactive areas if they exist
+	if scene.has("interactive_areas"):
+		print("Setting up interactive areas for scene: ", scene_id)
+		for area in scene["interactive_areas"]:
+			print("Setting up interactive area: ", area)
+			var rect = Rect2(area.x, area.y, area.width, area.height)
+			interactive_background.add_clickable_area(area.id, rect)
+			print("Added interactive area: ", area.id, " with rect: ", rect)
+	else:
+		print("No interactive areas for scene: ", scene_id)
 
 	# Start the dialogue with the found scene
+	print("Starting dialogue with scene: ", scene)
 	dialogue.start([scene])
 	
 	# Save current progress
@@ -78,6 +102,7 @@ func start_scene_by_id(scene_id: int) -> void:
 		"scene_id": cur_scene_id,
 		"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
 	}
+	print("Saving game state: ", save_info)
 	save_system.update_save_data(save_info)
 
 func _on_dialogue_finished():
@@ -90,8 +115,16 @@ func _on_dialogue_finished():
 		next_scene_id = -1  # Reset the next scene ID
 		return
 	
-	# Otherwise, try to find the next scene in the current path
+	# Get the current scene data
 	var current_scene = find_scene_by_id(cur_scene_id)
+	
+	# If the scene has interactive areas, don't auto-transition
+	# Wait for the player to click an area
+	if current_scene.has("interactive_areas") and not current_scene["interactive_areas"].is_empty():
+		print("Scene has interactive areas, waiting for player input")
+		return
+	
+	# Otherwise, try to find the next scene in the current path
 	if current_scene.has("next_scene"):
 		print("Using next scene from current scene: ", current_scene.next_scene)
 		start_scene_by_id(current_scene.next_scene)
@@ -125,3 +158,38 @@ func _on_choice_made(scene_id: int) -> void:
 	print("Choice made, transitioning to scene: ", scene_id)
 	next_scene_id = scene_id  # Store the next scene ID
 	start_scene_by_id(scene_id)
+
+func _on_interactive_area_clicked(area_id: String) -> void:
+	print("\n=== Interactive Area Clicked ===")
+	print("Area ID clicked: ", area_id)
+	print("Current scene ID before transition: ", cur_scene_id)
+	
+	var current_scene = find_scene_by_id(cur_scene_id)
+	print("Current scene data: ", current_scene)
+	print("Current scene ID from data: ", current_scene.get("id", "no id"))
+	
+	if current_scene.has("interactive_areas"):
+		print("\nInteractive areas in current scene:")
+		for area in current_scene["interactive_areas"]:
+			print("\nArea details:")
+			print("- ID: ", area.id)
+			print("- Next scene: ", area.get("next_scene", "none"))
+			print("- Full area data: ", area)
+			
+			if area.id == area_id:
+				print("\nMATCH FOUND!")
+				print("Area ID matches clicked area: ", area_id)
+				if area.has("next_scene"):
+					print("Transitioning to scene: ", area.next_scene)
+					start_scene_by_id(area.next_scene)
+					print("Scene transition completed")
+					return
+				else:
+					print("ERROR: Matching area has no next_scene defined")
+			else:
+				print("Area ID does not match: ", area.id, " != ", area_id)
+	else:
+		print("ERROR: Current scene has no interactive_areas")
+		print("Current scene data: ", current_scene)
+	print("WARNING: No next scene found for area: ", area_id)
+	print("=== End of Interactive Area Click ===\n")

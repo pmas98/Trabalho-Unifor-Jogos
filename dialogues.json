@@ -4,7 +4,7 @@
 	  "scenes": [
 		{
   	  "id": 0,
-      "background": "res://Assets/background1_1.png",
+	  "background": "res://Assets/background1_1.png",
 		  "speaker": "Dr. Zhang",
 		  "text": "Dr. Lin, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
 		  "sprite": "res://Assets/Nurse.png",
@@ -67,13 +67,21 @@
 		  "transition": "fade_in",
 		  "position": "right",
 		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
-		  "choices": [
+		  "interactive_areas": [
 			{
-			  "text": "Isso não se parece com nada que vi ultimamente. Vamos investigar. (Curiosidade)",
+			  "id": "computer",
+			  "x": 100,
+			  "y": 200,
+			  "width": 150,
+			  "height": 100,
 			  "next_scene": 6
 			},
 			{
-			  "text": "Provavelmente é só uma gripe. Vamos esperar mais resultados. (Cautela)",
+			  "id": "door",
+			  "x": 400,
+			  "y": 300,
+			  "width": 80,
+			  "height": 200,
 			  "next_scene": 7
 			}
 		  ]
