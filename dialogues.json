@@ -5,8 +5,8 @@
 		{
   	  "id": 0,
 	  "background": "res://Assets/background1_1.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Dr. Lin, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
+		  "speaker": "Dr. Fulano",
+		  "text": "Dr. Fulano, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
 		  "sprite": "res://Assets/Nurse.png",
 		  "transition": "fade_in",
 		  "position": "left",

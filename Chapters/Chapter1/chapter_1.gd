@@ -32,10 +32,10 @@ func _ready():
 	# Add this line in your chapter_1.gd _ready() function
 	interactive_background.area_clicked.connect(_on_interactive_area_clicked)
 	# Load saved game if exists
-	var save_data = save_system.load_game()
-	if save_data.has("chapter") and save_data.has("scene_id"):
-		cur_chapter = save_data["chapter"]
-		cur_scene_id = save_data["scene_id"]
+	save_system.load_game()  # This loads the data into save_system's variables
+	if save_system.current_chapter >= 0 and save_system.current_scene_id >= 0:
+		cur_chapter = save_system.current_chapter
+		cur_scene_id = save_system.current_scene_id
 		# Start with the saved scene instead of always scene 0
 		start_scene_by_id(cur_scene_id)
 	else:
