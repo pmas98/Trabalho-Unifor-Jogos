@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg4jttcqvb5me"
-path="res://.godot/imported/Background1_1.png-dd32981a66fbd7e6c90a2afc14785267.ctex"
+uid="uid://c15h4eeyuanyc"
+path="res://.godot/imported/QuartoPacienteSozinho.png-4d0bcc77d95d63ceb201954948aac54c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background1_1.png"
-dest_files=["res://.godot/imported/Background1_1.png-dd32981a66fbd7e6c90a2afc14785267.ctex"]
+source_file="res://Assets/QuartoPacienteSozinho.png"
+dest_files=["res://.godot/imported/QuartoPacienteSozinho.png-4d0bcc77d95d63ceb201954948aac54c.ctex"]
 
 [params]
 
