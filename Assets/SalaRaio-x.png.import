@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg4jttcqvb5me"
-path="res://.godot/imported/Background1_1.png-dd32981a66fbd7e6c90a2afc14785267.ctex"
+uid="uid://b2iyxuq1s50gj"
+path="res://.godot/imported/SalaRaio-x.png-a9c0cc4303bba16b8a8b050284bcf40f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background1_1.png"
-dest_files=["res://.godot/imported/Background1_1.png-dd32981a66fbd7e6c90a2afc14785267.ctex"]
+source_file="res://Assets/SalaRaio-x.png"
+dest_files=["res://.godot/imported/SalaRaio-x.png-a9c0cc4303bba16b8a8b050284bcf40f.ctex"]
 
 [params]
 

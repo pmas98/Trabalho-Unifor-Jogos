@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg4jttcqvb5me"
-path="res://.godot/imported/Background1_1.png-dd32981a66fbd7e6c90a2afc14785267.ctex"
+uid="uid://yq7qmba7gjje"
+path="res://.godot/imported/CorredorHospitalar.png-28c6ac7a98252d261a255dfab0d39281.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background1_1.png"
-dest_files=["res://.godot/imported/Background1_1.png-dd32981a66fbd7e6c90a2afc14785267.ctex"]
+source_file="res://Assets/CorredorHospitalar.png"
+dest_files=["res://.godot/imported/CorredorHospitalar.png-28c6ac7a98252d261a255dfab0d39281.ctex"]
 
 [params]
 
