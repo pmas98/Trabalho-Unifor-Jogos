@@ -69,7 +69,13 @@ func show_line(line: Dictionary) -> void:
 			$CharPortrait.position.x = get_viewport_rect().size.x * 0.76
 			$CharPortrait.flip_h = false
 	
-	$CharPortrait.texture = load(line.sprite)
+	# Only load and show sprite if it exists in the line
+	if line.has("sprite"):
+		$CharPortrait.texture = load(line.sprite)
+		$CharPortrait.show()
+	else:
+		$CharPortrait.hide()
+	
 	$DialoguePanel/Panel/CharacterName.text = line.speaker
 	$DialoguePanel/DialogueText.text = line.text
 	$DialoguePanel/DialogueText.visible_ratio = 0
