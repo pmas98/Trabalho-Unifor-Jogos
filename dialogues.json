@@ -5,7 +5,7 @@
 		{
 		  "id": 0,
 		  "background": "res://Assets/CorredorHospitalar.png",
-		  "speaker": "Você",
+		  "highlight": true,
 		  "text": "As pessoas dizem que nunca se sabe quando sua vida vai mudar, que o futuro não está escrito. Mas naquele dia... naquele dia eu vi o meu próprio futuro sendo escrito.",
 		  "transition": "fade_in",
 		  "position": "center",

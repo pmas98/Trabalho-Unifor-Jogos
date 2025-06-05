@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ProjetoFinalJogos"
-run/main_scene="uid://c031i1etrg2n"
+run/main_scene="uid://cly3sjbyuc6oi"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,4 +22,4 @@ AutoLoad="*res://Scripts/auto_load.gd"
 
 [display]
 
-window/size/mode=3
+window/stretch/mode="viewport"

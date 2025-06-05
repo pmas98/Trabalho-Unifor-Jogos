@@ -5,6 +5,8 @@ extends Control
 @onready var save_system = get_node("/root/SaveSystem")
 @onready var background_node = $BackgroundGame
 @onready var interactive_background = $InteractiveBackground
+@onready var highlight_label = $HighlightLabel/CenterContainer/MarginContainer/Label  # Updated path to the label
+@onready var text_reveal_timer = $TextRevealTimer  # Add timer reference
 
 # Storage for all chapters/scenes parsed from JSON
 var dialogue_data : Dictionary
@@ -12,6 +14,12 @@ var dialogue_data : Dictionary
 var cur_chapter : int = 0
 var cur_scene_id : int = 0  # Changed from cur_scene to cur_scene_id to be more explicit
 var next_scene_id : int = -1  # Track the next scene we should go to
+
+# Text reveal variables
+var full_text : String = ""
+var current_text_length : int = 0
+var reveal_speed : float = 0.05  # Time between each character reveal
+var is_revealing_text : bool = false
 
 func _ready():
 	# Load+parse the JSON once
@@ -29,8 +37,11 @@ func _ready():
 	# Connect signals
 	dialogue.dialogue_finished.connect(_on_dialogue_finished)
 	dialogue.choice_made.connect(_on_choice_made)
-	# Add this line in your chapter_1.gd _ready() function
 	interactive_background.area_clicked.connect(_on_interactive_area_clicked)
+	
+	# Initialize highlight label
+	highlight_label.hide()
+	
 	# Load saved game if exists
 	save_system.load_game()  # This loads the data into save_system's variables
 	if save_system.current_chapter >= 0 and save_system.current_scene_id >= 0:
@@ -59,11 +70,51 @@ func set_background(texture_path: String) -> void:
 	else:
 		print("Background não encontrado: ", texture_path)
 
+func show_highlighted_scene(scene: Dictionary) -> void:
+	# Hide dialogue UI and background
+	dialogue.hide()
+	background_node.hide()
+	
+	# Store the full text and reset reveal variables
+	full_text = scene.get("text", "")
+	current_text_length = 0
+	is_revealing_text = true
+	
+	# Configure highlight label
+	highlight_label.text = ""  # Start with empty text
+	highlight_label.show()
+	
+	# Start the text reveal timer
+	text_reveal_timer.wait_time = reveal_speed
+	text_reveal_timer.start()
+	
+	# Play audio if exists
+	if scene.has("audio"):
+		var audio_path = scene["audio"]
+		if ResourceLoader.exists(audio_path):
+			var audio_stream = load(audio_path)
+			var audio_player = get_node("AudioPlayer")
+			if audio_player:
+				audio_player.stream = audio_stream
+				audio_player.play()
+
+func _on_text_reveal_timer_timeout() -> void:
+	if is_revealing_text and current_text_length < full_text.length():
+		current_text_length += 1
+		highlight_label.text = full_text.substr(0, current_text_length)
+		
+		# Add a small random delay for more natural feel
+		text_reveal_timer.wait_time = reveal_speed + randf_range(-0.01, 0.01)
+		text_reveal_timer.start()
+	else:
+		text_reveal_timer.stop()
+		is_revealing_text = false
+
 func start_scene_by_id(scene_id: int) -> void:
 	print("Starting scene with ID: ", scene_id)
 	print("Current chapter: ", cur_chapter)
 	
-	# Always clear interactive areas first, regardless of whether the new scene has them
+	# Always clear interactive areas first
 	print("Clearing all interactive areas")
 	interactive_background.clear_areas()
 	
@@ -80,6 +131,18 @@ func start_scene_by_id(scene_id: int) -> void:
 	if scene.has("background"):
 		print("Setting background: ", scene["background"])
 		set_background(scene["background"])
+	
+	# Check if this is a highlighted scene
+	if scene.has("highlight") and scene["highlight"] == true:
+		show_highlighted_scene(scene)
+		# For highlighted scenes, we'll wait for a click to continue
+		# The dialogue_finished signal will be emitted when the player clicks
+		return
+	
+	# For non-highlighted scenes, proceed with normal dialogue
+	highlight_label.hide()
+	dialogue.show()
+	background_node.show()  # Make sure background is visible for normal scenes
 	
 	# Set up new interactive areas if they exist
 	if scene.has("interactive_areas"):
@@ -106,6 +169,13 @@ func start_scene_by_id(scene_id: int) -> void:
 	save_system.update_save_data(save_info)
 
 func _on_dialogue_finished():
+	# If we're in a highlighted scene, we need to handle the click to continue
+	if find_scene_by_id(cur_scene_id).has("highlight") and find_scene_by_id(cur_scene_id)["highlight"] == true:
+		# Hide the highlight label
+		highlight_label.hide()
+		# Show the dialogue UI again for the next scene
+		dialogue.show()
+	
 	print("Dialogue finished for scene: ", cur_scene_id)
 	
 	# If we have a next scene ID set (from a choice), use that
@@ -160,6 +230,13 @@ func _on_choice_made(scene_id: int) -> void:
 	start_scene_by_id(scene_id)
 
 func _on_interactive_area_clicked(area_id: String) -> void:
+	# If we're revealing text, clicking should show the full text immediately
+	if is_revealing_text:
+		highlight_label.text = full_text
+		text_reveal_timer.stop()
+		is_revealing_text = false
+		return
+		
 	print("\n=== Interactive Area Clicked ===")
 	print("Area ID clicked: ", area_id)
 	print("Current scene ID before transition: ", cur_scene_id)
