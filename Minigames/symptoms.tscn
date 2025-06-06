@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cly3sjbyuc6oi"]
+[gd_scene load_steps=17 format=3 uid="uid://cly3sjbyuc6oi"]
 
 [ext_resource type="Script" uid="uid://ex88fwxmo8b0" path="res://Minigames/symptoms.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bg4jttcqvb5me" path="res://Assets/background1_1.png" id="2_kgmhw"]
@@ -20,19 +20,41 @@ corner_radius_bottom_left = 20
 shadow_color = Color(0, 0, 0, 0.2)
 shadow_size = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prontuary"]
-bg_color = Color(0.133333, 0.133333, 0.133333, 0.901961)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pagination_button_disabled"]
+bg_color = Color(0, 0, 0, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.6, 0.6, 0.6, 0.2)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_color = Color(0, 0, 0, 0.25098)
-shadow_size = 10
+border_color = Color(0.4, 0.4, 0.4, 0.3)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pagination_button_hover"]
+bg_color = Color(0.4, 0.6, 1, 0.1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.6, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pagination_button"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.6, 1, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
 bg_color = Color(0.25, 0.45, 0.85, 1)
@@ -149,15 +171,20 @@ offset_bottom = 564.0
 texture = ExtResource("3_mmel0")
 
 [node name="SpeechBubble" type="Panel" parent="."]
-offset_left = 262.545
-offset_top = 17.77
-offset_right = 559.545
-offset_bottom = 92.89
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.755
+offset_top = 20.0
+offset_right = 131.245
+offset_bottom = 110.765
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_speech_bubble")
 
 [node name="SpeechContent" type="RichTextLabel" parent="SpeechBubble"]
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -166,9 +193,13 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "I'm not feeling well..."
+fit_content = true
+autowrap_mode = 2
 
 [node name="Table" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -180,6 +211,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(612, -119)
 texture = ExtResource("4_npfsh")
 expand_mode = 1
 stretch_mode = 6
@@ -194,7 +226,6 @@ offset_top = 37.165
 offset_right = 2004.17
 offset_bottom = 1526.07
 scale = Vector2(0.135, 0.135)
-theme_override_styles/panel = SubResource("StyleBoxFlat_prontuary")
 
 [node name="ProntuaryContent" type="Control" parent="Prontuary"]
 layout_mode = 1
@@ -314,12 +345,15 @@ mouse_default_cursor_shape = 2
 texture = ExtResource("6_hhlsg")
 
 [node name="CloseButton" type="Button" parent="Manual"]
-layout_mode = 0
+layout_mode = 1
 offset_left = 20.0
 offset_top = 20.0
-offset_right = 80.0
-offset_bottom = 80.0
-scale = Vector2(4.075, 4.075)
+offset_right = 180.0
+offset_bottom = 160.0
+grow_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 96
 text = "X"
 
 [node name="ManualContent" type="Control" parent="Manual"]
@@ -338,7 +372,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 100.0
 offset_top = 100.0
-offset_right = -100.0
+offset_right = 356.865
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -358,28 +392,184 @@ theme_override_font_sizes/font_size = 24
 text = "Medical Reference Manual"
 horizontal_alignment = 1
 
-[node name="IllnessList" type="ItemList" parent="Manual/ManualContent/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 400)
+[node name="PageContent" type="Control" parent="Manual/ManualContent/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-allow_reselect = true
-max_text_lines = 2
-same_column_width = true
-fixed_column_width = 400
-icon_mode = 0
 
-[node name="ActionButtons" type="HBoxContainer" parent="."]
+[node name="IllnessList" type="RichTextLabel" parent="Manual/ManualContent/MarginContainer/VBoxContainer/PageContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.2856
+offset_bottom = -14.2856
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+scroll_active = false
+
+[node name="PaginationButtons" type="HBoxContainer" parent="Manual/ManualContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PrevPageButton" type="Button" parent="Manual/ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Previous"
+
+[node name="PageLabel" type="Label" parent="Manual/ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Page 1/2"
+horizontal_alignment = 1
+
+[node name="NextPageButton" type="Button" parent="Manual/ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Next"
+
+[node name="HowToTreat" type="TextureRect" parent="."]
+offset_left = 282.625
+offset_top = 429.0
+offset_right = 4282.63
+offset_bottom = 2929.0
+scale = Vector2(0.07, 0.07)
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("6_hhlsg")
+
+[node name="CloseButton" type="Button" parent="HowToTreat"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 180.0
+offset_bottom = 160.0
+grow_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 96
+text = "X"
+
+[node name="ManualContent" type="Control" parent="HowToTreat"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HowToTreat/ManualContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 356.865
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_top = -20
+theme_override_constants/margin_right = 3380
+theme_override_constants/margin_bottom = 1780
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToTreat/ManualContent/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Medical Reference Manual"
+horizontal_alignment = 1
+
+[node name="PageContent" type="Control" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IllnessList" type="RichTextLabel" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer/PageContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.2856
+offset_bottom = -14.2856
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+scroll_active = false
+
+[node name="PaginationButtons" type="HBoxContainer" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PrevPageButton" type="Button" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Previous"
+
+[node name="PageLabel" type="Label" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Page 1/2"
+horizontal_alignment = 1
+
+[node name="NextPageButton" type="Button" parent="HowToTreat/ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Next"
+
+[node name="ActionButtons" type="VBoxContainer" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 650.0
-offset_top = -198.0
-offset_right = -47.0
-offset_bottom = -118.0
+offset_left = 692.755
+offset_top = -238.785
+offset_right = -57.755
+offset_bottom = -47.785
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="RequestInfoButton" type="Button" parent="ActionButtons"]
 custom_minimum_size = Vector2(200, 60)
@@ -408,13 +598,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_diagnose_normal")
 text = "Make Diagnosis"
 
 [node name="NextPatientButton" type="Button" parent="ActionButtons"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Next Patient"
 
 [node name="QueueLabel" type="Label" parent="."]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -428,6 +616,7 @@ theme_override_font_sizes/font_size = 24
 text = "Patients in Queue: 3"
 
 [node name="QueueContainer" type="HBoxContainer" parent="."]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
