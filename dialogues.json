@@ -4,30 +4,29 @@
 	  "scenes": [
 		{
 		  "id": 0,
-		  "background": "res://Assets/CorredorHospitalar.png",
-		  "highlight": true,
-		  "text": "As pessoas dizem que nunca se sabe quando sua vida vai mudar, que o futuro não está escrito. Mas naquele dia... naquele dia eu vi o meu próprio futuro sendo escrito.",
+		  "background": "res://Assets/QuartoPacienteSozinho.png",
+		  "speaker": "Dr. Zhang",
+		  "text": "Não sei, me pareceu uma gripe, mas nenhuma gripe causa isso nos pulmões... nenhuma que não tenha sido erradicada pelo menos.",
+		  "sprite": "res://Assets/ZhangYu_main.png",
 		  "transition": "fade_in",
-		  "position": "center",
-		  "audio": "res://Assets/Audio/BGM/bgm_hospital.ogg",
+		  "position": "left",
 		  "next_scene": 1
 		},
 		{
 		  "id": 1,
-		  "background": "res://Assets/CorredorHospitalar.png",
+		  "background": "res://Assets/QuartoPacienteSozinho.png",
 		  "speaker": "Você",
-		  "text": "Plantão da madrugada, era só mais um dia tranquilo, a maioria dos casos do dia eram o de sempre, uma febre, uma gripe. Foi então que ela chegou.",
+		  "text": "Chegou a aplicar o protocolo de pneumonia?",
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "fade_in",
 		  "position": "right",
-		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "next_scene": 2
 		},
 		{
 		  "id": 2,
 		  "background": "res://Assets/QuartoPacienteSozinho.png",
 		  "speaker": "Dr. Zhang",
-		  "text": "Não sei, me pareceu uma gripe, mas nenhuma gripe causa isso nos pulmões... nenhuma que não tenha sido erradicada pelo menos.",
+		  "text": "Dr. Liu, eu tenho 32 anos de plantão, acredite, eu conheço casos de pneumonia. E me parece que esse não vai ser o único caso de hoje. Vem cá, vou te mostrar o resultado do Raio X.",
 		  "sprite": "res://Assets/ZhangYu_main.png",
 		  "transition": "fade_in",
 		  "position": "left",
@@ -35,26 +34,6 @@
 		},
 		{
 		  "id": 3,
-		  "background": "res://Assets/QuartoPacienteSozinho.png",
-		  "speaker": "Você",
-		  "text": "Chegou a aplicar o protocolo de pneumonia?",
-		  "sprite": "res://Assets/main_char.png",
-		  "transition": "fade_in",
-		  "position": "right",
-		  "next_scene": 4
-		},
-		{
-		  "id": 4,
-		  "background": "res://Assets/QuartoPacienteSozinho.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Dr. Liu, eu tenho 32 anos de plantão, acredite, eu conheço casos de pneumonia. E me parece que esse não vai ser o único caso de hoje. Vem cá, vou te mostrar o resultado do Raio X.",
-		  "sprite": "res://Assets/ZhangYu_main.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "next_scene": 5
-		},
-		{
-		  "id": 5,
 		  "background": "res://Assets/SalaRaio-x.png",
 		  "speaker": "Dr. Zhang",
 		  "text": "Não tem nada parecido com isso, existe um padrão nos pulmões, mas nenhum teste dá positivo.",

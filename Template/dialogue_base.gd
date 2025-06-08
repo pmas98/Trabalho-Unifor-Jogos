@@ -18,18 +18,18 @@ func _ready() -> void:
 
 # Begin a dialogue sequence: pass an Array of Dictionaries
 func start(dialogue_array: Array) -> void:
-	print("Starting dialogue with array: ", dialogue_array)
+	if dialogue_array.is_empty():
+		print("[DialogueSystem] Error: Dialogue array is empty. Cannot start dialogue.")
+		return
 	dialogues = dialogue_array
 	current_index = 0
 	show()
 	show_line(dialogues[0])  # Always show the first line directly
 
 func show_next_valid_line() -> void:
-	print("Showing next valid line. Current index: ", current_index)
 	# Find the next valid line that either has no requirements or meets them
 	while current_index < dialogues.size():
 		var line = dialogues[current_index]
-		print("Checking line: ", line)
 		if not line.has("requires_flag") or active_flags.has(line.requires_flag):
 			show_line(line)
 			return
@@ -37,22 +37,21 @@ func show_next_valid_line() -> void:
 	
 	# If we've gone through all lines, end the dialogue
 	if current_index >= dialogues.size():
-		print("No more valid lines, ending dialogue")
 		hide()
 		dialogue_finished.emit()
 
 func show_line(line: Dictionary) -> void:
-	print("Showing line: ", line)
 	# Set any flags this line might have
 	if line.has("set_flag"):
 		active_flags[line.set_flag] = true
-		print("Set flag: ", line.set_flag)
 	
 	# Reset/Hide choices if any lingering
-	choices_container.hide()
+	if choices_container.visible:
+		choices_container.hide()
 	# Clear all children from the choices container
-	for child in choices_container.get_children():
-		child.queue_free()
+	if not choices_container.get_children().is_empty():
+		for child in choices_container.get_children():
+			child.queue_free()
 	
 	# line keys: "speaker","text","sprite","transition","position","choices"
 	var pos = line.get("position", "left")
@@ -68,14 +67,14 @@ func show_line(line: Dictionary) -> void:
 			$CharPortrait.anchor_right = 1.0
 			$CharPortrait.position.x = get_viewport_rect().size.x * 0.76
 			$CharPortrait.flip_h = false
-	
+			
 	# Only load and show sprite if it exists in the line
 	if line.has("sprite"):
 		$CharPortrait.texture = load(line.sprite)
 		$CharPortrait.show()
 	else:
 		$CharPortrait.hide()
-	
+		
 	$DialoguePanel/Panel/CharacterName.text = line.speaker
 	$DialoguePanel/DialogueText.text = line.text
 	$DialoguePanel/DialogueText.visible_ratio = 0
@@ -92,7 +91,7 @@ func show_line(line: Dictionary) -> void:
 	tween.tween_property($DialoguePanel/DialogueText, "visible_ratio", 1.0, duration)
 	tween.tween_callback(_on_line_complete)
 
-		# TOCAR ÁUDIO SE EXISTIR NA CENA
+	# TOCAR ÁUDIO SE EXISTIR NA CENA
 	if line.has("audio"):
 		var audio_path = line.audio
 		if audio_path != "":
@@ -103,11 +102,9 @@ func show_line(line: Dictionary) -> void:
 
 
 func _on_line_complete() -> void:
-	print("Line complete. Current index: ", current_index)
 	# If this line has choices, show them instead of normal input
 	var line = dialogues[current_index]
 	if line.has("choices"):
-		print("Showing choices: ", line.choices)
 		show_choices(line.choices)
 	else:
 		set_process_input(true)
@@ -115,6 +112,8 @@ func _on_line_complete() -> void:
 func _input(event: InputEvent) -> void:
 	# Only process input if no choices are showing
 	if choices_container.visible:
+		# We want _input to *not* advance dialogue if choices are visible.
+		# Buttons themselves handle input.
 		return
 	
 	# Handle both mouse click and key press to advance dialogue
@@ -132,25 +131,34 @@ func _input(event: InputEvent) -> void:
 		set_process_input(false)
 		current_index += 1
 		if current_index >= dialogues.size():
-			print("End of dialogue array reached")
 			hide()
 			dialogue_finished.emit()
 		else:
 			show_next_valid_line()
 
 func show_choices(choices_array: Array) -> void:
-	print("Setting up choices: ", choices_array)
-	# Populate and display choice buttons
-	for choice in choices_array:
+	if choices_array.is_empty():
+		print("[DialogueSystem] Warning: Choices array is empty. No buttons to show.")
+		return
+
+	for choice_data in choices_array:
 		var btn = Button.new()
-		btn.text = choice.text
-		btn.pressed.connect(_on_choice_selected.bind(choice.next_scene))
-		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.text = choice_data.text
+		# Add debug print to verify the signal connection
+		print("[DialogueSystem] Connecting button '%s' to _on_choice_selected with next_scene: %s" % [choice_data.text, choice_data.next_scene])
+		var err = btn.pressed.connect(_on_choice_selected.bind(choice_data.next_scene))
+		if err != OK:
+			print("[DialogueSystem] ERROR: Failed to connect button signal! Error code: ", err)
+		else:
+			print("[DialogueSystem] Successfully connected button signal")
+
+		btn.size_flags_horizontal = Control.SIZE_EXPAND | Control.SIZE_FILL
 		choices_container.add_child(btn)
+
 	choices_container.show()
 
 func _on_choice_selected(next_scene_id: int) -> void:
-	print("Choice selected with next_scene_id: ", next_scene_id)
+	print("[DialogueSystem] Button pressed! Next scene ID: ", next_scene_id)  # Debug print
 	# Clear UI
 	for child in choices_container.get_children():
 		child.queue_free()

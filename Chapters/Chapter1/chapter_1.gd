@@ -44,14 +44,21 @@ func _ready():
 	
 	# Load saved game if exists
 	save_system.load_game()  # This loads the data into save_system's variables
-	if save_system.current_chapter >= 0 and save_system.current_scene_id >= 0:
+	
+	# Check if we're returning from the minigame
+	if save_system.has_flag("completed_intro"):
+		# If we've completed the intro, start at scene 1
 		cur_chapter = save_system.current_chapter
-		cur_scene_id = save_system.current_scene_id
-		# Start with the saved scene instead of always scene 0
-		start_scene_by_id(cur_scene_id)
+		cur_scene_id = 1
+		start_scene_by_id(1)
 	else:
-		# Only start with scene 0 if there's no save data
-		start_scene_by_id(0)
+		# If we haven't completed the intro, start at scene 0
+		if save_system.current_chapter >= 0 and save_system.current_scene_id >= 0:
+			cur_chapter = save_system.current_chapter
+			cur_scene_id = save_system.current_scene_id
+			start_scene_by_id(cur_scene_id)
+		else:
+			start_scene_by_id(0)
 
 func find_scene_by_id(scene_id: int) -> Dictionary:
 	print("Finding scene with ID: ", scene_id)
@@ -188,19 +195,35 @@ func _on_dialogue_finished():
 	# Get the current scene data
 	var current_scene = find_scene_by_id(cur_scene_id)
 	
+	# Check for special scene transitions
+	if current_scene.has("next_scene"):
+		var next_scene = current_scene.next_scene
+		if next_scene is String and next_scene == "minigame_symptoms":
+			print("Transitioning to symptoms minigame")
+			# Set the flag indicating we've completed the intro
+			save_system.set_flag("completed_intro", true)
+			# Save current progress before transitioning
+			var save_info = {
+				"chapter": cur_chapter,
+				"scene_id": cur_scene_id,
+				"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
+			}
+			save_system.update_save_data(save_info)
+			# Change to the minigame scene
+			get_tree().change_scene_to_file("res://Minigames/symptoms.tscn")
+			return
+		elif next_scene is int:
+			print("Using next scene from current scene: ", next_scene)
+			start_scene_by_id(next_scene)
+			return
+	
 	# If the scene has interactive areas, don't auto-transition
 	# Wait for the player to click an area
 	if current_scene.has("interactive_areas") and not current_scene["interactive_areas"].is_empty():
 		print("Scene has interactive areas, waiting for player input")
 		return
 	
-	# Otherwise, try to find the next scene in the current path
-	if current_scene.has("next_scene"):
-		print("Using next scene from current scene: ", current_scene.next_scene)
-		start_scene_by_id(current_scene.next_scene)
-		return
-	
-	# If no next scene is specified, try to find the next scene in sequence
+	# Otherwise, try to find the next scene in sequence
 	# that matches our current path's requirements
 	var next_scene_id = cur_scene_id + 1
 	while true:
@@ -267,6 +290,5 @@ func _on_interactive_area_clicked(area_id: String) -> void:
 				print("Area ID does not match: ", area.id, " != ", area_id)
 	else:
 		print("ERROR: Current scene has no interactive_areas")
-		print("Current scene data: ", current_scene)
 	print("WARNING: No next scene found for area: ", area_id)
 	print("=== End of Interactive Area Click ===\n")

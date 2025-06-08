@@ -76,6 +76,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -39.85
 
 [node name="TextRevealTimer" type="Timer" parent="."]
 
