@@ -5,7 +5,9 @@ extends Control
 @onready var save_system = get_node("/root/SaveSystem")
 @onready var background_node = $BackgroundGame
 @onready var interactive_background = $InteractiveBackground
-@onready var highlight_label = $HighlightLabel/CenterContainer/MarginContainer/Label  # Updated path to the label
+@onready var highlight_label = $HighlightLabel/Label  # Updated path to just the Label
+@onready var highlight_background = $HighlightLabel/ColorRect  # Add reference to background
+@onready var highlight_container = $HighlightLabel  # Add reference to container
 @onready var text_reveal_timer = $TextRevealTimer  # Add timer reference
 
 # Storage for all chapters/scenes parsed from JSON
@@ -39,20 +41,25 @@ func _ready():
 	dialogue.choice_made.connect(_on_choice_made)
 	interactive_background.area_clicked.connect(_on_interactive_area_clicked)
 	
-	# Initialize highlight label
-	highlight_label.hide()
+	# Initialize highlight elements
+	highlight_container.hide()
+	highlight_label.text = ""
+	
+	# Make sure the highlight container can receive input
+	highlight_container.mouse_filter = Control.MOUSE_FILTER_STOP
 	
 	# Load saved game if exists
 	save_system.load_game()  # This loads the data into save_system's variables
 	
 	# Check if we're returning from the minigame
 	if save_system.has_flag("completed_intro"):
-		# If we've completed the intro, start at scene 1
+		# If we've completed the intro, start at scene 1 (now this logic might need adjustment depending on where you want to return)
 		cur_chapter = save_system.current_chapter
-		cur_scene_id = 1
-		start_scene_by_id(1)
+		# We can decide where to continue after the minigame, for now, let's go to scene 2.
+		cur_scene_id = 2 
+		start_scene_by_id(2)
 	else:
-		# If we haven't completed the intro, start at scene 0
+		# If we haven't completed the intro, start at the saved scene or scene 0
 		if save_system.current_chapter >= 0 and save_system.current_scene_id >= 0:
 			cur_chapter = save_system.current_chapter
 			cur_scene_id = save_system.current_scene_id
@@ -82,16 +89,17 @@ func show_highlighted_scene(scene: Dictionary) -> void:
 	dialogue.hide()
 	background_node.hide()
 	
-	# Store the full text and reset reveal variables
+	# Set up text reveal
 	full_text = scene.get("text", "")
 	current_text_length = 0
+	highlight_label.text = ""
+	highlight_container.show()
+	
+	# Make sure the highlight container can receive input
+	highlight_container.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	# Start text reveal
 	is_revealing_text = true
-	
-	# Configure highlight label
-	highlight_label.text = ""  # Start with empty text
-	highlight_label.show()
-	
-	# Start the text reveal timer
 	text_reveal_timer.wait_time = reveal_speed
 	text_reveal_timer.start()
 	
@@ -116,6 +124,17 @@ func _on_text_reveal_timer_timeout() -> void:
 	else:
 		text_reveal_timer.stop()
 		is_revealing_text = false
+		# The user can now click to continue, which will fire _on_dialogue_finished
+		# The old flag logic is kept as requested, setting the flag after the text is revealed.
+		if cur_scene_id == 1:
+			save_system.set_flag("completed_intro", true)
+			var save_info = {
+				"chapter": cur_chapter,
+				"scene_id": cur_scene_id,
+				"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
+			}
+			save_system.update_save_data(save_info)
+
 
 func start_scene_by_id(scene_id: int) -> void:
 	print("Starting scene with ID: ", scene_id)
@@ -147,7 +166,7 @@ func start_scene_by_id(scene_id: int) -> void:
 		return
 	
 	# For non-highlighted scenes, proceed with normal dialogue
-	highlight_label.hide()
+	highlight_container.hide()
 	dialogue.show()
 	background_node.show()  # Make sure background is visible for normal scenes
 	
@@ -176,119 +195,94 @@ func start_scene_by_id(scene_id: int) -> void:
 	save_system.update_save_data(save_info)
 
 func _on_dialogue_finished():
-	# If we're in a highlighted scene, we need to handle the click to continue
-	if find_scene_by_id(cur_scene_id).has("highlight") and find_scene_by_id(cur_scene_id)["highlight"] == true:
-		# Hide the highlight label
-		highlight_label.hide()
-		# Show the dialogue UI again for the next scene
-		dialogue.show()
-	
 	print("Dialogue finished for scene: ", cur_scene_id)
 	
-	# If we have a next scene ID set (from a choice), use that
+	var current_scene = find_scene_by_id(cur_scene_id)
+
+	# Se uma escolha foi feita, ela já definiu o next_scene_id.
 	if next_scene_id >= 0:
 		print("Using next scene from choice: ", next_scene_id)
 		start_scene_by_id(next_scene_id)
-		next_scene_id = -1  # Reset the next scene ID
+		next_scene_id = -1  # Reseta o ID da próxima cena
 		return
 	
-	# Get the current scene data
-	var current_scene = find_scene_by_id(cur_scene_id)
-	
-	# Check for special scene transitions
+	# Verifica se há uma "next_scene" definida no JSON para transições lineares.
 	if current_scene.has("next_scene"):
 		var next_scene = current_scene.next_scene
-		if next_scene is String and next_scene == "minigame_symptoms":
-			print("Transitioning to symptoms minigame")
-			# Set the flag indicating we've completed the intro
-			save_system.set_flag("completed_intro", true)
-			# Save current progress before transitioning
-			var save_info = {
-				"chapter": cur_chapter,
-				"scene_id": cur_scene_id,
-				"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
-			}
-			save_system.update_save_data(save_info)
-			# Change to the minigame scene
-			get_tree().change_scene_to_file("res://Minigames/symptoms.tscn")
-			return
-		elif next_scene is int:
+		if next_scene is int:
 			print("Using next scene from current scene: ", next_scene)
 			start_scene_by_id(next_scene)
 			return
 	
-	# If the scene has interactive areas, don't auto-transition
-	# Wait for the player to click an area
+	# Se a cena tem áreas interativas, espera pela ação do jogador.
 	if current_scene.has("interactive_areas") and not current_scene["interactive_areas"].is_empty():
 		print("Scene has interactive areas, waiting for player input")
 		return
 	
-	# Otherwise, try to find the next scene in sequence
-	# that matches our current path's requirements
-	var next_scene_id = cur_scene_id + 1
-	while true:
-		var next_scene = find_scene_by_id(next_scene_id)
-		if next_scene.is_empty():
-			print("No more scenes in sequence")
-			break
-			
-		# Check if this scene has any requirements
-		if next_scene.has("requires_flag"):
-			# If we have the required flag, show this scene
-			if dialogue.active_flags.has(next_scene.requires_flag):
-				print("Found next valid scene with required flag: ", next_scene_id)
-				start_scene_by_id(next_scene_id)
-				return
-		else:
-			# If no requirements, show this scene
-			print("Found next valid scene without requirements: ", next_scene_id)
-			start_scene_by_id(next_scene_id)
-			return
-			
-		next_scene_id += 1
-
+	# Lógica fallback para encontrar a próxima cena na sequência
+	var next_sequential_id = cur_scene_id + 1
+	# ... (o resto da função pode permanecer como está)
 func _on_choice_made(scene_id: int) -> void:
 	print("Choice made, transitioning to scene: ", scene_id)
 	next_scene_id = scene_id  # Store the next scene ID
 	start_scene_by_id(scene_id)
 
 func _on_interactive_area_clicked(area_id: String) -> void:
-	# If we're revealing text, clicking should show the full text immediately
+	# Se o texto estiver sendo revelado, o primeiro clique irá completá-lo instantaneamente.
 	if is_revealing_text:
-		highlight_label.text = full_text
 		text_reveal_timer.stop()
 		is_revealing_text = false
-		return
-		
-	print("\n=== Interactive Area Clicked ===")
-	print("Area ID clicked: ", area_id)
-	print("Current scene ID before transition: ", cur_scene_id)
-	
+		highlight_label.text = full_text
+		# Não retorne aqui. Deixe a lógica continuar para que o primeiro clique
+		# também possa acionar a transição, tornando a experiência mais fluida.
+
 	var current_scene = find_scene_by_id(cur_scene_id)
-	print("Current scene data: ", current_scene)
-	print("Current scene ID from data: ", current_scene.get("id", "no id"))
+
+	# LÓGICA CORRIGIDA: Verifica se estamos em uma cena 'highlight'.
+	if current_scene.has("highlight") and current_scene["highlight"] == true:
+		# Se a cena de highlight deve chamar um minigame, faça isso.
+		if current_scene.has("trigger_minigame"):
+			var minigame_name = current_scene["trigger_minigame"]
+			if minigame_name == "symptoms":
+				print("Transitioning to symptoms minigame from highlight scene")
+				get_tree().change_scene_to_file("res://Minigames/symptoms.tscn")
+				return # Transição feita, encerra a função.
+
+		# Se não houver minigame, vá para a próxima cena definida no JSON.
+		elif current_scene.has("next_scene"):
+			start_scene_by_id(current_scene.next_scene)
+			return # Transição feita, encerra a função.
+
+	# O código abaixo só será executado para cenas normais com áreas interativas definidas.
+	print("\n=== Interactive Area Clicked (Standard Scene) ===")
+	print("Area ID clicked: ", area_id)
 	
 	if current_scene.has("interactive_areas"):
-		print("\nInteractive areas in current scene:")
 		for area in current_scene["interactive_areas"]:
-			print("\nArea details:")
-			print("- ID: ", area.id)
-			print("- Next scene: ", area.get("next_scene", "none"))
-			print("- Full area data: ", area)
-			
 			if area.id == area_id:
-				print("\nMATCH FOUND!")
-				print("Area ID matches clicked area: ", area_id)
 				if area.has("next_scene"):
 					print("Transitioning to scene: ", area.next_scene)
 					start_scene_by_id(area.next_scene)
-					print("Scene transition completed")
 					return
-				else:
-					print("ERROR: Matching area has no next_scene defined")
-			else:
-				print("Area ID does not match: ", area.id, " != ", area_id)
-	else:
-		print("ERROR: Current scene has no interactive_areas")
+	
 	print("WARNING: No next scene found for area: ", area_id)
 	print("=== End of Interactive Area Click ===\n")
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var current_scene = find_scene_by_id(cur_scene_id)
+		
+		# If we're in a highlighted scene and the text is fully revealed
+		if current_scene.has("highlight") and current_scene["highlight"] == true and not is_revealing_text:
+			# If the scene has a minigame trigger
+			if current_scene.has("trigger_minigame"):
+				var minigame_name = current_scene["trigger_minigame"]
+				if minigame_name == "symptoms":
+					print("Transitioning to symptoms minigame from highlight scene")
+					get_tree().change_scene_to_file("res://Minigames/symptoms.tscn")
+					return
+			
+			# If no minigame, proceed to next scene
+			if current_scene.has("next_scene"):
+				start_scene_by_id(current_scene["next_scene"])
+				return

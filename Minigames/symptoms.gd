@@ -1110,7 +1110,7 @@ func _start_chapter_1_transition():
 
 	# Create a label with centered text and autowrap
 	var message_label = Label.new()
-	message_label.text = "On December 31, 2019, the first case of COVID-19 was confirmed, marking the beginning of a global pandemic."
+	message_label.text = "E assim começou, no dia 14 de Dezembro de 2019, um dos primeiros casos de COVID-19, marcando o início de uma pandemia global."
 	message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	message_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
