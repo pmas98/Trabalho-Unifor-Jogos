@@ -1,0 +1,247 @@
+{
+  "chapters": [
+	{
+	  "scenes": [
+		{
+  	  "id": 0,
+	  "background": "res://Assets/Background1_1.png",
+		  "speaker": "Dr. Fulano",
+		  "text": "Dr. Fulano, temos um novo paciente. Tosse forte, febre alta, falta de ar. Parece pneumonia.",
+		  "sprite": "res://Assets/Nurse.png",
+		  "transition": "fade_in",
+		  "position": "left",
+		  "audio": "res://Assets/Audio/BGM/bgm_hospital.ogg",
+		  "next_scene": 1
+		},
+		{
+		  "id": 1,
+		  "speaker": "Você",
+		  "text": "Vou dar uma olhada. Onde está o prontuário dele?",
+		  "background": "res://Background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "next_scene": 2
+		},
+		{
+		  "id": 2,
+		  "speaker": "Nurse",
+		  "text": "Aqui está, doutor. Ele visitou um mercado de frutos do mar recentemente.",
+		  "background": "res://Assets/Background1_1.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "res://Assets/Nurse.png",
+		  "transition": "fade_in",
+		  "position": "left",
+		  "next_scene": 3
+		},
+		{
+		  "id": 3,
+		  "speaker": "Você",
+		  "text": "Hmm... os sintomas estão agressivos demais para uma gripe comum. O raio-X mostra opacidade em vidro fosco...",
+		  "background": "res://Assets/SalaDePronuarioEpesquisa.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "next_scene": 4
+		},
+		{
+		  "id": 4,
+		  "speaker": "Dr. Zhang",
+		  "text": "Concordo, Lin. Isso não está normal.",
+		  "background": "res://Assets/SalaDePronuarioEpesquisa.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "res://Assets/ZhangYu_main.png",
+		  "transition": "fade_in",
+		  "position": "left",
+		  "next_scene": 5
+		},
+		{
+		  "id": 5,
+		  "speaker": "Você",
+		  "text": "Você tem duas opções. O que vai fazer?",
+		  "background": "res://Assets/SalaDePronuarioEpesquisa.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
+		  "interactive_areas": [
+			{
+			  "id": "computer",
+			  "x": 100,
+			  "y": 200,
+			  "width": 150,
+			  "height": 100,
+			  "next_scene": 6
+			},
+			{
+			  "id": "door",
+			  "x": 400,
+			  "y": 300,
+			  "width": 80,
+			  "height": 200,
+			  "next_scene": 7
+			}
+		  ]
+		},
+		{
+		  "id": 6,
+		  "speaker": "Você",
+		  "text": "Isso não se parece com nada que vi ultimamente. Melhor investigarmos mais a fundo.",
+		  "background": "res://Assets/id6Background.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "set_flag": "investigative_approach",
+		  "next_scene": 16
+		},
+		{
+		  "id": 7,
+		  "speaker": "Você",
+		  "text": "Provavelmente é só uma gripe. Vamos esperar os próximos exames para confirmar.",
+		  "background": "res://Assets/CorredorHospitalar.png",
+		  "music": "res://Assets/Audio/Nomearquivo.mp3",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "set_flag": "cautious_approach",
+		  "next_scene": 8
+		},
+		{
+		  "id": 8,
+		  "speaker": "Dr. Zhang",
+		  "text": "Lin, o paciente está piorando rapidamente. A febre subiu para 40°C e ele está com dificuldade respiratória severa.",
+		  "background": "res://Assets/SalaRaio-x.png",
+		  "sprite": "res://Assets/ZhangYu_main.png",
+		  "transition": "fade_in",
+		  "position": "left",
+		  "requires_flag": "cautious_approach",
+		  "next_scene": 9
+		},
+		{
+		  "id": 9,
+		  "speaker": "Você",
+		  "text": "Precisamos agir rápido. O que você sugere?",
+		  "background": "res://Assets/SalaRaio-x.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "requires_flag": "cautious_approach",
+		  "choices": [
+			{
+			  "text": "Vamos iniciar tratamento com antibióticos de amplo espectro. (Agressivo)",
+			  "next_scene": 10,
+			  "set_flag": "aggressive_treatment"
+			},
+			{
+			  "text": "Precisamos de mais exames antes de decidir o tratamento. (Cauteloso)",
+			  "next_scene": 11,
+			  "set_flag": "more_tests"
+			}
+		  ]
+		},
+		{
+		  "id": 10,
+		  "speaker": "Você",
+		  "text": "Vamos iniciar com ceftriaxona e azitromicina. Monitorar de perto a resposta.",
+		  "background": "res://Assets/QuartoPacienteSozinho.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "requires_flag": "aggressive_treatment",
+		  "next_scene": 16
+		},
+		{
+		  "id": 11,
+		  "speaker": "Você",
+		  "text": "Vamos pedir hemocultura, PCR para vírus respiratórios e um novo raio-X.",
+		  "background": "res://Assets/SalaRaio-x.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "requires_flag": "more_tests",
+		  "next_scene": 12
+		},
+		{
+		  "id": 12,
+		  "speaker": "Nurse",
+		  "text": "Doutor, os resultados do PCR chegaram. É positivo para um novo coronavírus!",
+		  "background": "res://Assets/laboratorioClinico.png", 
+		  "sprite": "res://Assets/Nurse.png",
+		  "transition": "fade_in",
+		  "position": "left",
+		  "requires_flag": "more_tests",
+		  "next_scene": 13
+		},
+		{
+		  "id": 13,
+		  "speaker": "Você",
+		  "text": "Um novo coronavírus? Isso é sério. Precisamos isolar o paciente imediatamente.",
+		  "background": "res://Assets/laboratorioClinico.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
+		  "requires_flag": "more_tests",
+		  "choices": [
+			{
+			  "text": "Alertar as autoridades de saúde. (Responsável)",
+			  "next_scene": 14,
+			  "set_flag": "alerted_authorities"
+			},
+			{
+			  "text": "Manter em observação por enquanto. (Discreto)",
+			  "next_scene": 15,
+			  "set_flag": "kept_quiet"
+			}
+		  ]
+		},
+		{
+		  "id": 14,
+		  "speaker": "Você",
+		  "text": "Dr. Zhang, precisamos notificar o CDC imediatamente. Este pode ser um caso de um novo patógeno.",
+		  "background": "res://Assets/laboratorioClinico.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "requires_flag": "alerted_authorities",
+		  "audio": "res://Assets/Audio/BGM/bgm_final_truth.ogg",
+		  "next_scene": 16
+		},
+		{
+		  "id": 15,
+		  "speaker": "Você",
+		  "text": "Vamos manter o paciente isolado e monitorar de perto. Sem pânico por enquanto.",
+		  "background": "res://Assets/isolamento.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right",
+		  "requires_flag": "kept_quiet",
+		  "audio": "res://Assets/Audio/BGM/bgm_suppression.ogg",
+		  "next_scene": 16
+		},
+		{
+		  "id": 16,
+		  "speaker": "Dr. Zhang",
+		  "text": "Lin, o paciente está se recuperando bem com o tratamento. Boa decisão!",
+		  "background": "res://Assets/SalaDePronuarioEpesquisa.png",
+		  "sprite": "res://Assets/ZhangYu_main.png",
+		  "transition": "fade_in",
+		  "position": "left"
+		},
+		{
+		  "id": 17,
+		  "speaker": "Você",
+		  "text": "Obrigado, Dr. Zhang. Cada caso nos ensina algo novo.",
+		  "background": "res://Assets/SalaDePronuarioEpesquisa.png",
+		  "sprite": "res://Assets/main_char.png",
+		  "transition": "fade_in",
+		  "position": "right"
+		}
+	  ]
+	}
+  ]
+}

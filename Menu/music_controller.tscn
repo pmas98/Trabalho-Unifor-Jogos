@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://8pevk0qwx5kj"]
+
+[ext_resource type="Script" uid="uid://dsnkhjcy05fj8" path="res://Menu/music_controller.gd" id="1_6y2fw"]
+[ext_resource type="AudioStream" uid="uid://c18gouhg1gmuj" path="res://Assets/Audio/BGM/bgm_menuCalmo.ogg" id="1_sa881"]
+
+[node name="MusicController" type="Node2D"]
+script = ExtResource("1_6y2fw")
+
+[node name="bgmusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_sa881")
+volume_db = -0.5
+bus = &"music"

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbg6x7dedq185"]
+
+[ext_resource type="Script" uid="uid://c1drmmnhs1jlm" path="res://Chapters/Chapter1/chapter_1.gd" id="1_bmr2h"]
+[ext_resource type="PackedScene" uid="uid://l08au552gm3a" path="res://Template/dialogue_base.tscn" id="1_oljnv"]
+[ext_resource type="Texture2D" uid="uid://bg4jttcqvb5me" path="res://Assets/background1_1.png" id="2_ktk5n"]
+[ext_resource type="PackedScene" uid="uid://c3actnemwc1d1" path="res://Template/interactive_background.tscn" id="3_yucny"]
+
+[node name="Chapter1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bmr2h")
+
+[node name="BackgroundGame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 1151.0
+offset_bottom = 647.0
+texture = ExtResource("2_ktk5n")
+expand_mode = 1
+
+[node name="InteractiveBackground" parent="." instance=ExtResource("3_yucny")]
+layout_mode = 1
+
+[node name="DialogueBase" parent="." instance=ExtResource("1_oljnv")]
+
+[connection signal="area_clicked" from="InteractiveBackground" to="." method="_on_interactive_area_clicked"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb0ph51xfjkmo"]
+
+[ext_resource type="Script" uid="uid://bmr2figu4vhv6" path="res://effects.gd" id="1_oaf0w"]
+
+[node name="Effects" type="Node2D"]
+script = ExtResource("1_oaf0w")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
