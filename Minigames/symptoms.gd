@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 # References to UI elements
-@onready var patient_avatar = $Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader/PatientAvatar
 @onready var patient_asset = $PatientAsset
 @onready var patient_name = $Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader/PatientInfo/PatientName
 @onready var patient_details = $Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader/PatientInfo/PatientDetails
@@ -67,100 +66,100 @@ var game_over_popup: PopupPanel
 var game_over_label: Label
 var available_illnesses: Array = [
 	{
-		"name": "Common Cold",
-		"symptoms": ["Runny nose", "Sore throat", "Cough", "Fever"],
+		"name": "Resfriado Comum",
+		"symptoms": ["Coriza", "Dor de garganta", "Tosse", "Febre"],
 		"vitals": {"hr": [60, 100], "spo2": [95, 100]}
 	},
 	{
 		"name": "Pneumonia",
-		"symptoms": ["Chest pain", "Shortness of breath", "Fever", "Cough with phlegm"],
+		"symptoms": ["Dor no peito", "Falta de ar", "Febre", "Tosse com catarro"],
 		"vitals": {"hr": [90, 120], "spo2": [85, 95]}
 	},
 	{
-		"name": "Heart Attack",
-		"symptoms": ["Chest pain", "Shortness of breath", "Dizziness", "Nausea"],
+		"name": "Ataque Cardíaco",
+		"symptoms": ["Dor no peito", "Falta de ar", "Tontura", "Náusea"],
 		"vitals": {"hr": [100, 140], "spo2": [85, 95]}
 	},
 	{
-		"name": "Stroke",
-		"symptoms": ["Sudden numbness", "Confusion", "Trouble speaking", "Dizziness"],
+		"name": "AVC",
+		"symptoms": ["Dormência súbita", "Confusão", "Dificuldade para falar", "Tontura"],
 		"vitals": {"hr": [70, 110], "spo2": [90, 100]}
 	},
 	{
-		"name": "Appendicitis",
-		"symptoms": ["Abdominal pain", "Nausea", "Fever", "Loss of appetite"],
+		"name": "Apendicite",
+		"symptoms": ["Dor abdominal", "Náusea", "Febre", "Perda de apetite"],
 		"vitals": {"hr": [80, 110], "spo2": [95, 100]}
 	},
 	{
-		"name": "Asthma Attack",
-		"symptoms": ["Shortness of breath", "Wheezing", "Chest tightness", "Cough"],
+		"name": "Crise de Asma",
+		"symptoms": ["Falta de ar", "Chiado no peito", "Aperto no peito", "Tosse"],
 		"vitals": {"hr": [90, 130], "spo2": [85, 95]}
 	},
 	{
-		"name": "Diabetes Crisis",
-		"symptoms": ["Confusion", "Dizziness", "Nausea", "Excessive thirst"],
+		"name": "Crise de Diabetes",
+		"symptoms": ["Confusão", "Tontura", "Náusea", "Sede excessiva"],
 		"vitals": {"hr": [80, 120], "spo2": [90, 100]}
 	},
 	{
-		"name": "Septic Shock",
-		"symptoms": ["Fever", "Rapid breathing", "Confusion", "Low blood pressure"],
+		"name": "Choque Séptico",
+		"symptoms": ["Febre", "Respiração acelerada", "Confusão", "Pressão baixa"],
 		"vitals": {"hr": [120, 160], "spo2": [80, 90]}
 	},
 	{
-		"name": "Kidney Infection",
-		"symptoms": ["Fever", "Back pain", "Nausea", "Frequent urination"],
+		"name": "Infecção Renal",
+		"symptoms": ["Febre", "Dor nas costas", "Náusea", "Micção frequente"],
 		"vitals": {"hr": [85, 115], "spo2": [90, 100]}
 	},
 	{
-		"name": "Gastroenteritis",
-		"symptoms": ["Abdominal pain", "Nausea", "Diarrhea", "Fever"],
+		"name": "Gastroenterite",
+		"symptoms": ["Dor abdominal", "Náusea", "Diarreia", "Febre"],
 		"vitals": {"hr": [75, 105], "spo2": [95, 100]}
 	},
 	{
-		"name": "Meningitis",
-		"symptoms": ["Severe headache", "Fever", "Stiff neck", "Confusion"],
+		"name": "Meningite",
+		"symptoms": ["Dor de cabeça forte", "Febre", "Rigidez na nuca", "Confusão"],
 		"vitals": {"hr": [90, 130], "spo2": [90, 100]}
 	},
 	{
-		"name": "Pulmonary Embolism",
-		"symptoms": ["Chest pain", "Shortness of breath", "Rapid breathing", "Cough"],
+		"name": "Embolia Pulmonar",
+		"symptoms": ["Dor no peito", "Falta de ar", "Respiração acelerada", "Tosse"],
 		"vitals": {"hr": [100, 140], "spo2": [80, 90]}
 	},
 	{
-		"name": "Panic Attack",
-		"symptoms": ["Chest pain", "Shortness of breath", "Dizziness", "Rapid heartbeat"],
+		"name": "Ataque de Pânico",
+		"symptoms": ["Dor no peito", "Falta de ar", "Tontura", "Batimento cardíaco acelerado"],
 		"vitals": {"hr": [100, 150], "spo2": [95, 100]}
 	},
 	{
-		"name": "Dehydration",
-		"symptoms": ["Dizziness", "Confusion", "Dry mouth", "Excessive thirst"],
+		"name": "Desidratação",
+		"symptoms": ["Tontura", "Confusão", "Boca seca", "Sede excessiva"],
 		"vitals": {"hr": [90, 130], "spo2": [90, 100]}
 	},
 	{
-		"name": "Hypothermia",
-		"symptoms": ["Shivering", "Confusion", "Dizziness", "Slow breathing"],
+		"name": "Hipotermia",
+		"symptoms": ["Calafrios", "Confusão", "Tontura", "Respiração lenta"],
 		"vitals": {"hr": [50, 80], "spo2": [90, 100]}
 	}
 ]
 
 # New mapping of symptoms to potential illnesses
 var symptoms_to_illnesses: Dictionary = {
-	"Chest pain": ["Heart Attack", "Pneumonia"],
-	"Shortness of breath": ["Heart Attack", "Pneumonia", "Asthma Attack"],
-	"Dizziness": ["Heart Attack", "Stroke"],
-	"Fever": ["Common Cold", "Pneumonia", "Appendicitis"],
-	"Cough": ["Common Cold", "Pneumonia", "Asthma Attack"],
-	"Runny nose": ["Common Cold"],
-	"Sore throat": ["Common Cold"],
-	"Nausea": ["Heart Attack", "Appendicitis"],
-	"Abdominal pain": ["Appendicitis"],
-	"Loss of appetite": ["Appendicitis"],
-	"Sudden numbness": ["Stroke"],
-	"Confusion": ["Stroke"],
-	"Trouble speaking": ["Stroke"],
-	"Cough with phlegm": ["Pneumonia"],
-	"Wheezing": ["Asthma Attack"],
-	"Chest tightness": ["Asthma Attack"]
+	"Dor no peito": ["Ataque Cardíaco", "Pneumonia"],
+	"Falta de ar": ["Ataque Cardíaco", "Pneumonia", "Crise de Asma"],
+	"Tontura": ["Ataque Cardíaco", "AVC"],
+	"Febre": ["Resfriado Comum", "Pneumonia", "Apendicite"],
+	"Tosse": ["Resfriado Comum", "Pneumonia", "Crise de Asma"],
+	"Coriza": ["Resfriado Comum"],
+	"Dor de garganta": ["Resfriado Comum"],
+	"Náusea": ["Ataque Cardíaco", "Apendicite"],
+	"Dor abdominal": ["Apendicite"],
+	"Perda de apetite": ["Apendicite"],
+	"Dormência súbita": ["AVC"],
+	"Confusão": ["AVC"],
+	"Dificuldade para falar": ["AVC"],
+	"Tosse com catarro": ["Pneumonia"],
+	"Chiado no peito": ["Crise de Asma"],
+	"Aperto no peito": ["Crise de Asma"]
 }
 
 # Get all unique symptoms for the manual
@@ -182,69 +181,69 @@ var total_pages: int = 0
 # Treatment data
 var available_treatments: Array = [
 	{
-		"name": "Antibiotics",
-		"good_for": ["Pneumonia", "Kidney Infection", "Meningitis", "Appendicitis", "Septic Shock"], # Added "Septic Shock"
-		"contraindications": ["Dizziness", "Nausea"]
+		"name": "Antibióticos",
+		"good_for": ["Pneumonia", "Infecção Renal", "Meningite", "Apendicite", "Choque Séptico"],
+		"contraindications": ["Tontura", "Náusea"]
 	},
 	{
-		"name": "Bronchodilators",
-		"good_for": ["Asthma Attack", "Pneumonia"],
-		"contraindications": ["Chest pain", "Rapid heartbeat"]
+		"name": "Broncodilatadores",
+		"good_for": ["Crise de Asma", "Pneumonia"],
+		"contraindications": ["Dor no peito", "Batimento cardíaco acelerado"]
 	},
 	{
-		"name": "Anticoagulants",
-		"good_for": ["Pulmonary Embolism", "Heart Attack"],
-		"contraindications": ["Chest pain", "Shortness of breath"]
+		"name": "Anticoagulantes",
+		"good_for": ["Embolia Pulmonar", "Ataque Cardíaco"],
+		"contraindications": ["Dor no peito", "Falta de ar"]
 	},
 	{
-		"name": "Antipyretics",
-		"good_for": ["Common Cold", "Pneumonia", "Meningitis", "Appendicitis", "Gastroenteritis"],
-		"contraindications": ["Low blood pressure", "Dehydration"]
+		"name": "Antipiréticos",
+		"good_for": ["Resfriado Comum", "Pneumonia", "Meningite", "Apendicite", "Gastroenterite"],
+		"contraindications": ["Pressão baixa", "Desidratação"]
 	},
 	{
-		"name": "Corticosteroids",
-		"good_for": ["Asthma Attack", "Pneumonia"],
-		"contraindications": ["Diabetes Crisis", "High blood pressure"]
+		"name": "Corticosteroides",
+		"good_for": ["Crise de Asma", "Pneumonia"],
+		"contraindications": ["Crise de Diabetes", "Pressão alta"]
 	},
 	{
-		"name": "Antiemetics",
-		"good_for": ["Gastroenteritis", "Kidney Infection", "Appendicitis"],
-		"contraindications": ["Dizziness", "Confusion"]
+		"name": "Antieméticos",
+		"good_for": ["Gastroenterite", "Infecção Renal", "Apendicite"],
+		"contraindications": ["Tontura", "Confusão"]
 	},
 	{
-		"name": "Insulin",
-		"good_for": ["Diabetes Crisis"],
-		"contraindications": ["Low blood sugar", "Dehydration"]
+		"name": "Insulina",
+		"good_for": ["Crise de Diabetes"],
+		"contraindications": ["Hipoglicemia", "Desidratação"]
 	},
 	{
-		"name": "Antivirals",
-		"good_for": ["Common Cold", "Meningitis"],
-		"contraindications": ["Kidney problems", "Liver problems"]
+		"name": "Antivirais",
+		"good_for": ["Resfriado Comum", "Meningite"],
+		"contraindications": ["Problemas renais", "Problemas hepáticos"]
 	},
 	{
-		"name": "Surgery",
-		"good_for": ["Appendicitis"],
-		"contraindications": ["Heart Attack", "Stroke"]
+		"name": "Cirurgia",
+		"good_for": ["Apendicite"],
+		"contraindications": ["Ataque Cardíaco", "AVC"]
 	},
 	{
-		"name": "Thrombolytics",
-		"good_for": ["Stroke", "Heart Attack"],
-		"contraindications": ["Recent surgery", "Bleeding disorders"]
+		"name": "Trombolíticos",
+		"good_for": ["AVC", "Ataque Cardíaco"],
+		"contraindications": ["Cirurgia recente", "Distúrbios hemorrágicos"]
 	},
 	{
-		"name": "IV Fluids",
-		"good_for": ["Dehydration", "Gastroenteritis", "Septic Shock"], # Added "Septic Shock"
-		"contraindications": ["Heart failure", "Kidney failure"]
+		"name": "Fluidos IV",
+		"good_for": ["Desidratação", "Gastroenterite", "Choque Séptico"],
+		"contraindications": ["Insuficiência cardíaca", "Insuficiência renal"]
 	},
 	{
-		"name": "Warming Treatment",
-		"good_for": ["Hypothermia"],
-		"contraindications": ["Burns", "Fever"]
+		"name": "Tratamento de Aquecimento",
+		"good_for": ["Hipotermia"],
+		"contraindications": ["Queimaduras", "Febre"]
 	},
 	{
-		"name": "Anti-anxiety Medication",
-		"good_for": ["Panic Attack"],
-		"contraindications": ["Severe respiratory depression", "Acute narrow-angle glaucoma"]
+		"name": "Medicação para Ansiedade",
+		"good_for": ["Ataque de Pânico"],
+		"contraindications": ["Depressão respiratória grave", "Glaucoma agudo de ângulo fechado"]
 	}
 ]
 
@@ -373,11 +372,11 @@ func _ready():
 func _setup_tooltips():
 	# Add tooltips to vital signs
 	var hr_tooltip = (
-		"Normal range: %d-%d bpm\nHigh: Tachycardia\nLow: Bradycardia"
+		"Normal: %d-%d bpm\nAlto: Taquicardia\nBaixo: Bradicardia"
 		% [HR_NORMAL[0], HR_NORMAL[1]]
 	)
 	var spo2_tooltip = (
-		"Normal range: %d-%d%%\nLow: Hypoxemia\nCritical: <90%%" % [SPO2_NORMAL[0], SPO2_NORMAL[1]]
+		"Normal: %d-%d%%\nBaixo: Hipoxemia\nCrítico: <90%%" % [SPO2_NORMAL[0], SPO2_NORMAL[1]]
 	)
 	hr_value.tooltip_text = hr_tooltip
 	spo2_value.tooltip_text = spo2_tooltip
@@ -385,9 +384,9 @@ func _setup_tooltips():
 func create_new_patient():
 	var illness = available_illnesses[randi() % available_illnesses.size()]
 	return {
-		"name": "Patient %d" % randi_range(1, 999),
+		"name": "Paciente %d" % randi_range(1, 999),
 		"age": randi_range(18, 80),
-		"sex": "Male" if randf() > 0.5 else "Female",
+		"sex": "Masculino" if randf() > 0.5 else "Feminino",
 		"illness": illness,
 		"avatar": "res://assets/patient%d.png" % randi_range(1, 6), # Random number between 1 and 6
 		"time_elapsed": 0
@@ -410,16 +409,16 @@ func update_queue_display():
 			panel.custom_minimum_size = Vector2(60, 60)
 			panel.add_theme_stylebox_override("panel", queue_patient_stylebox)
 			queue_container.add_child(panel)
-	queue_label.text = "Patients in Queue: %d" % queue_patients.size()
+	queue_label.text = "Pacientes na Fila: %d" % queue_patients.size()
 	queue_label.visible = true
 
 func load_next_patient():
 	if queue_patients.is_empty():
 		health_update_timer.stop()
-		speech_content.text = "No patients in queue."
+		speech_content.text = "Não há pacientes na fila."
 		current_patient_data = {}
 		# Clear patient UI
-		patient_name.text = "No Patient"
+		patient_name.text = "Sem Paciente"
 		patient_details.text = ""
 		symptoms_list.text = ""
 		hr_value.text = "N/A"
@@ -427,8 +426,6 @@ func load_next_patient():
 		hr_value.modulate = NORMAL_COLOR
 		spo2_value.modulate = NORMAL_COLOR
 		patient_asset.texture = null
-		patient_avatar.texture = null
-		patient_avatar.visible = false
 		request_info_button.disabled = true
 		diagnose_button.disabled = true
 		next_patient_button.visible = false # Ensure next patient button is hidden
@@ -442,12 +439,12 @@ func load_next_patient():
 
 	if patient_count == 6:
 		current_patient_data = {
-			"name": "Patient Zero",
+			"name": "Paciente Zero",
 			"age": randi_range(20, 60),
-			"sex": "Male" if randf() > 0.5 else "Female",
+			"sex": "Masculino" if randf() > 0.5 else "Feminino",
 			"illness": {
 				"name": "COVID-19",
-				"symptoms": ["Fever", "Cough", "Shortness of breath", "Loss of taste or smell"],
+				"symptoms": ["Febre", "Tosse", "Falta de ar", "Perda de paladar ou olfato"],
 				"vitals": {"hr": [90, 130], "spo2": [80, 94]}
 			},
 			"avatar": "res://assets/patient%d.png" % randi_range(1, 6),
@@ -469,16 +466,16 @@ func load_next_patient():
 	health_update_timer.start()
 
 	# Debugging: Print patient's disease and correct treatment
-	print("--- New Patient Loaded ---")
-	print("Patient Name: ", current_patient_data.name)
-	print("Patient Disease: ", current_patient_data.illness.name)
+	print("--- Novo Paciente Carregado ---")
+	print("Nome do Paciente: ", current_patient_data.name)
+	print("Doença do Paciente: ", current_patient_data.illness.name)
 	var correct_treatments = []
 	for treatment in available_treatments:
 		if current_patient_data.illness.name in treatment.good_for:
 			correct_treatments.append(treatment.name)
 	print(
-		"Correct Treatment(s): ",
-		"None found" if correct_treatments.is_empty() else ", ".join(correct_treatments)
+		"Tratamento(s) Correto(s): ",
+		"Nenhum encontrado" if correct_treatments.is_empty() else ", ".join(correct_treatments)
 	)
 	print("--------------------------")
 
@@ -486,18 +483,14 @@ func update_patient_ui():
 	# Update UI
 	patient_name.text = current_patient_data.name
 	patient_details.text = (
-		"Age: %d | Sex: %s" % [current_patient_data.age, current_patient_data.sex]
+		"Idade: %d | Sexo: %s" % [current_patient_data.age, current_patient_data.sex]
 	)
 	# Update patient avatar texture
 	var avatar_texture = load(current_patient_data.avatar)
 	if avatar_texture:
 		patient_asset.texture = avatar_texture
-		patient_avatar.texture = avatar_texture
-		patient_avatar.visible = true
 	else:
 		patient_asset.texture = null
-		patient_avatar.texture = null
-		patient_avatar.visible = false
 	# Update symptoms with icons and colors
 	symptoms_list.text = _format_symptoms(current_patient_data.illness.symptoms)
 	# Update speech bubble with conversational symptoms
@@ -544,65 +537,73 @@ func _format_symptoms(symptoms: Array) -> String:
 
 func _get_symptom_icon(symptom: String) -> String:
 	var icons = {
-		"Chest pain": "⚠️",
-		"Shortness of breath": "💨",
-		"Dizziness": "💫",
-		"Fever": "🌡️",
-		"Cough": "🤧",
-		"Runny nose": "🤧",
-		"Sore throat": "😷",
-		"Nausea": "🤢",
-		"Abdominal pain": "🤕",
-		"Loss of appetite": "🍽️",
-		"Sudden numbness": "🫥",
-		"Confusion": "😵‍💫",
-		"Trouble speaking": "🗣️",
-		"Loss of taste or smell": "👅"
+		"Dor no peito": "⚠️",
+		"Falta de ar": "💨",
+		"Tontura": "💫",
+		"Febre": "🌡️",
+		"Tosse": "🤧",
+		"Coriza": "🤧",
+		"Dor de garganta": "😷",
+		"Náusea": "🤢",
+		"Dor abdominal": "🤕",
+		"Perda de apetite": "🍽️",
+		"Dormência súbita": "🫥",
+		"Confusão": "😵‍💫",
+		"Dificuldade para falar": "🗣️",
+		"Perda de paladar ou olfato": "👅"
 	}
 	return icons.get(symptom, "•")
 
 func _get_symptom_color(symptom: String) -> String:
 	var colors = {
-		"Chest pain": "#ff6b6b",
-		"Shortness of breath": "#4ecdc4",
-		"Dizziness": "#ffe66d",
-		"Fever": "#ff9f1c",
-		"Cough": "#ff6b6b",
-		"Runny nose": "#4ecdc4",
-		"Sore throat": "#ff6b6b",
-		"Nausea": "#ff9f1c",
-		"Abdominal pain": "#ff6b6b",
-		"Loss of appetite": "#ffe66d",
-		"Sudden numbness": "#ff6b6b",
-		"Confusion": "#ffe66d",
-		"Trouble speaking": "#ff6b6b"
+		"Dor no peito": "#ff6b6b",
+		"Falta de ar": "#4ecdc4",
+		"Tontura": "#ffe66d",
+		"Febre": "#ff9f1c",
+		"Tosse": "#ff6b6b",
+		"Coriza": "#4ecdc4",
+		"Dor de garganta": "#ff6b6b",
+		"Náusea": "#ff9f1c",
+		"Dor abdominal": "#ff6b6b",
+		"Perda de apetite": "#ffe66d",
+		"Dormência súbita": "#ff6b6b",
+		"Confusão": "#ffe66d",
+		"Dificuldade para falar": "#ff6b6b"
 	}
 	return colors.get(symptom, "#ffffff")
 
 func _format_speech_bubble(symptoms: Array) -> void:
-	# Map each symptom to a short, conversational phrase
+	# Map each symptom to a short, conversational phrase in PT-BR
 	var symptom_to_phrase = {
-		"Chest pain": "My chest hurts...",
-		"Shortness of breath": "I can't breathe well...",
-		"Dizziness": "I feel dizzy...",
-		"Fever": "I have a fever...",
-		"Cough": "I keep coughing...",
-		"Runny nose": "My nose won't stop running...",
-		"Sore throat": "My throat is sore...",
-		"Nausea": "I feel sick...",
-		"Abdominal pain": "My stomach hurts...",
-		"Loss of appetite": "I don't want to eat...",
-		"Sudden numbness": "I can't feel my limbs...",
-		"Confusion": "I'm confused...",
-		"Trouble speaking": "I can't speak clearly...",
-		"Loss of taste or smell": "I can't taste or smell anything..."
+		"Dor no peito": "Meu peito dói...",
+		"Falta de ar": "Não consigo respirar direito...",
+		"Tontura": "Sinto tontura...",
+		"Febre": "Estou com febre...",
+		"Tosse": "Não paro de tossir...",
+		"Coriza": "Meu nariz não para de escorrer...",
+		"Dor de garganta": "Minha garganta está doendo...",
+		"Náusea": "Sinto náuseas...",
+		"Dor abdominal": "Minha barriga dói...",
+		"Perda de apetite": "Não tenho vontade de comer...",
+		"Dormência súbita": "Não sinto meus membros...",
+		"Confusão": "Estou confuso...",
+		"Dificuldade para falar": "Não consigo falar direito...",
+		"Perda de paladar ou olfato": "Não consigo sentir gosto ou cheiro de nada...",
+		"Tosse com catarro": "Estou tossindo com catarro...",
+		"Chiado no peito": "Meu peito está chiando...",
+		"Aperto no peito": "Sinto um aperto no peito...",
+		"Respiração acelerada": "Minha respiração está muito rápida...",
+		"Sede excessiva": "Estou com muita sede...",
+		"Dor nas costas": "Estou com dor nas costas...",
+		"Boca seca": "Minha boca está seca...",
+		"Calafrios": "Estou com calafrios..."
 	}
 	messages_to_type.clear()
 	for symptom in symptoms:
 		if symptom_to_phrase.has(symptom):
 			messages_to_type.append(symptom_to_phrase[symptom])
 		else:
-			messages_to_type.append("I'm experiencing %s..." % symptom.to_lower())
+			messages_to_type.append("Estou com %s..." % symptom.to_lower())
 
 	# Start typing the first message
 	current_message_index = 0
@@ -854,20 +855,20 @@ func _on_request_info_pressed():
 		return
 	# Add a random additional symptom or detail
 	var additional_info = [
-		"Patient reports feeling worse",
-		(
-			"Patient has a history of %s"
-			% ["hypertension", "diabetes", "asthma", "heart disease"][randi() % 4]
-		),
-		"Patient is allergic to %s" % ["penicillin", "aspirin", "sulfa drugs"][randi() % 3],
-		"Patient's symptoms started %d hours ago" % randi_range(1, 48)
-	]
+	"O paciente relata estar se sentindo pior",
+	(
+		"O paciente tem histórico de %s"
+		% ["hipertensão", "diabetes", "asma", "doença cardíaca"][randi() % 4]
+	),
+	"O paciente é alérgico a %s" % ["penicilina", "aspirina", "sulfonamidas"][randi() % 3],
+	"Os sintomas do paciente começaram há %d horas" % randi_range(1, 48)
+]
 	var additional_speech = [
-		"It's getting worse...",
-		"I have %s..." % ["hypertension", "diabetes", "asthma", "heart disease"][randi() % 4],
-		"I'm allergic to %s..." % ["penicillin", "aspirin", "sulfa drugs"][randi() % 3],
-		"This started %d hours ago..." % randi_range(1, 48)
-	]
+	"Está piorando...",
+	"Eu tenho %s..." % ["hipertensão", "diabetes", "asma", "doença cardíaca"][randi() % 4],
+	"Sou alérgico(a) a %s..." % ["penicilina", "aspirina", "sulfonamidas"][randi() % 3],
+	"Isso começou há %d horas..." % randi_range(1, 48)
+]
 	# Add the new information to symptoms list
 	var current_text = symptoms_list.text
 	symptoms_list.text = current_text + "\n• " + additional_info[randi() % additional_info.size()]
@@ -992,7 +993,7 @@ func _on_next_page_pressed():
 func _create_game_over_popup():
 	game_over_popup = PopupPanel.new()
 	game_over_popup.size = get_viewport().get_visible_rect().size
-	game_over_popup.title = "Game Over"
+	game_over_popup.title = "Fim de Jogo"
 	# Create a style for the popup - full black background
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(0, 0, 0, 0.95) # Almost black with slight transparency
@@ -1005,7 +1006,7 @@ func _create_game_over_popup():
 
 	# Create game over message label
 	var message_label = Label.new()
-	message_label.text = "GAME OVER\nThe patient has died.\nYou took too long to make the correct diagnosis."
+	message_label.text = "FIM DE JOGO\nO paciente desmaiou.\nVocê demorou demais para escolher o tratamento correto."
 	message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	message_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	message_label.add_theme_font_size_override("font_size", 32)
@@ -1029,7 +1030,7 @@ func _create_game_over_popup():
 	button_style.corner_radius_bottom_left = 8
 
 	var restart_button = Button.new()
-	restart_button.text = "Restart Game"
+	restart_button.text = "Reiniciar Jogo"
 	restart_button.custom_minimum_size = Vector2(200, 50)
 	restart_button.pressed.connect(_on_restart_game_pressed)
 	restart_button.add_theme_font_size_override("font_size", 24)
@@ -1162,7 +1163,7 @@ func _update_page_display():
 	print("Current page: ", current_page)
 	print("Total pages: ", total_pages)
 	# Update page label
-	page_label.text = "Page %d/%d" % [current_page + 1, total_pages]
+	page_label.text = "Página %d/%d" % [current_page + 1, total_pages]
 	# Update button states
 	prev_page_button.disabled = current_page == 0
 	next_page_button.disabled = current_page >= total_pages - 1
@@ -1196,7 +1197,7 @@ func _update_illness_list():
 		var symptom = all_symptoms[i]
 		var potential_illnesses = symptoms_to_illnesses[symptom]
 		var illnesses_text = ", ".join(potential_illnesses)
-		formatted_text1 += "[b]%s:[/b]\nIndicates: %s\n\n" % [symptom, illnesses_text]
+		formatted_text1 += "[b]%s:[/b]\nIndica: %s\n\n" % [symptom, illnesses_text]
 		print("Added symptom to col1: ", symptom)
 	illness_list_col1.text = formatted_text1
 
@@ -1207,7 +1208,7 @@ func _update_illness_list():
 			var symptom = all_symptoms[i]
 			var potential_illnesses = symptoms_to_illnesses[symptom]
 			var illnesses_text = ", ".join(potential_illnesses)
-			formatted_text2 += "[b]%s:[/b]\nIndicates: %s\n\n" % [symptom, illnesses_text]
+			formatted_text2 += "[b]%s:[/b]\nIndica: %s\n\n" % [symptom, illnesses_text]
 			print("Added symptom to col2: ", symptom)
 	illness_list_col2.text = formatted_text2
 	print("Text updated in illness list columns")
@@ -1222,7 +1223,7 @@ func _initialize_how_to_treat_pages():
 
 func _update_treatment_page_display():
 	how_to_treat_page_label.text = (
-		"Page %d/%d" % [current_treatment_page + 1, total_treatment_pages]
+		"Página %d/%d" % [current_treatment_page + 1, total_treatment_pages]
 	)
 	how_to_treat_prev_page_button.disabled = current_treatment_page == 0
 	how_to_treat_next_page_button.disabled = current_treatment_page >= total_treatment_pages - 1
@@ -1241,8 +1242,8 @@ func _update_treatment_list():
 	for i in range(start_idx, midpoint_idx):
 		var treatment = available_treatments[i]
 		formatted_text1 += "[b]%s:[/b]\n" % treatment.name
-		formatted_text1 += "Good for: %s\n" % ", ".join(treatment.good_for)
-		formatted_text1 += "Do not use if: %s\n\n" % ", ".join(treatment.contraindications)
+		formatted_text1 += "Bom para: %s\n" % ", ".join(treatment.good_for)
+		formatted_text1 += "Não use se o paciente indicar: %s\n\n" % ", ".join(treatment.contraindications)
 	treatment_list_col1.text = formatted_text1
 
 	# Column 2
@@ -1251,8 +1252,8 @@ func _update_treatment_list():
 		for i in range(midpoint_idx, end_idx):
 			var treatment = available_treatments[i]
 			formatted_text2 += "[b]%s:[/b]\n" % treatment.name
-			formatted_text2 += "Good for: %s\n" % ", ".join(treatment.good_for)
-			formatted_text2 += "Do not use if: %s\n\n" % ", ".join(treatment.contraindications)
+			formatted_text2 += "Bom para: %s\n" % ", ".join(treatment.good_for)
+			formatted_text2 += "Não use se o paciente indicar: %s\n\n" % ", ".join(treatment.contraindications)
 		treatment_list_col2.text = formatted_text2
 
 func _on_how_to_treat_prev_page_pressed():
@@ -1304,7 +1305,7 @@ func _on_how_to_treat_clicked():
 func _create_treatment_popup():
 	treatment_popup = PopupPanel.new()
 	treatment_popup.size = Vector2(600, 400)
-	treatment_popup.title = "Select Treatment"
+	treatment_popup.title = "Escolha o Tratamento"
 	# Create a style for the popup
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(0.1, 0.1, 0.1, 0.95)
@@ -1330,7 +1331,7 @@ func _create_treatment_popup():
 
 	# Add title label
 	var title_label = Label.new()
-	title_label.text = "Select a Treatment"
+	title_label.text = "Selecione um Tratamento"
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.add_theme_font_size_override("font_size", 24)
 	title_label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9, 1))
@@ -1338,7 +1339,7 @@ func _create_treatment_popup():
 
 	# Add description label
 	var desc_label = Label.new()
-	desc_label.text = "Choose the most appropriate treatment for the patient's condition:"
+	desc_label.text = "Escolha a forma de tratamento mais apropriada:"
 	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	desc_label.add_theme_font_size_override("font_size", 16)
 	desc_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8, 1))
@@ -1358,7 +1359,7 @@ func _create_treatment_popup():
 
 	# Add cancel button
 	var cancel_button = Button.new()
-	cancel_button.text = "Cancel"
+	cancel_button.text = "Cancelar"
 	cancel_button.custom_minimum_size = Vector2(200, 40)
 	cancel_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	cancel_button.pressed.connect(_on_treatment_cancel_pressed)
@@ -1383,7 +1384,7 @@ func _show_treatment_options():
 
 		# Add tooltip with treatment details
 		var tooltip = (
-			"Good for: %s\nDo not use if: %s"
+			"Indicado para: %s\nNão usar se: %s"
 			% [", ".join(treatment.good_for), ", ".join(treatment.contraindications)]
 		)
 		button.tooltip_text = tooltip
@@ -1436,7 +1437,7 @@ func _on_treatment_selected(treatment: Dictionary):
 	if is_correct_treatment:
 		patient_diagnosed_correctly = true # Set the flag to true
 		var feedback = (
-			"Thank you doctor! I'm starting to feel better already. The %s seems to be helping with my %s."
+			"Obrigado, doutor(a)! Já estou começando a me sentir melhor. O %s parece estar ajudando com o(a) %s."
 			% [treatment.name.to_lower(), patient_illness.to_lower()]
 		)
 		messages_to_type.append(feedback)
@@ -1461,7 +1462,7 @@ func _on_treatment_selected(treatment: Dictionary):
 			# If some symptoms are helped, give partial feedback
 			var random_helped = helped_symptoms[randi() % helped_symptoms.size()]
 			var feedback_1 = (
-				"The %s is helping with my %s, but I still have other symptoms..."
+				"O %s está ajudando com o(a) %s, mas ainda tenho outros sintomas..."
 				% [treatment.name.to_lower(), random_helped.to_lower()]
 			)
 			messages_to_type.append(feedback_1)
@@ -1469,9 +1470,9 @@ func _on_treatment_selected(treatment: Dictionary):
 		else:
 			# If no symptoms are helped, give negative feedback
 			var random_symptom = unhelped_symptoms[randi() % unhelped_symptoms.size()]
-			var feedback_1 = "I'm not feeling much better..."
+			var feedback_1 = "Não estou me sentindo muito melhor..."
 			var feedback_2 = (
-				"The %s doesn't seem to help with my %s."
+				"O %s não parece ajudar com o(a) %s."
 				% [treatment.name.to_lower(), random_symptom.to_lower()]
 			)
 			messages_to_type.append(feedback_1)
