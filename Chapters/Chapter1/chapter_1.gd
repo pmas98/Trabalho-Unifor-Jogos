@@ -195,9 +195,15 @@ func start_scene_by_id(scene_id: int) -> void:
 	save_system.update_save_data(save_info)
 
 func _on_dialogue_finished():
-	print("Dialogue finished for scene: ", cur_scene_id)
+	print("=== DIALOGUE FINISHED DEBUG ===")
+	print("Current scene ID: ", cur_scene_id)
+	print("Next scene ID from choice: ", next_scene_id)
 	
 	var current_scene = find_scene_by_id(cur_scene_id)
+	print("Current scene data: ", current_scene)
+	print("Has next_scene property: ", current_scene.has("next_scene"))
+	if current_scene.has("next_scene"):
+		print("Next scene value: ", current_scene.next_scene)
 
 	# Se uma escolha foi feita, ela já definiu o next_scene_id.
 	if next_scene_id >= 0:
@@ -209,9 +215,9 @@ func _on_dialogue_finished():
 	# Verifica se há uma "next_scene" definida no JSON para transições lineares.
 	if current_scene.has("next_scene"):
 		var next_scene = current_scene.next_scene
-		if next_scene is int:
-			print("Using next scene from current scene: ", next_scene)
-			start_scene_by_id(next_scene)
+		if next_scene is int or next_scene is float:  # Handle both int and float values
+			print("Transitioning to next scene: ", next_scene)
+			start_scene_by_id(int(next_scene))  # Convert to int to ensure consistent type
 			return
 	
 	# Se a cena tem áreas interativas, espera pela ação do jogador.
@@ -219,9 +225,10 @@ func _on_dialogue_finished():
 		print("Scene has interactive areas, waiting for player input")
 		return
 	
-	# Lógica fallback para encontrar a próxima cena na sequência
-	var next_sequential_id = cur_scene_id + 1
-	# ... (o resto da função pode permanecer como está)
+	print("No valid next scene found, ending dialogue")
+	hide()
+	print("=== END DIALOGUE FINISHED DEBUG ===")
+
 func _on_choice_made(scene_id: int) -> void:
 	print("Choice made, transitioning to scene: ", scene_id)
 	next_scene_id = scene_id  # Store the next scene ID

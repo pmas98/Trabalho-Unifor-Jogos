@@ -1082,7 +1082,6 @@ func _trigger_game_over():
 	request_info_button.disabled = true
 	diagnose_button.disabled = true
 	next_patient_button.disabled = true
-	
 func _start_chapter_1_transition():
 	health_update_timer.stop()
 	patient_arrival_timer.stop()
@@ -1091,58 +1090,61 @@ func _start_chapter_1_transition():
 	diagnose_button.disabled = true
 	next_patient_button.disabled = true
 
-	# Create the PopupPanel
-	var covid_popup = PopupPanel.new()
+	# --- SOLUÇÃO RECOMENDADA ---
 
-	# Style the background to be nearly opaque
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0, 0, 0, 0.95)
-	covid_popup.add_theme_stylebox_override("panel", style)
+	# 1. Criar um container principal que servirá de fundo.
+	# ColorRect é ideal para um fundo de cor sólida.
+	var overlay = ColorRect.new()
+	overlay.color = Color(0, 0, 0, 0.95) # Cor preta com 95% de opacidade
+	
+	# 2. Fazer o overlay preencher toda a tela (viewport).
+	# Isso garante que ele se adapte a qualquer resolução.
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
-	# Set a minimum size to make it wider
-	covid_popup.min_size = Vector2(1200, 200)
-
-	# Create a container for internal margins
+	# 3. Criar um MarginContainer para adicionar "respiros" nas bordas.
+	# Isso impede que o texto cole nas laterais da tela.
 	var margin = MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 30)
-	margin.add_theme_constant_override("margin_top", 30)
-	margin.add_theme_constant_override("margin_right", 30)
-	margin.add_theme_constant_override("margin_bottom", 30)
-
-	# Create a label with centered text and autowrap
+	margin.add_theme_constant_override("margin_left", 100)
+	margin.add_theme_constant_override("margin_right", 100)
+	# O MarginContainer também deve preencher seu pai (o overlay).
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	
+	# 4. Criar a Label com as suas configurações.
 	var message_label = Label.new()
 	message_label.text = "E assim começou, no dia 14 de Dezembro de 2019, um dos primeiros casos de COVID-19, marcando o início de uma pandemia global."
-	message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	message_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-
-	# Set autowrap mode to handle line breaks correctly
-	message_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-
 	message_label.add_theme_font_size_override("font_size", 32)
 	message_label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9))
 
-	# Assemble the popup scene
+	# 5. Configurar alinhamento e quebra de linha.
+	# O texto será centralizado horizontalmente e verticalmente DENTRO do MarginContainer.
+	# Como o MarginContainer ocupa a tela toda (com margens), o efeito é o de centralização no viewport.
+	message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	message_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	message_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+
+	# 6. Montar a cena e adicioná-la à árvore.
 	margin.add_child(message_label)
-	covid_popup.add_child(margin)
-	add_child(covid_popup)
+	overlay.add_child(margin)
+	add_child(overlay)
 
-	# Display the popup
-	print("Transition popup displayed. Waiting for 5 seconds...")
-	covid_popup.popup_centered()
+	# Mensagem de debug
+	print("Transition overlay displayed. Waiting for 5 seconds...")
 
-	# Wait for 5 seconds before changing the scene
+	# Esperar 5 segundos antes de mudar de cena
 	await get_tree().create_timer(5.0).timeout
+	
+	# Remover o overlay antes de mudar de cena para evitar que ele permaneça
+	overlay.queue_free()
 
 	print("Timer finished. Attempting to change scene...")
 	
-	# --- SOLUTION ---
-	# Attempt to change the scene and check for errors
+	# Tentar mudar de cena e verificar por erros
 	var scene_path = "res://Chapters/Chapter1/Chapter1.tscn"
 	var error = get_tree().change_scene_to_file(scene_path)
 	
-	# If the scene change fails, print the error code
 	if error != OK:
 		print("Error changing scene to '%s'. Error code: %s" % [scene_path, error])
+
 func _initialize_manual_pages():
 	print("=== Manual Initialization ===")
 	# Calculate total pages based on number of illnesses
