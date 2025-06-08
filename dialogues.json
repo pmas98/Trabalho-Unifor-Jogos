@@ -4,8 +4,7 @@
 	  "scenes": [
 		{
 		  "id": 0,
-		  "background": "res://Assets/CorredorHospitalar.png",
-		  "speaker": "Você",
+		  "highlight": true,
 		  "text": "As pessoas dizem que nunca se sabe quando sua vida vai mudar, que o futuro não está escrito. Mas naquele dia... naquele dia eu vi o meu próprio futuro sendo escrito.",
 		  "transition": "fade_in",
 		  "position": "center",
@@ -14,14 +13,15 @@
 		},
 		{
 		  "id": 1,
+		  "highlight": true,
+		  "text": "Eu entrei para o meu plantão semanal, parecia ser apenas mais um dia normal. Cheguei e comecei a atender pacientes.",
 		  "background": "res://Assets/CorredorHospitalar.png",
 		  "speaker": "Você",
-		  "text": "Plantão da madrugada, era só mais um dia tranquilo, a maioria dos casos do dia eram o de sempre, uma febre, uma gripe. Foi então que ela chegou.",
-		  "sprite": "res://Assets/main_char.png",
 		  "transition": "fade_in",
-		  "position": "right",
+		  "position": "center",
 		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
-		  "next_scene": 2
+		  "next_scene": 2,
+		  "trigger_minigame": "symptoms"
 		},
 		{
 		  "id": 2,

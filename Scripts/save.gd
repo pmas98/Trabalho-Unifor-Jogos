@@ -7,6 +7,7 @@ var current_chapter: int = 0
 var current_scene_id: int = 0
 var current_scene_path: String = ""
 var player_choices: Array = []
+var flags: Dictionary = {}  # Add flags dictionary to store game flags
 
 var fullscreen_enabled: bool = false
 
@@ -22,7 +23,8 @@ func save_game() -> void:
 		"choices": player_choices,
 		"volume_bus_1": volume_bus_1,
 		"volume_bus_2": volume_bus_2,
-		"fullscreen_enabled": fullscreen_enabled
+		"fullscreen_enabled": fullscreen_enabled,
+		"flags": flags  # Add flags to save data
 	}
 	
 	var save_file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
@@ -42,6 +44,7 @@ func load_game() -> void:
 		current_scene_id = 0
 		current_scene_path = "res://Chapters/Chapter1/Chapter1.tscn"
 		player_choices = []
+		flags = {}  # Initialize empty flags
 		volume_bus_1 = 0.5
 		volume_bus_2 = 0.5
 		fullscreen_enabled = false
@@ -63,6 +66,7 @@ func load_game() -> void:
 		current_scene_id = 0
 		current_scene_path = "res://Chapters/Chapter1/Chapter1.tscn"
 		player_choices = []
+		flags = {}  # Clear flags
 		volume_bus_1 = 0.5
 		volume_bus_2 = 0.5
 		fullscreen_enabled = false
@@ -74,6 +78,7 @@ func load_game() -> void:
 	current_scene_id = save_data.get("scene_id", 0)
 	current_scene_path = save_data.get("scene_path", "res://Chapters/Chapter1/Chapter1.tscn")
 	player_choices = save_data.get("choices", [])
+	flags = save_data.get("flags", {})  # Load flags from save data
 
 	volume_bus_1 = save_data.get("volume_bus_1", 0.5)
 	volume_bus_2 = save_data.get("volume_bus_2", 0.5)
@@ -114,6 +119,7 @@ func update_save_data(save_info: Dictionary) -> void:
 	current_scene_id = save_info.get("scene_id", current_scene_id)
 	current_scene_path = save_info.get("scene_path", current_scene_path)
 	player_choices = save_info.get("choices", player_choices)
+	flags = save_info.get("flags", flags)
 
 	volume_bus_1 = save_info.get("volume_bus_1", volume_bus_1)
 	volume_bus_2 = save_info.get("volume_bus_2", volume_bus_2)
@@ -142,6 +148,7 @@ func clear_save_data() -> void:
 	current_scene_id = 0
 	current_scene_path = "res://Chapters/Chapter1/Chapter1.tscn"
 	player_choices = []
+	flags = {}  # Clear flags
 	volume_bus_1 = 0.5
 	volume_bus_2 = 0.5
 	fullscreen_enabled = false
@@ -156,3 +163,19 @@ func clear_save_data() -> void:
 	sync_autoload()
 	apply_audio_settings()
 	save_game() # Save the reset state
+
+# Add new flag-related methods
+func set_flag(flag_name: String, value: bool) -> void:
+	flags[flag_name] = value
+	save_game()  # Save immediately when a flag changes
+
+func has_flag(flag_name: String) -> bool:
+	return flags.get(flag_name, false)
+
+func get_flag(flag_name: String) -> bool:
+	return flags.get(flag_name, false)
+
+func clear_flag(flag_name: String) -> void:
+	if flags.has(flag_name):
+		flags.erase(flag_name)
+		save_game()  # Save immediately when a flag changes

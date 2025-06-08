@@ -27,4 +27,49 @@ layout_mode = 1
 
 [node name="DialogueBase" parent="." instance=ExtResource("1_oljnv")]
 
+[node name="HighlightLabel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="HighlightLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="HighlightLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -100.0
+offset_right = 400.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -39.85
+
+[node name="TextRevealTimer" type="Timer" parent="."]
+
 [connection signal="area_clicked" from="InteractiveBackground" to="." method="_on_interactive_area_clicked"]
+[connection signal="timeout" from="TextRevealTimer" to="." method="_on_text_reveal_timer_timeout"]

@@ -9,7 +9,6 @@ func _ready() -> void:
 		button.mouse_exited.connect(Callable(self, "_on_mouse_interaction").bind(button, "exited"))
 		button.mouse_entered.connect(Callable(self, "_on_mouse_interaction").bind(button, "entered"))
 
-
 	# Ativa/desativa o botão "Continuar"
 	var continue_button = get_node("MainContainer/HBoxContainer/VBoxContainer/Continuar")  # ajuste o caminho se necessário
 	if continue_button:
