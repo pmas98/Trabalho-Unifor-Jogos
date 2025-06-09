@@ -27,7 +27,7 @@
 		  "id": 2,
 		  "background": "res://Assets/corredorvazio.png",
 		  "speaker": "Você",
-		  "text": "Mas a rotina estava prestes a morrer. Foi então que ela chegou.",
+		  "text": "E assim tudo começou.",
 		  "//comment": "Ação visual: Sra. Huang entra em cena, debilitada. Som de tosse aumenta.",
 		  "sprite": "res://Assets/main_char_surprised.png",
 		  "transition": "none",
