@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg4jttcqvb5me"
-
-path="res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"
+uid="uid://bqiaw04bh4n1a"
+path="res://.godot/imported/fade_chapter1.png-8eb93d8e6d81f56865b891391e304a18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/background1_1.png"
-dest_files=["res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"]
+source_file="res://Assets/fade_chapter1.png"
+dest_files=["res://.godot/imported/fade_chapter1.png-8eb93d8e6d81f56865b891391e304a18.ctex"]
 
 [params]
 
