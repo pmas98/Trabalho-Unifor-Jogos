@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccvnyhykl377r"
-path="res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"
+uid="uid://ch2ckx3uwy1wc"
+path="res://.godot/imported/CelularChamando.png-622518152a2780eac756683cc9b6e803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/background1_1.png"
-dest_files=["res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"]
+source_file="res://Assets/CelularChamando.png"
+dest_files=["res://.godot/imported/CelularChamando.png-622518152a2780eac756683cc9b6e803.ctex"]
 
 [params]
 

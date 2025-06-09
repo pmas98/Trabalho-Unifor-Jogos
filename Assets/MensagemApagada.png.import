@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccvnyhykl377r"
-path="res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"
+uid="uid://d3pai0eerikq4"
+path="res://.godot/imported/MensagemApagada.png-9ca0132b9e9cc4a465041e79bc3c0034.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/background1_1.png"
-dest_files=["res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"]
+source_file="res://Assets/MensagemApagada.png"
+dest_files=["res://.godot/imported/MensagemApagada.png-9ca0132b9e9cc4a465041e79bc3c0034.ctex"]
 
 [params]
 

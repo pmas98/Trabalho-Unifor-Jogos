@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccvnyhykl377r"
-path="res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"
+uid="uid://beamy2c7kb01b"
+path="res://.godot/imported/ZhangYu_Suprised.png-f5ff35e9e6810f3edcbefc894ad3696c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/background1_1.png"
-dest_files=["res://.godot/imported/background1_1.png-3356ab037c5a37424ea2d9f825329c48.ctex"]
+source_file="res://Assets/ZhangYu_Suprised.png"
+dest_files=["res://.godot/imported/ZhangYu_Suprised.png-f5ff35e9e6810f3edcbefc894ad3696c.ctex"]
 
 [params]
 
