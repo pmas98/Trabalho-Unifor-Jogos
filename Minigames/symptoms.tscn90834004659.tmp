@@ -1,0 +1,675 @@
+[gd_scene load_steps=17 format=3 uid="uid://cly3sjbyuc6oi"]
+
+[ext_resource type="Script" uid="uid://ex88fwxmo8b0" path="res://Minigames/symptoms.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bg4jttcqvb5me" path="res://Assets/background1_1.png" id="2_kgmhw"]
+[ext_resource type="Texture2D" uid="uid://dakittkql30pe" path="res://Assets/mesa.png" id="4_npfsh"]
+[ext_resource type="Texture2D" uid="uid://c3pqnbb5ie4q1" path="res://Assets/sintomas.png" id="5_kgmhw"]
+[ext_resource type="AudioStream" uid="uid://cqq4scwjqofqx" path="res://Assets/Audio/Ambient/amb_hospital.ogg" id="6_kgmhw"]
+[ext_resource type="Texture2D" uid="uid://bojiasijnel6" path="res://Assets/Tratamentos.png" id="6_mmel0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_speech_bubble"]
+bg_color = Color(0.147672, 0.147672, 0.147672, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.5)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pagination_button_disabled"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.4, 0.4, 0.3)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pagination_button_hover"]
+bg_color = Color(0.4, 0.6, 1, 0.1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.6, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pagination_button"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.6, 1, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhgyq"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.528301, 0.649521, 0.946006, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.305908, 0.311594, 0.31644, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.5, 0.9, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diagnose_hover"]
+bg_color = Color(0.48267, 0.557128, 0.928807, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.508721, 0.608011, 0.930391, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diagnose_pressed"]
+bg_color = Color(0.310964, 0.352058, 0.811213, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.268941, 0.403314, 0.893132, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diagnose_normal"]
+bg_color = Color(0.352701, 0.339728, 0.99879, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3953, 0.512648, 0.887265, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_queue_patient"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.4, 0.4, 0.3)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 4
+
+[node name="Symptoms" type="CanvasLayer"]
+script = ExtResource("1_script")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_kgmhw")
+volume_db = -6.433
+autoplay = true
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.755, 0.755)
+texture = ExtResource("2_kgmhw")
+
+[node name="PatientAsset" type="TextureRect" parent="."]
+offset_left = -1.0
+offset_top = 28.0
+offset_right = 376.0
+offset_bottom = 564.0
+
+[node name="SpeechBubble" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.755
+offset_top = 20.0
+offset_right = 131.245
+offset_bottom = 110.765
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_speech_bubble")
+
+[node name="SpeechContent" type="RichTextLabel" parent="SpeechBubble"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "I'm not feeling well..."
+fit_content = true
+autowrap_mode = 2
+
+[node name="Table" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -49.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(612, -119)
+texture = ExtResource("4_npfsh")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Prontuary" type="Panel" parent="."]
+anchors_preset = -1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+offset_left = 798.55
+offset_top = 37.165
+offset_right = 2004.17
+offset_bottom = 1526.07
+scale = Vector2(0.135, 0.135)
+
+[node name="ProntuaryContent" type="Control" parent="Prontuary"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -14.51
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Prontuary/ProntuaryContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.08
+offset_top = 100.0
+offset_right = -227.825
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 245
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Prontuary/ProntuaryContent/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PatientHeader" type="HBoxContainer" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PatientAvatar" type="TextureRect" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader"]
+visible = false
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PatientInfo" type="VBoxContainer" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PatientName" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader/PatientInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 299
+text = "John Doe"
+
+[node name="PatientDetails" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/PatientHeader/PatientInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 141
+text = "Idade: 34 | Sexo: Male"
+
+[node name="HSeparator" type="HSeparator" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VitalSigns" type="GridContainer" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="HR" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/VitalSigns"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 121
+text = "Batimentos:"
+
+[node name="HRValue" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/VitalSigns"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 121
+text = "80 bpm"
+
+[node name="SpO2" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/VitalSigns"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 226
+text = "SpO2:"
+
+[node name="SpO2Value" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer/VitalSigns"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 176
+text = "98%"
+
+[node name="HSeparator2" type="HSeparator" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SymptomsLabel" type="Label" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 96
+text = "Sintomas:"
+vertical_alignment = 1
+
+[node name="SymptomsList" type="RichTextLabel" parent="Prontuary/ProntuaryContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/bold_italics_font_size = 151
+theme_override_font_sizes/italics_font_size = 111
+theme_override_font_sizes/mono_font_size = 161
+theme_override_font_sizes/normal_font_size = 91
+bbcode_enabled = true
+text = "[indent]• [color=#ff6b6b]⚠️[/color] Chest pain
+• [color=#4ecdc4]💨[/color] Shortness of breath
+• [color=#ffe66d]💫[/color] Dizziness[/indent]"
+
+[node name="Manual" type="TextureRect" parent="."]
+offset_left = 38.0
+offset_top = 398.065
+offset_right = 2538.0
+offset_bottom = 2898.06
+scale = Vector2(0.105, 0.105)
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("5_kgmhw")
+
+[node name="ManualContent" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = 398.065
+offset_right = 16.525
+offset_bottom = 398.065
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.155, 0.155)
+
+[node name="CloseButton" type="Button" parent="ManualContent"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 99.73
+offset_bottom = 109.275
+grow_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "X"
+
+[node name="MarginContainer" type="MarginContainer" parent="ManualContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -91.895
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ManualContent/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="ManualContent/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Medical Reference Manual"
+horizontal_alignment = 1
+
+[node name="PageContent" type="Control" parent="ManualContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IllnessGrid" type="GridContainer" parent="ManualContent/MarginContainer/VBoxContainer/PageContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 45
+columns = 2
+
+[node name="Column1" type="RichTextLabel" parent="ManualContent/MarginContainer/VBoxContainer/PageContent/IllnessGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="Column2" type="RichTextLabel" parent="ManualContent/MarginContainer/VBoxContainer/PageContent/IllnessGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="PaginationButtons" type="HBoxContainer" parent="ManualContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 320
+alignment = 1
+
+[node name="PrevPageButton" type="Button" parent="ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Anterior
+"
+
+[node name="PageLabel" type="Label" parent="ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Page 1/2"
+horizontal_alignment = 1
+
+[node name="NextPageButton" type="Button" parent="ManualContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Próximo"
+
+[node name="HowToTreat" type="TextureRect" parent="."]
+offset_left = 282.625
+offset_top = 393.27
+offset_right = 2782.63
+offset_bottom = 2893.27
+scale = Vector2(0.105, 0.105)
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("6_mmel0")
+
+[node name="HowToTreatContent" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 259.75
+offset_top = 393.0
+offset_right = 125.75
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloseButton" type="Button" parent="HowToTreatContent"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 78.95
+offset_bottom = 78.0
+grow_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "X"
+
+[node name="MarginContainer" type="MarginContainer" parent="HowToTreatContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 20.63
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToTreatContent/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="HowToTreatContent/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Medical Reference Manual"
+horizontal_alignment = 1
+
+[node name="PageContent" type="Control" parent="HowToTreatContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TreatmentGrid" type="GridContainer" parent="HowToTreatContent/MarginContainer/VBoxContainer/PageContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -92.36
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="TreatmentColumn1" type="RichTextLabel" parent="HowToTreatContent/MarginContainer/VBoxContainer/PageContent/TreatmentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="TreatmentColumn2" type="RichTextLabel" parent="HowToTreatContent/MarginContainer/VBoxContainer/PageContent/TreatmentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="PaginationButtons" type="HBoxContainer" parent="HowToTreatContent/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 370
+alignment = 1
+
+[node name="PrevPageButton" type="Button" parent="HowToTreatContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Previous"
+
+[node name="PageLabel" type="Label" parent="HowToTreatContent/MarginContainer/VBoxContainer/PaginationButtons"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Page 1/2"
+horizontal_alignment = 1
+
+[node name="NextPageButton" type="Button" parent="HowToTreatContent/MarginContainer/VBoxContainer/PaginationButtons"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.3)
+theme_override_colors/font_hover_color = Color(0.4, 0.6, 1, 1)
+theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
+text = "Next"
+
+[node name="ActionButtons" type="VBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 692.755
+offset_top = -238.785
+offset_right = -57.755
+offset_bottom = -47.785
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="RequestInfoButton" type="Button" parent="ActionButtons"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_vhgyq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+text = "Pedir mais informação"
+
+[node name="DiagnoseButton" type="Button" parent="ActionButtons"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_diagnose_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_diagnose_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_diagnose_normal")
+text = "Escolher Tratamento"
+
+[node name="NextPatientButton" type="Button" parent="ActionButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Next Patient"
+
+[node name="QueueLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 24
+text = "Patients in Queue: 3"
+
+[node name="QueueContainer" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 10.76
+offset_right = -20.0
+offset_bottom = 70.76
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="QueuePatient1" type="Panel" parent="QueueContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_queue_patient")
+
+[node name="QueuePatient2" type="Panel" parent="QueueContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_queue_patient")
+
+[node name="QueuePatient3" type="Panel" parent="QueueContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_queue_patient")

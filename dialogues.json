@@ -1,567 +1,563 @@
 {
   "chapters": [
-	{
-	  "scenes": [
-		{
-		  "id": 0,
-		  "background": "res://Assets/firstscene.png",
-		  "speaker": "Você",
-		  "text": "As pessoas dizem que nunca se sabe quando sua vida vai mudar... Mas naquele dia, eu vi o meu próprio futuro sendo escrito com tinta preta no prontuário de uma desconhecida.",
-		  "sprite": "",
-		  "transition": "fade_in",
-		  "position": "center",
-		  "audio": "res://Assets/Audio/BGM/bgm_hospital.ogg",
-		  "next_scene": 1
-		},
-		{
-		  "id": 1,
-		  "background": "res://Assets/corredorvazio.png",
-		  "speaker": "Você",
-		  "text": "Plantão da madrugada. O hospital respirava em um ritmo lento e cansado. A maioria dos casos eram os de sempre: uma febre, uma virose... rotina.",
-		  "sprite": "res://Assets/main_char.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 2
-		},
-		{
-		  "id": 2,
-		  "background": "res://Assets/corredorvazio.png",
-		  "speaker": "Você",
-		  "text": "Mas a rotina estava prestes a morrer. Foi então que ela chegou.",
-		  "//comment": "Ação visual: Sra. Huang entra em cena, debilitada. Som de tosse aumenta.",
-		  "sprite": "res://Assets/main_char_surprised.png", 
-		  "transition": "none",
-		  "position": "right",
-		  "audio": "res://Assets/Audio/SFX/sfx_coughing_sequence.ogg",
-		  "next_scene": 3
-		},
-		{
-		  "id": 3,
-		  "background": "res://Assets/corredorvazio.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Parece uma gripe infernal, mas os pulmões dela... Nenhuma gripe que eu conheço faz um estrago desses. Pelo menos, nenhuma que não tenha sido erradicada.",
-		  "sprite": "res://Assets/ZhangYu_main.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "next_scene": 4
-		},
-		{
-		  "id": 4,
-		  "background": "res://Assets/corredorvazio.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Garoto, eu tenho 32 anos de plantão, eu vejo pneumonia nos meus sonhos. Conheço cada sombra que ela deixa num raio-x. Isso é diferente. Vem comigo, preciso te mostrar uma coisa.",
-		  "sprite": "res://Assets/ZhangYu_main.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 5
-		},
-		{
-		  "id": 5,
-		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Olhe isso. Um padrão difuso em vidro fosco. Agressivo, limpo... mas nenhum dos nossos testes consegue nomear o artista. Bactéria, negativo. Vírus da gripe, negativo. Tudo negativo.",
-		  "sprite": "res://Assets/ZhangYu_main.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "choices": [
-			{
-			  "text": "(Analítico) Pode ser uma mutação?",
-			  "next_scene": 6
-			},
-			{
-			  "text": "(Pragmático) Precisamos alertar o Centro de Controle de Doenças.",
-			  "next_scene": 7
-			},
-			{
-			  "text": "(Cauteloso) Então... esperamos e observamos por enquanto?",
-			  "next_scene": 8
-			}
-		  ]
-		},
-		{
-		  "id": 6,
-		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "É uma possibilidade. Inteligente. Mas a minha dúvida é: de qual vírus veio essa mutação? E por que tão agressiva?",
-		  "sprite": "res://Assets/ZhangYu_Surprised.png", 
-		  "transition": "fade_in",
-		  "position": "left",
-		  "next_scene": 9
-		},
-		{
-		  "id": 7,
-		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Eles temem o pânico mais do que a praga, garoto. Em 92, com a raiva... eu vi o que o pânico faz com gente boa. O CDC só aparece quando já é tarde demais.",
-		  "sprite": "res://Assets/ZhangYu_angry.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "next_scene": 9
-		},
-		{
-		  "id": 8,
-		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Esperar? E deixar mais gente morrer sem que a gente tente entender? Posso ser um velho cínico, mas não sou covarde. Pensei que você também não fosse.",
-		  "sprite": "res://Assets/ZhangYu_angry.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "next_scene": 9
-		},
-		{
-		  "id": 9,
-		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Você",
-		  "text": "Então por que me trouxe aqui? Se nenhum de nós tem uma resposta?",
-		  "sprite": "res://Assets/main_char.png",
-		  "transition": "fade_in",
-		  "position": "right",
-		  "next_scene": 10
-		},
-		{
-	  "id": 10,
-	  "background": "res://Assets/Computador.png",
-	  "speaker": "Dr. Zhang",
-	  "text": "Veja o prontuário. Você entende o inglês dos relatórios dela. Se essa coisa se espalhar, o mundo vai precisar saber e eles não falam mandarim.",
-	  "sprite": "res://Assets/ZhangYu_main.png",
-	  "transition": "fade_in",
-	  "position": "left",
-	  "choices": [
-		{
-		  "text": "[Fazer uma cópia para um pendrive]",
-		  "next_scene": 101,
-		  "set_flag": "copied_records"
-		},
-		{
-		  "text": "[Memorizar os dados principais]",
-		  "next_scene": 102, 
-		  "set_flag": "memorized_records"
-		},
-		{
-		  "text": "[Recusar] Isso é contra as regras, Zhang.",
-		  "next_scene": 103,
-		  "set_flag": "refused_records"
-		}
-	  ]
-	},
-	{
-	  "id": 101,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Dr. Zhang",
-	  "text": "Bom. Tenha cuidado com isso. É a nossa única chance.",
-	  "sprite": "res://Assets/ZhangYu_main.png",
-	  "transition": "none",
-	  "position": "left",
-	  "next_scene": 104 
-	},
-	{
-	  "id": 104,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(O pendrive parece pesar uma tonelada no meu bolso. Acabei de cruzar uma linha... não tem mais volta.)",
-	  "sprite": "res://Assets/main_char.png",
-	  "transition": "none",
-	  "position": "right",
-	  "next_scene": 11
-	},
-
-	{
-	  "id": 102,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Dr. Zhang",
-	  "text": "Sua memória é boa? Espero que sim. Não podemos nos dar ao luxo de esquecer um único detalhe.",
-	  "sprite": "res://Assets/ZhangYu_main.png",
-	  "transition": "none",
-	  "position": "left",
-	  "next_scene": 105 
-	},
-	{
-	  "id": 105,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Sintomas, datas, progressão... tudo girando na minha cabeça. Preciso me lembrar. A vida de outras pessoas pode depender disso.)",
-	  "sprite": "res://Assets/main_char.png",
-	  "transition": "none",
-	  "position": "right",
-	  "next_scene": 11 
-	},
-	{
-	  "id": 103,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Dr. Zhang",
-	  "text": "(A voz dele se torna fria e cortante) Regras... As regras não vão salvar ninguém quando os leitos estiverem cheios de corpos. Eu me enganei sobre você, garoto.",
-	  "sprite": "res://Assets/ZhangYu_angry.png", 
-	  "transition": "none",
-	  "position": "left",
-	  "next_scene": 106 
-	},
-	{
-	  "id": 106,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Ele não pode me pedir pra arriscar minha carreira assim! ...pode? O que eu fiz?)",
-	  "sprite": "res://Assets/main_char_depressed.png",
-	  "transition": "none",
-	  "position": "right",
-	  "next_scene": 11 
-	},
-
-
-	{
-	  "id": 11,
-	  "background": "res://Assets/SalaRaio-x.png",
-	  "speaker": "Enfermeira (Voz)", 
-	  "text": "PRECISAMOS DE UM MÉDICO NA 304! AGORA! É A PACIENTE NOVA!",
-	  "sprite": "",
-	  "transition": "none",
-	  "position": "center",
-	  "audio": "res://Assets/Audio/SFX/sfx_urgent_call.ogg",
-	  "next_scene": 12
-	},
-		{
-		  "id": 12,
-		  "background": "res://Assets/QuartoPacienteSozinho.png",
-		  "speaker": "Enfermeira",
-		  "text": "Doutor! A saturação dela caiu para 72 e não para de descer! Parada cardiorrespiratória iminente!",
-		  "sprite": "res://Assets/Nurse_panicked.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
-		  "choices": [
-			{
-			  "text": "Zhang, o que eu faço?!",
-			  "next_scene": 13,
-			  "set_flag": "asked_zhang"
-			},
-			{
-			  "text": "Segurem ela, eu vou entubar!",
-			  "next_scene": 14,
-			  "set_flag": "took_action"
-			}
-		  ]
-		},
-		{
-		  "id": 13,
-		  "background": "res://Assets/QuartoPacienteSozinho.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Está esperando um convite? Entube! AGORA!",
-		  "sprite": "res://Assets/ZhangYu_angry.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 15
-		},
-		{
-		  "id": 14,
-		  "background": "res://Assets/QuartoPacienteSozinho.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Bom instinto, garoto. Faça o que tem que ser feito.",
-		  "sprite": "res://Assets/ZhangYu_main.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 15
-		},
-		{
-		  "id": 15,
-		  "background": "res://Assets/QuartoPacienteSozinho.png",
-		  "speaker": "Narrador",
-		  "text": "Apesar de todos os esforços, o corpo da paciente não resiste. O som agudo e contínuo do monitor cardíaco preenche o silêncio do quarto.",
-		  "sprite": "",
-		  "transition": "none",
-		  "position": "center",
-		  "audio": "res://Assets/Audio/SFX/sfx_flatline.ogg",
-		  "next_scene": 16
-		},
-		{
-		  "id": 16,
-		  "background": "res://Assets/CorredorHospitalar.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Lá dentro... você congelou. Medo é normal, mas hesitação, na nossa profissão, mata. Nunca se esqueça disso.",
-		  "sprite": "res://Assets/ZhangYu_angry.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "requires_flag": "asked_zhang",
-		  "next_scene": 18
-		},
-		{
-		  "id": 17,
-		  "background": "res://Assets/CorredorHospitalar.png",
-		  "speaker": "Dr. Zhang",
-		  "text": "Você viu o que essa doença fez. Você não fugiu da luta lá dentro. Agora, precisamos avisar o mundo.",
-		  "sprite": "res://Assets/ZhangYu_main.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "requires_flag": "took_action",
-		  "next_scene": 18 
-		},
-		{
-		  "id": 18,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "Sr. Diretor, com licença. Precisamos discutir uma medida de contenção para a doença que vimos na sala 304. E notificar as autoridades.",
-		  "sprite": "res://Assets/main_char.png",
-		  "transition": "fade_in",
-		  "position": "right",
-		  "audio": "res://Assets/Audio/BGM/bgm_tense_calm.ogg",
-		  "next_scene": 19
-		},
-		{
-		  "id": 19,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "Doutor Liu, entre. Não há necessidade para alarde, meu caro. Sobre a paciente, o prontuário será reclassificado. Um caso trágico, sem dúvida. Diagnóstico oficial: pneumonia atípica grave.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "fade_in",
-		  "position": "left",
-		  "next_scene": 20
-		},
-		{
-		  "id": 20,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "Mas senhor, com todo o respeito, aquilo não era uma pneumonia comum! Essa doença matou uma mulher em horas!",
-		  "sprite": "res://Assets/main_char_angry.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 21
-		},
-		{
-		  "id": 21,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "A minha decisão é final, Doutor. Você é um médico promissor. Não manche seu futuro. Pode aceitar minha decisão... ou procurar um futuro em outro lugar.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "none",
-		  "position": "left",
-		  "choices": [
-			{
-			  "text": "Questionar abertamente",
-			  "next_scene": 22,
-			  "set_flag": "confronted_director"
-			},
-			{
-			  "text": "Aceitar com raiva interna",
-			  "next_scene": 24,
-			  "set_flag": "accepted_angry"
-			},
-			{
-			  "text": "(Discreto) Ativar o gravador do celular",
-			  "next_scene": 26,
-			  "set_flag": "recorded_conversation"
-			}
-		  ]
-		},
-		{
-		  "id": 22,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "Não posso aceitar isso. Nossa ética nos obriga a buscar a verdade. Quantas mais pessoas precisarão morrer para que isso se torne um problema 'oficial'?",
-		  "sprite": "res://Assets/main_char_angry.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 23
-		},
-		{
-		  "id": 23,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "A sua 'ética', Doutor, não paga suas contas nem protege sua carreira. A porta está aberta. Pense bem em suas prioridades.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 28 
-		},
-		{
-		  "id": 24,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "(Cerro os punhos. Cada fibra do meu corpo quer gritar, mas eu apenas assinto com a cabeça. O gosto amargo da covardia enche minha boca.)",
-		  "sprite": "res://Assets/main_char_depressed.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 25
-		},
-		{
-		  "id": 25,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "Boa escolha. Vejo que entende o quadro geral. Agora, volte ao trabalho.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 28 
-		},
-		{
-		  "id": 26,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "Então é isso? Uma nova doença mortal e a política do hospital é varrer para debaixo do tapete? Quantos terão que morrer até que isso vire um problema seu?",
-		  "//comment": "Ação: O jogador vê um pequeno ícone de gravação piscar na tela.",
-		  "audio": "res://Assets/Audio/SFX/sfx_phone_record_start.ogg",
-		  "sprite": "res://Assets/main_char_angry.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 27
-		},
-		{
-		  "id": 27,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "Doutor Liu. A estabilidade da nação é mais importante que um incidente isolado. Estou protegendo esta cidade do pânico. Você pode não entender, mas estou do lado da nossa nação.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 28 
-		},
-		{
-				"id": 28,
-				"background": "res://Assets/ApartamentoBanheiro.png",
-				"speaker": "Você",
-				"text": "(O vapor do chuveiro embaça o espelho. O cansaço do plantão pesa em meus ombros, mas a conversa com o Diretor pesa ainda mais na minha alma.)",
-				"audio": "res://Assets/Audio/SFX/sfx_shower.ogg",
-				"sprite": "",
-				"transition": "fade_in",
-				"position": "center",
-				"next_scene": 29
-		},
-		 {
-	  "id": 29,
-	  "background": "res://Assets/ApartamentoBanheiro.png",
-	  "speaker": "Narrador",
-	  "text": "O celular, esquecido na cama, vibra incessantemente, o som agudo cortando o barulho do ar condicionado.",
-	  "audio": "res://Assets/Audio/SFX/sfx_phone_vibrating.ogg",
-	  "sprite": "",
-	  "transition": "none",
-	  "position": "center",
-	  "next_scene": 30
-	},
-	{
-	  "id": 30,
-	  "background": "res://Assets/MensagemRecebida.png",
-	  "speaker": "Mensagem Anônima",
-	  "text": "Você viu o que aconteceu na 304. Isso não começou no mercado. Não é só uma mutação. Procure no laboratório P4. Você precisa escolher: o silêncio deles ou a sua verdade.",
-	  "sprite": "",
-	  "transition": "fade_in",
-	  "position": "center",
-	  "choices": [
-		{
-		  "text": "Responder: 'Quem é você?'",
-		  "next_scene": 31 
-		},
-		{
-		  "text": "Ignorar e apagar a mensagem",
-		  "next_scene": 33 
-		},
-		{
-		  "text": "Ligar para Zhang Yu imediatamente",
-		  "next_scene": 35 
-		}
-	  ]
-	},
-	{
-	  "id": 31,
-	  "background": "res://Assets/MensagemApagada.png",
-	  "speaker": "Narrador",
-	  "text": "Você digita a resposta, o coração acelerado. Por um instante, vê um avatar - a silhueta de uma mulher - antes que a conversa inteira seja apagada. A tela agora diz: 'Mensagem apagada'.",
-	  "audio": "res://Assets/Audio/SFX/sfx_message_deleted.ogg",
-	  "sprite": "",
-	  "transition": "none",
-	  "position": "center",
-	  "next_scene": 32
-	},
-	{
-	  "id": 32,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Uma silhueta de mulher... uma mensagem que se apaga... e agora o silêncio de Zhang. Não estou paranoico. Alguém está me vigiando, e talvez algo tenha acontecido com ele.)",
-	  "sprite": "res://Assets/main_char_depressed.png",
-	  "transition": "none",
-	  "position": "center",
-	  "next_scene": 37
-	},
-
-	{
-	  "id": 33,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Isso é loucura. Uma armadilha. Apago a conversa, mas não consigo apagar as palavras da minha mente: 'Não começou no mercado... Laboratório P4...').",
-	  "sprite": "res://Assets/main_char_depressed.png",
-	  "transition": "fade_in",
-	  "position": "center",
-	  "next_scene": 34
-	},
-	{
-	  "id": 34,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Eu apaguei a mensagem, mas as palavras não somem. 'Laboratório P4'. O silêncio de Zhang só confirma meus medos. Ignorar isso não vai me proteger. Só vai me tornar cúmplice.)",
-	  "sprite": "res://Assets/main_char_depressed.png",
-	  "transition": "none",
-	  "position": "left",
-	  "next_scene": 37 
-	},
-	{
-	  "id": 35,
-	  "background": "res://Assets/CelularChamando.png",
-	  "speaker": "Narrador",
-	  "text": "Você liga para Zhang. Chama uma, duas, três vezes. Cai na caixa postal. A voz dele soa normal, mas antes do bip, você ouve um barulho estranho... algo de metal caindo no chão.",
-	  "audio": "res://Assets/Audio/SFX/sfx_voicemail_ominous.ogg",
-	  "sprite": "",
-	  "transition": "fade_in",
-	  "position": "center",
-	  "next_scene": 36
-	},
-	{
-	  "id": 36,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Aquele barulho na ligação... metal caindo. Foi só minha imaginação? Ou algo realmente aconteceu com Zhang? Estou sozinho nisso. Completamente sozinho.)",
-	  "sprite": "res://Assets/main_char_depressed.png",
-	  "transition": "none",
-	  "position": "center",
-	  "next_scene": 37 
-	},
-	{
-	  "id": 37,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(A cidade lá fora ainda dorme, ignorante de tudo. Mas eu... eu não consigo mais dormir. O peso do que eu sei, e do que eu não sei, é grande demais.)",
-	  "sprite": "res://Assets/main_char_depressed.png",
-	  "transition": "fade_in",
-	  "position": "center",
-	  "audio": "res://Assets/Audio/BGM/bgm_sad_reflection.ogg",
-	  "next_scene": 38
-	},
-	{
-	  "id": 38,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(A mensagem era clara. 'O silêncio deles ou a minha verdade'...)",
-	  "sprite": "res://Assets/main_char_determined.png",
-	  "transition": "none",
-	  "position": "center",
-	  "next_scene": 39
-	},
-	{
-	  "id": 39,
-	  "background": "res://Assets/JanelaHospital.png",
-	  "speaker": "Você (Voz Interna)",
-	  "text": "(Acho que, no fundo, eu não tenho mais escolha.)",
-	  "sprite": "res://Assets/main_char_determined.png",
-	  "transition": "none",
-	  "position": "center",
-	  "next_scene": 40
-	},
-	{
-	  "id": 40,
-	  "background": "res://Assets/FichaSendoTriturada.png",
-	  "speaker": "Narrador",
-	  "text": "Primeira morte não registrada.\nWuhan, China — Dezembro de 2019.",
-	  "sprite": "",
-	  "audio": "res://Assets/Audio/SFX/sfx_paper_shredder.ogg",
-	  "transition": "fade_out",
-	  "position": "center"
-	}
-	  ]
-	}
+    {
+      "scenes": [
+        {
+          "id": 0,
+          "highlight": true,
+          "text": "As pessoas dizem que nunca se sabe quando sua vida vai mudar, que o futuro não está escrito. Mas naquele dia... naquele dia eu vi o meu próprio futuro sendo escrito.",
+          "transition": "fade_in",
+          "position": "center",
+          "audio": "res://Assets/Audio/BGM/bgm_hospital.ogg",
+          "next_scene": 1
+        },
+        {
+          "id": 1,
+          "highlight": true,
+          "text": "Eu entrei para o meu plantão semanal, parecia ser apenas mais um dia normal. Cheguei e comecei a atender pacientes.",
+          "background": "res://Assets/CorredorHospitalar.png",
+          "speaker": "Você",
+          "transition": "fade_in",
+          "position": "center",
+          "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
+          "next_scene": 2,
+          "trigger_minigame": "symptoms"
+        },
+        {
+          "id": 2,
+          "background": "res://Assets/corredorvazio.png",
+          "speaker": "Você",
+          "text": "Mas a rotina estava prestes a morrer. Foi então que ela chegou.",
+          "//comment": "Ação visual: Sra. Huang entra em cena, debilitada. Som de tosse aumenta.",
+          "sprite": "res://Assets/main_char_surprised.png",
+          "transition": "none",
+          "position": "right",
+          "audio": "res://Assets/Audio/SFX/sfx_coughing_sequence.ogg",
+          "next_scene": 3
+        },
+        {
+          "id": 3,
+          "background": "res://Assets/corredorvazio.png",
+          "speaker": "Dr. Zhang",
+          "text": "Parece uma gripe infernal, mas os pulmões dela... Nenhuma gripe que eu conheço faz um estrago desses. Pelo menos, nenhuma que não tenha sido erradicada.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "fade_in",
+          "position": "left",
+          "next_scene": 4
+        },
+        {
+          "id": 4,
+          "background": "res://Assets/corredorvazio.png",
+          "speaker": "Dr. Zhang",
+          "text": "Garoto, eu tenho 32 anos de plantão, eu vejo pneumonia nos meus sonhos. Conheço cada sombra que ela deixa num raio-x. Isso é diferente. Vem comigo, preciso te mostrar uma coisa.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 5
+        },
+        {
+          "id": 5,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "Olhe isso. Um padrão difuso em vidro fosco. Agressivo, limpo... mas nenhum dos nossos testes consegue nomear o artista. Bactéria, negativo. Vírus da gripe, negativo. Tudo negativo.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "fade_in",
+          "position": "left",
+          "choices": [
+            {
+              "text": "(Analítico) Pode ser uma mutação?",
+              "next_scene": 6
+            },
+            {
+              "text": "(Pragmático) Precisamos alertar o Centro de Controle de Doenças.",
+              "next_scene": 7
+            },
+            {
+              "text": "(Cauteloso) Então... esperamos e observamos por enquanto?",
+              "next_scene": 8
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "É uma possibilidade. Inteligente. Mas a minha dúvida é: de qual vírus veio essa mutação? E por que tão agressiva?",
+          "sprite": "res://Assets/ZhangYu_Surprised.png",
+          "transition": "fade_in",
+          "position": "left",
+          "next_scene": 9
+        },
+        {
+          "id": 7,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "Eles temem o pânico mais do que a praga, garoto. Em 92, com a raiva... eu vi o que o pânico faz com gente boa. O CDC só aparece quando já é tarde demais.",
+          "sprite": "res://Assets/ZhangYu_angry.png",
+          "transition": "fade_in",
+          "position": "left",
+          "next_scene": 9
+        },
+        {
+          "id": 8,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "Esperar? E deixar mais gente morrer sem que a gente tente entender? Posso ser um velho cínico, mas não sou covarde. Pensei que você também não fosse.",
+          "sprite": "res://Assets/ZhangYu_angry.png",
+          "transition": "fade_in",
+          "position": "left",
+          "next_scene": 9
+        },
+        {
+          "id": 9,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Você",
+          "text": "Então por que me trouxe aqui? Se nenhum de nós tem uma resposta?",
+          "sprite": "res://Assets/main_char.png",
+          "transition": "fade_in",
+          "position": "right",
+          "next_scene": 10
+        },
+        {
+          "id": 10,
+          "background": "res://Assets/Computador.png",
+          "speaker": "Dr. Zhang",
+          "text": "Veja o prontuário. Você entende o inglês dos relatórios dela. Se essa coisa se espalhar, o mundo vai precisar saber e eles não falam mandarim.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "fade_in",
+          "position": "left",
+          "choices": [
+            {
+              "text": "[Fazer uma cópia para um pendrive]",
+              "next_scene": 101,
+              "set_flag": "copied_records"
+            },
+            {
+              "text": "[Memorizar os dados principais]",
+              "next_scene": 102,
+              "set_flag": "memorized_records"
+            },
+            {
+              "text": "[Recusar] Isso é contra as regras, Zhang.",
+              "next_scene": 103,
+              "set_flag": "refused_records"
+            }
+          ]
+        },
+        {
+          "id": 101,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "Bom. Tenha cuidado com isso. É a nossa única chance.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 104
+        },
+        {
+          "id": 104,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(O pendrive parece pesar uma tonelada no meu bolso. Acabei de cruzar uma linha... não tem mais volta.)",
+          "sprite": "res://Assets/main_char.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 11
+        },
+        {
+          "id": 102,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "Sua memória é boa? Espero que sim. Não podemos nos dar ao luxo de esquecer um único detalhe.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 105
+        },
+        {
+          "id": 105,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Sintomas, datas, progressão... tudo girando na minha cabeça. Preciso me lembrar. A vida de outras pessoas pode depender disso.)",
+          "sprite": "res://Assets/main_char.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 11
+        },
+        {
+          "id": 103,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Dr. Zhang",
+          "text": "(A voz dele se torna fria e cortante) Regras... As regras não vão salvar ninguém quando os leitos estiverem cheios de corpos. Eu me enganei sobre você, garoto.",
+          "sprite": "res://Assets/ZhangYu_angry.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 106
+        },
+        {
+          "id": 106,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Ele não pode me pedir pra arriscar minha carreira assim! ...pode? O que eu fiz?)",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 11
+        },
+        {
+          "id": 11,
+          "background": "res://Assets/SalaRaio-x.png",
+          "speaker": "Enfermeira (Voz)",
+          "text": "PRECISAMOS DE UM MÉDICO NA 304! AGORA! É A PACIENTE NOVA!",
+          "sprite": "",
+          "transition": "none",
+          "position": "center",
+          "audio": "res://Assets/Audio/SFX/sfx_urgent_call.ogg",
+          "next_scene": 12
+        },
+        {
+          "id": 12,
+          "background": "res://Assets/QuartoPacienteSozinho.png",
+          "speaker": "Enfermeira",
+          "text": "Doutor! A saturação dela caiu para 72 e não para de descer! Parada cardiorrespiratória iminente!",
+          "sprite": "res://Assets/Nurse_panicked.png",
+          "transition": "fade_in",
+          "position": "left",
+          "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
+          "choices": [
+            {
+              "text": "Zhang, o que eu faço?!",
+              "next_scene": 13,
+              "set_flag": "asked_zhang"
+            },
+            {
+              "text": "Segurem ela, eu vou entubar!",
+              "next_scene": 14,
+              "set_flag": "took_action"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "background": "res://Assets/QuartoPacienteSozinho.png",
+          "speaker": "Dr. Zhang",
+          "text": "Está esperando um convite? Entube! AGORA!",
+          "sprite": "res://Assets/ZhangYu_angry.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 15
+        },
+        {
+          "id": 14,
+          "background": "res://Assets/QuartoPacienteSozinho.png",
+          "speaker": "Dr. Zhang",
+          "text": "Bom instinto, garoto. Faça o que tem que ser feito.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 15
+        },
+        {
+          "id": 15,
+          "background": "res://Assets/QuartoPacienteSozinho.png",
+          "speaker": "Narrador",
+          "text": "Apesar de todos os esforços, o corpo da paciente não resiste. O som agudo e contínuo do monitor cardíaco preenche o silêncio do quarto.",
+          "sprite": "",
+          "transition": "none",
+          "position": "center",
+          "audio": "res://Assets/Audio/SFX/sfx_flatline.ogg",
+          "next_scene": 16
+        },
+        {
+          "id": 16,
+          "background": "res://Assets/CorredorHospitalar.png",
+          "speaker": "Dr. Zhang",
+          "text": "Lá dentro... você congelou. Medo é normal, mas hesitação, na nossa profissão, mata. Nunca se esqueça disso.",
+          "sprite": "res://Assets/ZhangYu_angry.png",
+          "transition": "fade_in",
+          "position": "left",
+          "requires_flag": "asked_zhang",
+          "next_scene": 18
+        },
+        {
+          "id": 17,
+          "background": "res://Assets/CorredorHospitalar.png",
+          "speaker": "Dr. Zhang",
+          "text": "Você viu o que essa doença fez. Você não fugiu da luta lá dentro. Agora, precisamos avisar o mundo.",
+          "sprite": "res://Assets/ZhangYu_main.png",
+          "transition": "fade_in",
+          "position": "left",
+          "requires_flag": "took_action",
+          "next_scene": 18
+        },
+        {
+          "id": 18,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Você",
+          "text": "Sr. Diretor, com licença. Precisamos discutir uma medida de contenção para a doença que vimos na sala 304. E notificar as autoridades.",
+          "sprite": "res://Assets/main_char.png",
+          "transition": "fade_in",
+          "position": "right",
+          "audio": "res://Assets/Audio/BGM/bgm_tense_calm.ogg",
+          "next_scene": 19
+        },
+        {
+          "id": 19,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Liang Bo",
+          "text": "Doutor Liu, entre. Não há necessidade para alarde, meu caro. Sobre a paciente, o prontuário será reclassificado. Um caso trágico, sem dúvida. Diagnóstico oficial: pneumonia atípica grave.",
+          "sprite": "res://Assets/Liang Bo.png",
+          "transition": "fade_in",
+          "position": "left",
+          "next_scene": 20
+        },
+        {
+          "id": 20,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Você",
+          "text": "Mas senhor, com todo o respeito, aquilo não era uma pneumonia comum! Essa doença matou uma mulher em horas!",
+          "sprite": "res://Assets/main_char_angry.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 21
+        },
+        {
+          "id": 21,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Liang Bo",
+          "text": "A minha decisão é final, Doutor. Você é um médico promissor. Não manche seu futuro. Pode aceitar minha decisão... ou procurar um futuro em outro lugar.",
+          "sprite": "res://Assets/Liang Bo.png",
+          "transition": "none",
+          "position": "left",
+          "choices": [
+            {
+              "text": "Questionar abertamente",
+              "next_scene": 22,
+              "set_flag": "confronted_director"
+            },
+            {
+              "text": "Aceitar com raiva interna",
+              "next_scene": 24,
+              "set_flag": "accepted_angry"
+            },
+            {
+              "text": "(Discreto) Ativar o gravador do celular",
+              "next_scene": 26,
+              "set_flag": "recorded_conversation"
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Você",
+          "text": "Não posso aceitar isso. Nossa ética nos obriga a buscar a verdade. Quantas mais pessoas precisarão morrer para que isso se torne um problema 'oficial'?",
+          "sprite": "res://Assets/main_char_angry.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 23
+        },
+        {
+          "id": 23,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Liang Bo",
+          "text": "A sua 'ética', Doutor, não paga suas contas nem protege sua carreira. A porta está aberta. Pense bem em suas prioridades.",
+          "sprite": "res://Assets/Liang Bo.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 28
+        },
+        {
+          "id": 24,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Você",
+          "text": "(Cerro os punhos. Cada fibra do meu corpo quer gritar, mas eu apenas assinto com a cabeça. O gosto amargo da covardia enche minha boca.)",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 25
+        },
+        {
+          "id": 25,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Liang Bo",
+          "text": "Boa escolha. Vejo que entende o quadro geral. Agora, volte ao trabalho.",
+          "sprite": "res://Assets/Liang Bo.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 28
+        },
+        {
+          "id": 26,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Você",
+          "text": "Então é isso? Uma nova doença mortal e a política do hospital é varrer para debaixo do tapete? Quantos terão que morrer até que isso se torne um problema seu?",
+          "//comment": "Ação: O jogador vê um pequeno ícone de gravação piscar na tela.",
+          "audio": "res://Assets/Audio/SFX/sfx_phone_record_start.ogg",
+          "sprite": "res://Assets/main_char_angry.png",
+          "transition": "none",
+          "position": "right",
+          "next_scene": 27
+        },
+        {
+          "id": 27,
+          "background": "res://Assets/DiretorEscritorio.png",
+          "speaker": "Liang Bo",
+          "text": "Doutor Liu. A estabilidade da nação é mais importante que um incidente isolado. Estou protegendo esta cidade do pânico. Você pode não entender, mas estou do lado da nossa nação.",
+          "sprite": "res://Assets/Liang Bo.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 28
+        },
+        {
+          "id": 28,
+          "background": "res://Assets/ApartamentoBanheiro.png",
+          "speaker": "Você",
+          "text": "(O vapor do chuveiro embaça o espelho. O cansaço do plantão pesa em meus ombros, mas a conversa com o Diretor pesa ainda mais na minha alma.)",
+          "audio": "res://Assets/Audio/SFX/sfx_shower.ogg",
+          "sprite": "",
+          "transition": "fade_in",
+          "position": "center",
+          "next_scene": 29
+        },
+        {
+          "id": 29,
+          "background": "res://Assets/ApartamentoBanheiro.png",
+          "speaker": "Narrador",
+          "text": "O celular, esquecido na cama, vibra incessantemente, o som agudo cortando o barulho do ar condicionado.",
+          "audio": "res://Assets/Audio/SFX/sfx_phone_vibrating.ogg",
+          "sprite": "",
+          "transition": "none",
+          "position": "center",
+          "next_scene": 30
+        },
+        {
+          "id": 30,
+          "background": "res://Assets/MensagemRecebida.png",
+          "speaker": "Mensagem Anônima",
+          "text": "Você viu o que aconteceu na 304. Isso não começou no mercado. Não é só uma mutação. Procure no laboratório P4. Você precisa escolher: o silêncio deles ou a sua verdade.",
+          "sprite": "",
+          "transition": "fade_in",
+          "position": "center",
+          "choices": [
+            {
+              "text": "Responder: 'Quem é você?'",
+              "next_scene": 31
+            },
+            {
+              "text": "Ignorar e apagar a mensagem",
+              "next_scene": 33
+            },
+            {
+              "text": "Ligar para Zhang Yu imediatamente",
+              "next_scene": 35
+            }
+          ]
+        },
+        {
+          "id": 31,
+          "background": "res://Assets/MensagemApagada.png",
+          "speaker": "Narrador",
+          "text": "Você digita a resposta, o coração acelerado. Por um instante, vê um avatar - a silhueta de uma mulher - antes que a conversa inteira seja apagada. A tela agora diz: 'Mensagem apagada'.",
+          "audio": "res://Assets/Audio/SFX/sfx_message_deleted.ogg",
+          "sprite": "",
+          "transition": "none",
+          "position": "center",
+          "next_scene": 32
+        },
+        {
+          "id": 32,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Uma silhueta de mulher... uma mensagem que se apaga... e agora o silêncio de Zhang. Não estou paranoico. Alguém está me vigiando, e talvez algo tenha acontecido com ele.)",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "none",
+          "position": "center",
+          "next_scene": 37
+        },
+        {
+          "id": 33,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Isso é loucura. Uma armadilha. Apago a conversa, mas não consigo apagar as palavras da minha mente: 'Não começou no mercado... Laboratório P4...').",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "fade_in",
+          "position": "center",
+          "next_scene": 34
+        },
+        {
+          "id": 34,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Eu apaguei a mensagem, mas as palavras não somem. 'Laboratório P4'. O silêncio de Zhang só confirma meus medos. Ignorar isso não vai me proteger. Só vai me tornar cúmplice.)",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "none",
+          "position": "left",
+          "next_scene": 37
+        },
+        {
+          "id": 35,
+          "background": "res://Assets/CelularChamando.png",
+          "speaker": "Narrador",
+          "text": "Você liga para Zhang. Chama uma, duas, três vezes. Cai na caixa postal. A voz dele soa normal, mas antes do bip, você ouve um barulho estranho... algo de metal caindo no chão.",
+          "audio": "res://Assets/Audio/SFX/sfx_voicemail_ominous.ogg",
+          "sprite": "",
+          "transition": "fade_in",
+          "position": "center",
+          "next_scene": 36
+        },
+        {
+          "id": 36,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Aquele barulho na ligação... metal caindo. Foi só minha imaginação? Ou algo realmente aconteceu com Zhang? Estou sozinho nisso. Completamente sozinho.)",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "none",
+          "position": "center",
+          "next_scene": 37
+        },
+        {
+          "id": 37,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(A cidade lá fora ainda dorme, ignorante de tudo. Mas eu... eu não consigo mais dormir. O peso do que eu sei, e do que eu não sei, é grande demais.)",
+          "sprite": "res://Assets/main_char_depressed.png",
+          "transition": "fade_in",
+          "position": "center",
+          "audio": "res://Assets/Audio/BGM/bgm_sad_reflection.ogg",
+          "next_scene": 38
+        },
+        {
+          "id": 38,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(A mensagem era clara. 'O silêncio deles ou a minha verdade'...)",
+          "sprite": "res://Assets/main_char_determined.png",
+          "transition": "none",
+          "position": "center",
+          "next_scene": 39
+        },
+        {
+          "id": 39,
+          "background": "res://Assets/JanelaHospital.png",
+          "speaker": "Você (Voz Interna)",
+          "text": "(Acho que, no fundo, eu não tenho mais escolha.)",
+          "sprite": "res://Assets/main_char_determined.png",
+          "transition": "none",
+          "position": "center",
+          "next_scene": 40
+        },
+        {
+          "id": 40,
+          "background": "res://Assets/FichaSendoTriturada.png",
+          "speaker": "Narrador",
+          "text": "Primeira morte não registrada.\nWuhan, China — Dezembro de 2019.",
+          "sprite": "",
+          "audio": "res://Assets/Audio/SFX/sfx_paper_shredder.ogg",
+          "transition": "fade_out",
+          "position": "center"
+        }
+      ]
+    }
   ]
 }
