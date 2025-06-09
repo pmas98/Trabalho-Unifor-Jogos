@@ -632,7 +632,7 @@ text = "Escolher Tratamento"
 [node name="NextPatientButton" type="Button" parent="ActionButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Next Patient"
+text = "Próximo Paciente"
 
 [node name="QueueLabel" type="Label" parent="."]
 anchors_preset = 1

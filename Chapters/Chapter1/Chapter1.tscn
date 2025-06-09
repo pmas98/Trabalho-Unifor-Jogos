@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c1drmmnhs1jlm" path="res://Chapters/Chapter1/chapter_1.gd" id="1_bmr2h"]
 [ext_resource type="PackedScene" uid="uid://l08au552gm3a" path="res://Template/dialogue_base.tscn" id="1_oljnv"]
-
 [ext_resource type="Texture2D" uid="uid://bg4jttcqvb5me" path="res://Assets/background1_1.png" id="2_ktk5n"]
 [ext_resource type="PackedScene" uid="uid://c3actnemwc1d1" path="res://Template/interactive_background.tscn" id="3_yucny"]
 
