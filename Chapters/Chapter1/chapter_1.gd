@@ -24,6 +24,10 @@ var reveal_speed : float = 0.05  # Time between each character reveal
 var is_revealing_text : bool = false
 
 func _ready():
+	$DialogueAudioPlayer.stream = load("res://Assets/Audio/Ambient/amb_dram.ogg")
+	$DialogueAudioPlayer.volume_db = 0
+	$DialogueAudioPlayer.play()
+
 	# Load+parse the JSON once
 	var file = FileAccess.open("res://dialogues.json", FileAccess.READ)
 	var json_string = file.get_as_text()
@@ -35,6 +39,8 @@ func _ready():
 		dialogue_data = json_data
 	else:
 		print("JSON Parse Error")
+		print("Cena 0 do JSON:", dialogue_data["chapters"][0]["scenes"][0])
+
 	
 	# Connect signals
 	dialogue.dialogue_finished.connect(_on_dialogue_finished)
@@ -184,6 +190,9 @@ func start_scene_by_id(scene_id: int) -> void:
 	# Start the dialogue with the found scene
 	print("Starting dialogue with scene: ", scene)
 	dialogue.start([scene])
+	print("DEBUG >>> dialogue.start() chamado com:", scene)
+
+
 	
 	# Save current progress
 	var save_info = {

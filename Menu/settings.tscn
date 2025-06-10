@@ -106,12 +106,13 @@ flat = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_emm1k")
+volume_db = -20.048
 autoplay = true
 bus = &"music"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_iesh6")
-volume_db = 10.049
+volume_db = -9.999
 bus = &"sfx"
 
 [connection signal="value_changed" from="Control/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://l08au552gm3a"]
+[gd_scene load_steps=3 format=3 uid="uid://l08au552gm3a"]
 
 [ext_resource type="Script" uid="uid://dlquy00v3kdro" path="res://Template/dialogue_base.gd" id="1_k4dtq"]
 [ext_resource type="Texture2D" uid="uid://ch2uvtujpheey" path="res://Assets/main_char.png" id="2_lch7t"]
-[ext_resource type="AudioStream" uid="uid://dlo6ev5xbmky0" path="res://Assets/Audio/BGM/bgm_hospital.ogg" id="3_qnqgq"]
 
 [node name="DialogueBase" type="Control"]
 layout_mode = 3
@@ -63,9 +62,3 @@ offset_top = 290.0
 offset_right = 887.0
 offset_bottom = 490.0
 alignment = 1
-
-[node name="DialogueAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_qnqgq")
-volume_db = -39.85
-autoplay = true
-parameters/looping = true

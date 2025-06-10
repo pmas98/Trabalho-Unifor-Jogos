@@ -5,10 +5,12 @@
 		{
 		  "id": 0,
 		  "highlight": true,
+		  "speaker": "Narrador",
+		  "sprite": "res://Assets/placeholder.png",
 		  "text": "As pessoas dizem que nunca se sabe quando sua vida vai mudar, que o futuro não está escrito. Mas naquele dia... naquele dia eu vi o meu próprio futuro sendo escrito.",
 		  "transition": "fade_in",
 		  "position": "center",
-		  "audio": "res://Assets/Audio/BGM/bgm_hospital.ogg",
+		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg",
 		  "next_scene": 1
 		},
 		{
@@ -19,7 +21,7 @@
 		  "speaker": "Você",
 		  "transition": "fade_in",
 		  "position": "center",
-		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
+		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg",
 		  "next_scene": 2,
 		  "trigger_minigame": "symptoms"
 		},
@@ -32,7 +34,7 @@
 		  "sprite": "res://Assets/main_char_surprised.png",
 		  "transition": "none",
 		  "position": "right",
-		  "audio": "res://Assets/Audio/SFX/sfx_coughing_sequence.ogg",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "next_scene": 3
 		},
 		{
@@ -63,6 +65,7 @@
 		  "sprite": "res://Assets/ZhangYu_main.png",
 		  "transition": "fade_in",
 		  "position": "left",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension1.ogg",
 		  "choices": [
 			{
 			  "text": "(Analítico) Pode ser uma mutação?",
@@ -126,6 +129,7 @@
 		  "sprite": "res://Assets/ZhangYu_main.png",
 		  "transition": "fade_in",
 		  "position": "left",
+		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg",
 		  "choices": [
 			{
 			  "text": "[Fazer uma cópia para um pendrive]",
@@ -212,7 +216,7 @@
 		  "sprite": "",
 		  "transition": "none",
 		  "position": "center",
-		  "audio": "res://Assets/Audio/SFX/sfx_urgent_call.ogg",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "next_scene": 12
 		},
 		{
@@ -223,7 +227,6 @@
 		  "sprite": "res://Assets/Nurse_panicked.png",
 		  "transition": "fade_in",
 		  "position": "left",
-		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "choices": [
 			{
 			  "text": "Zhang, o que eu faço?!",
@@ -265,7 +268,7 @@
 		  "sprite": "",
 		  "transition": "none",
 		  "position": "center",
-		  "audio": "res://Assets/Audio/SFX/sfx_flatline.ogg",
+		  "audio": "res://Assets/Audio/BGM/bgm_suppression.ogg",
 		  "next_scene": 16
 		},
 		{
@@ -277,6 +280,7 @@
 		  "transition": "fade_in",
 		  "position": "left",
 		  "requires_flag": "asked_zhang",
+		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg",
 		  "next_scene": 18
 		},
 		{
@@ -298,7 +302,6 @@
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "fade_in",
 		  "position": "right",
-		  "audio": "res://Assets/Audio/BGM/bgm_tense_calm.ogg",
 		  "next_scene": 19
 		},
 		{
@@ -393,7 +396,6 @@
 		  "speaker": "Você",
 		  "text": "Então é isso? Uma nova doença mortal e a política do hospital é varrer para debaixo do tapete? Quantos terão que morrer até que isso se torne um problema seu?",
 		  "//comment": "Ação: O jogador vê um pequeno ícone de gravação piscar na tela.",
-		  "audio": "res://Assets/Audio/SFX/sfx_phone_record_start.ogg",
 		  "sprite": "res://Assets/main_char_angry.png",
 		  "transition": "none",
 		  "position": "right",
@@ -414,7 +416,6 @@
 		  "background": "res://Assets/ApartamentoBanheiro.png",
 		  "speaker": "Você",
 		  "text": "(O vapor do chuveiro embaça o espelho. O cansaço do plantão pesa em meus ombros, mas a conversa com o Diretor pesa ainda mais na minha alma.)",
-		  "audio": "res://Assets/Audio/SFX/sfx_shower.ogg",
 		  "sprite": "",
 		  "transition": "fade_in",
 		  "position": "center",
@@ -425,7 +426,6 @@
 		  "background": "res://Assets/ApartamentoBanheiro.png",
 		  "speaker": "Narrador",
 		  "text": "O celular, esquecido na cama, vibra incessantemente, o som agudo cortando o barulho do ar condicionado.",
-		  "audio": "res://Assets/Audio/SFX/sfx_phone_vibrating.ogg",
 		  "sprite": "",
 		  "transition": "none",
 		  "position": "center",
@@ -439,6 +439,7 @@
 		  "sprite": "",
 		  "transition": "fade_in",
 		  "position": "center",
+		  "audio": "res://Assets/Audio/BGM/bgm_tension.ogg",
 		  "choices": [
 			{
 			  "text": "Responder: 'Quem é você?'",
@@ -459,7 +460,6 @@
 		  "background": "res://Assets/MensagemApagada.png",
 		  "speaker": "Narrador",
 		  "text": "Você digita a resposta, o coração acelerado. Por um instante, vê um avatar - a silhueta de uma mulher - antes que a conversa inteira seja apagada. A tela agora diz: 'Mensagem apagada'.",
-		  "audio": "res://Assets/Audio/SFX/sfx_message_deleted.ogg",
 		  "sprite": "",
 		  "transition": "none",
 		  "position": "center",
@@ -473,6 +473,7 @@
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "none",
 		  "position": "center",
+		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg",
 		  "next_scene": 37
 		},
 		{
@@ -500,7 +501,6 @@
 		  "background": "res://Assets/CelularChamando.png",
 		  "speaker": "Narrador",
 		  "text": "Você liga para Zhang. Chama uma, duas, três vezes. Cai na caixa postal. A voz dele soa normal, mas antes do bip, você ouve um barulho estranho... algo de metal caindo no chão.",
-		  "audio": "res://Assets/Audio/SFX/sfx_voicemail_ominous.ogg",
 		  "sprite": "",
 		  "transition": "fade_in",
 		  "position": "center",
@@ -524,7 +524,6 @@
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "fade_in",
 		  "position": "center",
-		  "audio": "res://Assets/Audio/BGM/bgm_sad_reflection.ogg",
 		  "next_scene": 38
 		},
 		{
@@ -555,7 +554,9 @@
 		  "sprite": "",
 		  "audio": "res://Assets/Audio/SFX/sfx_paper_shredder.ogg",
 		  "transition": "fade_out",
-		  "position": "center"
+		  "position": "center",
+			"audio": "res://Assets/Audio/BGM/bgm_suppression.ogg"
+		
 		}
 	  ]
 	}
