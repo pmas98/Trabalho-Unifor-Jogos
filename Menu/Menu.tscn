@@ -126,11 +126,11 @@ flat = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_crea4")
-volume_db = -28.948
+volume_db = -12.659
 autoplay = true
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_w32jx")
-volume_db = -28.548
+volume_db = -5.994
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

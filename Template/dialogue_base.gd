@@ -18,13 +18,11 @@ func _ready() -> void:
 
 # Begin a dialogue sequence: pass an Array of Dictionaries
 func start(dialogue_array: Array) -> void:
-	if dialogue_array.is_empty():
-		print("[DialogueSystem] Error: Dialogue array is empty. Cannot start dialogue.")
-		return
 	dialogues = dialogue_array
 	current_index = 0
+	print("DEBUG >>> Dialogue START iniciado com:", dialogues)
 	show()
-	show_line(dialogues[0])  # Always show the first line directly
+	show_line(dialogues[0])
 
 func show_next_valid_line() -> void:
 	# Find the next valid line that either has no requirements or meets them
@@ -41,6 +39,8 @@ func show_next_valid_line() -> void:
 		dialogue_finished.emit()
 
 func show_line(line: Dictionary) -> void:
+	print("DEBUG >>> show_line() chamado com texto:", line.text)
+
 	# Set any flags this line might have
 	if line.has("set_flag"):
 		active_flags[line.set_flag] = true
@@ -94,11 +94,17 @@ func show_line(line: Dictionary) -> void:
 	# TOCAR ÁUDIO SE EXISTIR NA CENA
 	if line.has("audio"):
 		var audio_path = line.audio
+		print("Tentando tocar áudio:", audio_path)
 		if audio_path != "":
-			var audio_player = $DialogueAudioPlayer
-			audio_player.stop() # Para o anterior, se estiver tocando
-			audio_player.stream = load(audio_path)
-			audio_player.play()
+			var player = get_tree().root.get_node("Chapter1/DialogueAudioPlayer")
+			if player:
+				player.stop()
+				player.stream = load(audio_path)
+				player.volume_db = 6
+				player.play()
+				print("Áudio tocando:", audio_path)
+			else:
+				print("ERRO: DialogueAudioPlayer não encontrado na cena Chapter1.")
 
 
 func _on_line_complete() -> void:
