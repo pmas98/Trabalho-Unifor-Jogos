@@ -145,6 +145,7 @@ script = ExtResource("1_script")
 stream = ExtResource("6_kgmhw")
 volume_db = -6.433
 autoplay = true
+parameters/looping = true
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 40.0
@@ -569,7 +570,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
-text = "Previous"
+text = "Anterior"
 
 [node name="PageLabel" type="Label" parent="HowToTreatContent/MarginContainer/VBoxContainer/PaginationButtons"]
 visible = false
@@ -589,7 +590,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/disabled = SubResource("StyleBoxFlat_pagination_button_disabled")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pagination_button_hover")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pagination_button")
-text = "Next"
+text = "Próximo"
 
 [node name="ActionButtons" type="VBoxContainer" parent="."]
 anchors_preset = 12
