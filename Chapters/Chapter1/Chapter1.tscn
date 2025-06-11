@@ -67,6 +67,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="DialogueAudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -22.0
 autoplay = true
 
 [node name="TextRevealTimer" type="Timer" parent="."]

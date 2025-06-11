@@ -22,4 +22,13 @@ AutoLoad="*res://Scripts/auto_load.gd"
 
 [display]
 
-window/stretch/mode="viewport"
+window/size/mode=3
+window/subwindows/embed_subwindows=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/stretch/scale=1.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter_mipmaps=0

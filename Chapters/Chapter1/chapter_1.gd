@@ -15,7 +15,6 @@ var dialogue_data : Dictionary
 # Current position
 var cur_chapter : int = 0
 var cur_scene_id : int = 0  # Changed from cur_scene to cur_scene_id to be more explicit
-var next_scene_id : int = -1  # Track the next scene we should go to
 
 # Text reveal variables
 var full_text : String = ""
@@ -24,10 +23,6 @@ var reveal_speed : float = 0.05  # Time between each character reveal
 var is_revealing_text : bool = false
 
 func _ready():
-	$DialogueAudioPlayer.stream = load("res://Assets/Audio/Ambient/amb_dram.ogg")
-	$DialogueAudioPlayer.volume_db = 0
-	$DialogueAudioPlayer.play()
-
 	# Load+parse the JSON once
 	var file = FileAccess.open("res://dialogues.json", FileAccess.READ)
 	var json_string = file.get_as_text()
@@ -114,10 +109,12 @@ func show_highlighted_scene(scene: Dictionary) -> void:
 		var audio_path = scene["audio"]
 		if ResourceLoader.exists(audio_path):
 			var audio_stream = load(audio_path)
-			var audio_player = get_node("AudioPlayer")
-			if audio_player:
-				audio_player.stream = audio_stream
-				audio_player.play()
+			$DialogueAudioPlayer.stream = audio_stream
+			$DialogueAudioPlayer.play()
+			$DialogueAudioPlayer.volume_db = -22
+			print("Playing audio for highlighted scene: ", audio_path)
+		else:
+			print("Audio file not found: ", audio_path)
 
 func _on_text_reveal_timer_timeout() -> void:
 	if is_revealing_text and current_text_length < full_text.length():
@@ -134,17 +131,16 @@ func _on_text_reveal_timer_timeout() -> void:
 		# The old flag logic is kept as requested, setting the flag after the text is revealed.
 		if cur_scene_id == 1:
 			save_system.set_flag("completed_intro", true)
-			var save_info = {
-				"chapter": cur_chapter,
-				"scene_id": cur_scene_id,
-				"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
-			}
-			save_system.update_save_data(save_info)
-
+			# Force immediate save for critical transition
+			save_system.flush_pending_save()
+			# Don't update local variables from save system as this can cause loops
 
 func start_scene_by_id(scene_id: int) -> void:
 	print("Starting scene with ID: ", scene_id)
 	print("Current chapter: ", cur_chapter)
+	
+	# Store the previous scene ID to check if this is a transition
+	var previous_scene_id = cur_scene_id
 	
 	# Always clear interactive areas first
 	print("Clearing all interactive areas")
@@ -163,6 +159,17 @@ func start_scene_by_id(scene_id: int) -> void:
 	if scene.has("background"):
 		print("Setting background: ", scene["background"])
 		set_background(scene["background"])
+	
+	# Play audio if exists in scene data
+	if scene.has("audio"):
+		var audio_path = scene["audio"]
+		if ResourceLoader.exists(audio_path):
+			var audio_stream = load(audio_path)
+			$DialogueAudioPlayer.stream = audio_stream
+			$DialogueAudioPlayer.play()
+			print("Playing audio: ", audio_path)
+		else:
+			print("Audio file not found: ", audio_path)
 	
 	# Check if this is a highlighted scene
 	if scene.has("highlight") and scene["highlight"] == true:
@@ -192,21 +199,20 @@ func start_scene_by_id(scene_id: int) -> void:
 	dialogue.start([scene])
 	print("DEBUG >>> dialogue.start() chamado com:", scene)
 
-
-	
-	# Save current progress
-	var save_info = {
-		"chapter": cur_chapter,
-		"scene_id": cur_scene_id,
-		"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
-	}
-	print("Saving game state: ", save_info)
-	save_system.update_save_data(save_info)
+	# Only save progress when transitioning to a new scene, not on every scene start
+	# This prevents redundant saves during normal dialogue progression
+	if scene_id != previous_scene_id:
+		var save_info = {
+			"chapter": cur_chapter,
+			"scene_id": cur_scene_id,
+			"scene_path": "res://Chapters/Chapter1/Chapter1.tscn"
+		}
+		print("Saving game state: ", save_info)
+		save_system.update_save_data_immediate(save_info)
 
 func _on_dialogue_finished():
 	print("=== DIALOGUE FINISHED DEBUG ===")
 	print("Current scene ID: ", cur_scene_id)
-	print("Next scene ID from choice: ", next_scene_id)
 	
 	var current_scene = find_scene_by_id(cur_scene_id)
 	print("Current scene data: ", current_scene)
@@ -214,19 +220,43 @@ func _on_dialogue_finished():
 	if current_scene.has("next_scene"):
 		print("Next scene value: ", current_scene.next_scene)
 
-	# Se uma escolha foi feita, ela já definiu o next_scene_id.
-	if next_scene_id >= 0:
-		print("Using next scene from choice: ", next_scene_id)
-		start_scene_by_id(next_scene_id)
-		next_scene_id = -1  # Reseta o ID da próxima cena
+	# GUARD: Don't process highlighted scenes in dialogue_finished
+	# Highlighted scenes should only be handled by _input and _on_interactive_area_clicked
+	if current_scene.has("highlight") and current_scene["highlight"] == true:
+		print("Ignoring dialogue_finished for highlighted scene - should be handled by input functions")
 		return
-	
+
 	# Verifica se há uma "next_scene" definida no JSON para transições lineares.
 	if current_scene.has("next_scene"):
-		var next_scene = current_scene.next_scene
-		if next_scene is int or next_scene is float:  # Handle both int and float values
-			print("Transitioning to next scene: ", next_scene)
-			start_scene_by_id(int(next_scene))  # Convert to int to ensure consistent type
+		var next_scene_id = current_scene.next_scene
+		if next_scene_id is int or next_scene_id is float:  # Handle both int and float values
+			next_scene_id = int(next_scene_id)  # Convert to int to ensure consistent type
+			
+			# Check if the next scene has flag requirements
+			var next_scene = find_scene_by_id(next_scene_id)
+			if next_scene.has("requires_flag"):
+				var required_flag = next_scene["requires_flag"]
+				if not save_system.has_flag(required_flag):
+					# If we don't have the required flag, look for an alternative scene
+					print("Scene ", next_scene_id, " requires flag '", required_flag, "' which we don't have")
+					print("Looking for alternative scene...")
+					
+					# Search through all scenes to find one that matches our flags
+					var alternative_scene_id = find_alternative_scene_for_flags()
+					if alternative_scene_id >= 0:
+						print("Found alternative scene: ", alternative_scene_id)
+						start_scene_by_id(alternative_scene_id)
+						return
+					else:
+						print("No alternative scene found, skipping to scene after ", next_scene_id)
+						# If no alternative found, try to find the next scene after the conditional one
+						var scene_after_conditional = find_next_scene_after_conditional(next_scene_id)
+						if scene_after_conditional >= 0:
+							start_scene_by_id(scene_after_conditional)
+							return
+			
+			print("Transitioning to next scene: ", next_scene_id)
+			start_scene_by_id(next_scene_id)
 			return
 	
 	# Se a cena tem áreas interativas, espera pela ação do jogador.
@@ -235,17 +265,51 @@ func _on_dialogue_finished():
 		return
 	
 	print("No valid next scene found, ending dialogue")
+	# Force save before ending the chapter
+	save_system.flush_pending_save()
 	hide()
 	print("=== END DIALOGUE FINISHED DEBUG ===")
 
+# Helper function to find an alternative scene based on current flags
+func find_alternative_scene_for_flags() -> int:
+	var scenes = dialogue_data["chapters"][cur_chapter]["scenes"]
+	
+	# Look for scenes that have requires_flag and match our current flags
+	for scene in scenes:
+		if scene.has("requires_flag"):
+			var required_flag = scene["requires_flag"]
+			if save_system.has_flag(required_flag):
+				print("Found scene ", scene["id"], " that matches flag '", required_flag, "'")
+				return scene["id"]
+	
+	return -1
+
+# Helper function to find the next scene after a conditional scene
+func find_next_scene_after_conditional(conditional_scene_id: int) -> int:
+	var scenes = dialogue_data["chapters"][cur_chapter]["scenes"]
+	
+	# Find the conditional scene and get its next_scene
+	for scene in scenes:
+		if scene["id"] == conditional_scene_id and scene.has("next_scene"):
+			return scene["next_scene"]
+	
+	return -1
+
 func _on_choice_made(scene_id: int) -> void:
 	print("Choice made, transitioning to scene: ", scene_id)
-	next_scene_id = scene_id  # Store the next scene ID
+	# The 'scene_id' parameter directly holds the ID of the chosen scene.
+	# No need for an intermediate 'next_scene_id' variable here.
+	print("DEBUG: About to start scene by ID: ", scene_id)
 	start_scene_by_id(scene_id)
-
+	print("DEBUG: Scene transition completed")
+	
 func _on_interactive_area_clicked(area_id: String) -> void:
+	print("=== INTERACTIVE AREA CLICKED DEBUG ===")
+	print("Area ID clicked: ", area_id)
+	
 	# Se o texto estiver sendo revelado, o primeiro clique irá completá-lo instantaneamente.
 	if is_revealing_text:
+		print("Text is still revealing, completing it")
 		text_reveal_timer.stop()
 		is_revealing_text = false
 		highlight_label.text = full_text
@@ -253,19 +317,25 @@ func _on_interactive_area_clicked(area_id: String) -> void:
 		# também possa acionar a transição, tornando a experiência mais fluida.
 
 	var current_scene = find_scene_by_id(cur_scene_id)
+	print("Current scene ID: ", cur_scene_id)
+	print("Current scene highlight: ", current_scene.has("highlight") and current_scene["highlight"] == true)
 
 	# LÓGICA CORRIGIDA: Verifica se estamos em uma cena 'highlight'.
 	if current_scene.has("highlight") and current_scene["highlight"] == true:
+		print("Processing highlighted scene in interactive area clicked")
 		# Se a cena de highlight deve chamar um minigame, faça isso.
 		if current_scene.has("trigger_minigame"):
 			var minigame_name = current_scene["trigger_minigame"]
 			if minigame_name == "symptoms":
 				print("Transitioning to symptoms minigame from highlight scene")
+				# Force immediate save before transitioning to minigame
+				save_system.flush_pending_save()
 				get_tree().change_scene_to_file("res://Minigames/symptoms.tscn")
 				return # Transição feita, encerra a função.
 
 		# Se não houver minigame, vá para a próxima cena definida no JSON.
 		elif current_scene.has("next_scene"):
+			print("Transitioning to next scene: ", current_scene.next_scene)
 			start_scene_by_id(current_scene.next_scene)
 			return # Transição feita, encerra a função.
 
@@ -283,22 +353,38 @@ func _on_interactive_area_clicked(area_id: String) -> void:
 	
 	print("WARNING: No next scene found for area: ", area_id)
 	print("=== End of Interactive Area Click ===\n")
+	print("=== END INTERACTIVE AREA CLICKED DEBUG ===")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("=== INPUT EVENT DEBUG ===")
+		print("Mouse click detected")
 		var current_scene = find_scene_by_id(cur_scene_id)
+		print("Current scene ID: ", cur_scene_id)
+		print("Current scene highlight: ", current_scene.has("highlight") and current_scene["highlight"] == true)
+		print("Is revealing text: ", is_revealing_text)
 		
 		# If we're in a highlighted scene and the text is fully revealed
 		if current_scene.has("highlight") and current_scene["highlight"] == true and not is_revealing_text:
+			print("Processing click on highlighted scene")
 			# If the scene has a minigame trigger
 			if current_scene.has("trigger_minigame"):
 				var minigame_name = current_scene["trigger_minigame"]
 				if minigame_name == "symptoms":
 					print("Transitioning to symptoms minigame from highlight scene")
+					# Force immediate save before transitioning to minigame
+					save_system.flush_pending_save()
 					get_tree().change_scene_to_file("res://Minigames/symptoms.tscn")
 					return
 			
 			# If no minigame, proceed to next scene
 			if current_scene.has("next_scene"):
+				print("Transitioning to next scene: ", current_scene["next_scene"])
 				start_scene_by_id(current_scene["next_scene"])
 				return
+		print("=== END INPUT EVENT DEBUG ===")
+
+func _notification(what):
+	# Force save when the scene is being freed
+	if what == NOTIFICATION_PREDELETE:
+		save_system.flush_pending_save()

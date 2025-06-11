@@ -53,12 +53,9 @@ func _on_h_slider_2_value_changed(value: float) -> void:
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	save_system.fullscreen_enabled = toggled_on
+	save_system.apply_fullscreen_setting()
 	save_system.save_game()
 
-	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 func play_button_sound():
 	var sound = $ClickSound
 	if sound and sound.is_inside_tree():

@@ -3,6 +3,13 @@ extends Control
 @onready var save_system = get_node("/root/SaveSystem")
 
 func _ready() -> void:
+	# Initialize fullscreen setting for new users
+	# Load game data first to check if user has existing settings
+	save_system.load_game()
+	
+	# Apply fullscreen setting immediately
+	save_system.apply_fullscreen_setting()
+	
 	# Conectar botões
 	for button in get_tree().get_nodes_in_group("buttongroup"):
 		button.pressed.connect(Callable(self, "_on_button_pressed").bind(button))
@@ -10,7 +17,7 @@ func _ready() -> void:
 		button.mouse_entered.connect(Callable(self, "_on_mouse_interaction").bind(button, "entered"))
 
 	# Ativa/desativa o botão "Continuar"
-	var continue_button = get_node("MainContainer/HBoxContainer/VBoxContainer/Continuar")  # ajuste o caminho se necessário
+	var continue_button = get_node("MainContainer/HBoxContainer/VBoxContainer/CONTINUAR")  # Fixed the path to match the actual button name
 	if continue_button:
 		continue_button.disabled = !save_system.has_save_file()
 
