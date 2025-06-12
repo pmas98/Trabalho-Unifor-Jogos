@@ -62,7 +62,7 @@ var queue_patients: Array = []
 var patient_health: float = 100.0 # Patient health percentage
 var patient_count: int = 0
 var critical_health_threshold: float = 20.0 # Game over when health drops below this
-var game_over_popup: PopupPanel
+var game_over_popup: ColorRect
 var game_over_label: Label
 var available_illnesses: Array = [
 	{
@@ -991,19 +991,22 @@ func _on_next_page_pressed():
 	print("=====================")
 
 func _create_game_over_popup():
-	game_over_popup = PopupPanel.new()
-	game_over_popup.size = get_viewport().get_visible_rect().size
-	game_over_popup.title = "Fim de Jogo"
-	# Create a style for the popup - full black background
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0, 0, 0, 0.95) # Almost black with slight transparency
-	game_over_popup.add_theme_stylebox_override("panel", style)
-
+	# Create a ColorRect overlay similar to Chapter 1 transition
+	game_over_popup = ColorRect.new()
+	game_over_popup.color = Color(0, 0, 0, 0.95) # Black background with 95% opacity
+	game_over_popup.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	
+	# Create a MarginContainer for proper spacing
+	var margin = MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 100)
+	margin.add_theme_constant_override("margin_right", 100)
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	
 	# Create a VBoxContainer to stack the message and button
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
-	vbox.add_theme_constant_override("separation", 30) # Space between message and button
-
+	vbox.add_theme_constant_override("separation", 50) # Space between message and button
+	
 	# Create game over message label
 	var message_label = Label.new()
 	message_label.text = "FIM DE JOGO\nO paciente desmaiou.\nVocê demorou demais para escolher o tratamento correto."
@@ -1012,10 +1015,10 @@ func _create_game_over_popup():
 	message_label.add_theme_font_size_override("font_size", 32)
 	message_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2)) # Red color
 	message_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-
+	
 	# Create a center container for the button
 	var center_container = CenterContainer.new()
-
+	
 	# Create a style for the restart button
 	var button_style = StyleBoxFlat.new()
 	button_style.bg_color = Color(0.2, 0.4, 0.8, 1)
@@ -1028,28 +1031,33 @@ func _create_game_over_popup():
 	button_style.corner_radius_top_right = 8
 	button_style.corner_radius_bottom_right = 8
 	button_style.corner_radius_bottom_left = 8
-
+	
 	var restart_button = Button.new()
 	restart_button.text = "Reiniciar Jogo"
 	restart_button.custom_minimum_size = Vector2(200, 50)
 	restart_button.pressed.connect(_on_restart_game_pressed)
 	restart_button.add_theme_font_size_override("font_size", 24)
 	restart_button.add_theme_stylebox_override("normal", button_style)
-
+	
 	# Add hover style
 	var button_hover_style = button_style.duplicate()
 	button_hover_style.bg_color = Color(0.25, 0.45, 0.85, 1)
 	restart_button.add_theme_stylebox_override("hover", button_hover_style)
-
+	
 	# Add pressed style
 	var button_pressed_style = button_style.duplicate()
 	button_pressed_style.bg_color = Color(0.15, 0.35, 0.75, 1)
 	restart_button.add_theme_stylebox_override("pressed", button_pressed_style)
-
+	
+	# Assemble the UI hierarchy
 	center_container.add_child(restart_button)
 	vbox.add_child(message_label)
 	vbox.add_child(center_container)
-	game_over_popup.add_child(vbox)
+	margin.add_child(vbox)
+	game_over_popup.add_child(margin)
+	
+	# Initially hide the popup
+	game_over_popup.visible = false
 	add_child(game_over_popup)
 
 func _on_restart_game_pressed():
@@ -1060,7 +1068,7 @@ func _on_restart_game_pressed():
 	queue_patients.clear()
 	generate_queue()
 	load_next_patient()
-	game_over_popup.hide()
+	game_over_popup.visible = false # Hide the ColorRect overlay
 	health_update_timer.start()
 	patient_arrival_timer.start()
 	# Reset UI state
@@ -1068,6 +1076,7 @@ func _on_restart_game_pressed():
 	next_patient_button.disabled = false # Ensure button is enabled
 	diagnose_button.disabled = false
 	request_info_button.disabled = false
+
 func _trigger_game_over():
 	# Check if the patient is the special COVID-19 patient.
 	if current_patient_data.get("is_covid_patient", false):
@@ -1077,11 +1086,12 @@ func _trigger_game_over():
 
 	health_update_timer.stop()
 	patient_arrival_timer.stop()
-	game_over_popup.popup_centered()
+	game_over_popup.visible = true # Show the ColorRect overlay
 	# Disable all game controls
 	request_info_button.disabled = true
 	diagnose_button.disabled = true
 	next_patient_button.disabled = true
+
 func _start_chapter_1_transition():
 	health_update_timer.stop()
 	patient_arrival_timer.stop()

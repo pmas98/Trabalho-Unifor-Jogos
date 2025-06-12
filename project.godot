@@ -25,8 +25,6 @@ AutoLoad="*res://Scripts/auto_load.gd"
 window/size/mode=3
 window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
-window/stretch/scale=1.0
 
 [rendering]
 
