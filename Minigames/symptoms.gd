@@ -233,7 +233,7 @@ var available_treatments: Array = [
 		"contraindications": ["Cirurgia recente", "Distúrbios hemorrágicos"]
 	},
 	{
-		"name": "Fluidos IV",
+		"name": "Soro",
 		"good_for": ["Desidratação", "Gastroenterite", "Choque Séptico"],
 		"contraindications": ["Insuficiência cardíaca", "Insuficiência renal"]
 	},
