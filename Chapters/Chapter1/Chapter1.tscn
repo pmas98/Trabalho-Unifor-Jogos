@@ -72,5 +72,9 @@ autoplay = true
 
 [node name="TextRevealTimer" type="Timer" parent="."]
 
+[node name="MenuTransitionTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="area_clicked" from="InteractiveBackground" to="." method="_on_interactive_area_clicked"]
 [connection signal="timeout" from="TextRevealTimer" to="." method="_on_text_reveal_timer_timeout"]
+[connection signal="timeout" from="MenuTransitionTimer" to="." method="_on_menu_transition_timer_timeout"]

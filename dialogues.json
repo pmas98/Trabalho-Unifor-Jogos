@@ -161,7 +161,7 @@
 		{
 		  "id": 12,
 		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(O pendrive no meu bolso parece queimar. Acabei de cruzar uma linha que nem sabia que existia. Não há mais volta... será que há?)",
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "none",
@@ -171,7 +171,7 @@
 		{
 		  "id": 13,
 		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Enfermeira (Voz)",
+		  "speaker": "Enfermeira",
 		  "text": "DR. ZHANG! EMERGÊNCIA NA 304! A PACIENTE ESTÁ ENTRANDO EM COLAPSO RESPIRATÓRIO!",
 		  "sprite": "",
 		  "transition": "none",
@@ -192,7 +192,7 @@
 		{
 		  "id": 15,
 		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(Sintomas: febre alta, tosse seca progredindo para produtiva com sangue. Timeline: 6 dias do primeiro sintoma à morte. Progressão: rápida, inexorável. Por favor, que minha memória não me falhe quando precisar dela.)",
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "none",
@@ -212,7 +212,7 @@
 		{
 		  "id": 17,
 		  "background": "res://Assets/SalaRaio-x.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(A decepção nos olhos dele dói mais que qualquer reprimenda. Fiz a escolha certa... não foi? Por que então me sinto como se tivesse acabado de falhar no teste mais importante da minha vida?)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "none",
@@ -468,7 +468,7 @@
 		{
 		  "id": 38,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(Uma silhueta de mulher... uma mensagem que se autodestrói... e agora Zhang não atende. Isso não é paranoia. Alguém está me observando, e talvez algo tenha acontecido com ele também.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "none",
@@ -479,7 +479,7 @@
 		{
 		  "id": 39,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(Deleto a mensagem, mas as palavras se recusam a sair da minha mente: 'Laboratório P4... não começou no mercado...' Ignorar não vai fazer a verdade desaparecer. Só vai me tornar cúmplice dela.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "fade_in",
@@ -489,7 +489,7 @@
 		{
 		  "id": 40,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(A mensagem sumiu, mas as perguntas continuam. E agora, com o silêncio de Zhang, tenho certeza: não sou mais apenas um espectador. Sou parte disso, querendo ou não.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "none",
@@ -509,7 +509,7 @@
 		{
 		  "id": 42,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(Aquele ruído na ligação... não foi imaginação. Algo aconteceu com Zhang. A mensagem, o silêncio, e agora isso. Estou sozinho numa teia que não entendo, mas da qual não posso mais escapar.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "none",
@@ -519,7 +519,7 @@
 		{
 		  "id": 43,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(Lá fora, Wuhan dorme em paz, alheia ao que pode estar se aproximando. Mas eu não consigo mais dormir. O peso do que sei - e principalmente do que não sei - é grande demais para ignorar.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "fade_in",
@@ -529,7 +529,7 @@
 		{
 		  "id": 44,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(A mensagem ecoava na minha mente: 'O silêncio deles ou sua verdade'. Como se fosse uma escolha simples...)",
 		  "sprite": "res://Assets/main_char_determined.png",
 		  "transition": "none",
@@ -539,7 +539,7 @@
 		{
 		  "id": 45,
 		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você (Voz Interna)",
+		  "speaker": "Você",
 		  "text": "(Mas talvez seja exatamente isso. Uma escolha. E talvez, no fundo, eu já tenha feito a minha.)",
 		  "sprite": "res://Assets/main_char_determined.png",
 		  "transition": "none",
@@ -565,8 +565,7 @@
 		  "text": "Final do Capítulo 1.",
 		  "transition": "fade_in",
 		  "position": "center",
-		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg",
-		  "next_scene": 48
+		  "audio": "res://Assets/Audio/Ambient/amb_dram.ogg"
 		}
 	  ]
 	}

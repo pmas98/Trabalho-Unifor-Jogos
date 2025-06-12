@@ -146,7 +146,7 @@ var available_illnesses: Array = [
 var symptoms_to_illnesses: Dictionary = {
 	"Dor no peito": ["Ataque Cardíaco", "Pneumonia"],
 	"Falta de ar": ["Ataque Cardíaco", "Pneumonia", "Crise de Asma"],
-	"Tontura": ["Ataque Cardíaco", "AVC"],
+	"Tontura": ["Ataque Cardíaco", "AVC", "Desidratação"],
 	"Febre": ["Resfriado Comum", "Pneumonia", "Apendicite"],
 	"Tosse": ["Resfriado Comum", "Pneumonia", "Crise de Asma"],
 	"Coriza": ["Resfriado Comum"],
@@ -155,11 +155,13 @@ var symptoms_to_illnesses: Dictionary = {
 	"Dor abdominal": ["Apendicite"],
 	"Perda de apetite": ["Apendicite"],
 	"Dormência súbita": ["AVC"],
-	"Confusão": ["AVC"],
+	"Confusão": ["AVC", "Desidratação"],
 	"Dificuldade para falar": ["AVC"],
 	"Tosse com catarro": ["Pneumonia"],
 	"Chiado no peito": ["Crise de Asma"],
-	"Aperto no peito": ["Crise de Asma"]
+	"Aperto no peito": ["Crise de Asma"],
+	"Boca seca": ["Desidratação"],
+	"Sede excessiva": ["Desidratação"]
 }
 
 # Get all unique symptoms for the manual
@@ -1448,10 +1450,7 @@ func _on_treatment_selected(treatment: Dictionary):
 
 	if is_correct_treatment:
 		patient_diagnosed_correctly = true # Set the flag to true
-		var feedback = (
-			"Obrigado, doutor(a)! Já estou começando a me sentir melhor. O %s parece estar ajudando com o(a) %s."
-			% [treatment.name.to_lower(), patient_illness.to_lower()]
-		)
+		var feedback = "Obrigado, doutor(a)! Já estou começando a me sentir melhor."
 		messages_to_type.append(feedback)
 		print("Added positive feedback message")
 	else:

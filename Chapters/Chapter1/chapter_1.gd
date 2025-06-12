@@ -9,6 +9,7 @@ extends Control
 @onready var highlight_background = $HighlightLabel/ColorRect  # Add reference to background
 @onready var highlight_container = $HighlightLabel  # Add reference to container
 @onready var text_reveal_timer = $TextRevealTimer  # Add timer reference
+@onready var menu_transition_timer = $MenuTransitionTimer  # Add menu transition timer reference
 
 # Storage for all chapters/scenes parsed from JSON
 var dialogue_data : Dictionary
@@ -110,6 +111,7 @@ func show_highlighted_scene(scene: Dictionary) -> void:
 		if ResourceLoader.exists(audio_path):
 			var audio_stream = load(audio_path)
 			$DialogueAudioPlayer.stream = audio_stream
+			$DialogueAudioPlayer.stream.loop = true  # Enable looping
 			$DialogueAudioPlayer.play()
 			$DialogueAudioPlayer.volume_db = -22
 			print("Playing audio for highlighted scene: ", audio_path)
@@ -134,6 +136,10 @@ func _on_text_reveal_timer_timeout() -> void:
 			# Force immediate save for critical transition
 			save_system.flush_pending_save()
 			# Don't update local variables from save system as this can cause loops
+
+func _on_menu_transition_timer_timeout() -> void:
+	print("Menu transition timer finished, returning to menu")
+	get_tree().change_scene_to_file("res://Menu/Menu.tscn")
 
 func start_scene_by_id(scene_id: int) -> void:
 	print("Starting scene with ID: ", scene_id)
@@ -166,6 +172,7 @@ func start_scene_by_id(scene_id: int) -> void:
 		if ResourceLoader.exists(audio_path):
 			var audio_stream = load(audio_path)
 			$DialogueAudioPlayer.stream = audio_stream
+			$DialogueAudioPlayer.stream.loop = true  # Enable looping
 			$DialogueAudioPlayer.play()
 			print("Playing audio: ", audio_path)
 		else:
@@ -267,7 +274,15 @@ func _on_dialogue_finished():
 	print("No valid next scene found, ending dialogue")
 	# Force save before ending the chapter
 	save_system.flush_pending_save()
-	hide()
+	
+	# Check if this is the last scene (no next_scene property)
+	if not current_scene.has("next_scene"):
+		print("Last scene reached, starting 5-second timer to return to menu")
+		menu_transition_timer.start()
+	else:
+		# If there should be a next scene but we couldn't find it, hide immediately
+		hide()
+	
 	print("=== END DIALOGUE FINISHED DEBUG ===")
 
 # Helper function to find an alternative scene based on current flags
@@ -338,6 +353,12 @@ func _on_interactive_area_clicked(area_id: String) -> void:
 			print("Transitioning to next scene: ", current_scene.next_scene)
 			start_scene_by_id(current_scene.next_scene)
 			return # Transição feita, encerra a função.
+		else:
+			# This is the last scene, start the menu transition timer
+			print("Last highlighted scene reached, starting 5-second timer to return to menu")
+			save_system.flush_pending_save()
+			menu_transition_timer.start()
+			return # Transição feita, encerra a função.
 
 	# O código abaixo só será executado para cenas normais com áreas interativas definidas.
 	print("\n=== Interactive Area Clicked (Standard Scene) ===")
@@ -381,6 +402,12 @@ func _input(event: InputEvent) -> void:
 			if current_scene.has("next_scene"):
 				print("Transitioning to next scene: ", current_scene["next_scene"])
 				start_scene_by_id(current_scene["next_scene"])
+				return
+			else:
+				# This is the last scene, start the menu transition timer
+				print("Last highlighted scene reached, starting 5-second timer to return to menu")
+				save_system.flush_pending_save()
+				menu_transition_timer.start()
 				return
 		print("=== END INPUT EVENT DEBUG ===")
 
