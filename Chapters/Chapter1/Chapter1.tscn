@@ -69,6 +69,7 @@ autowrap_mode = 2
 [node name="DialogueAudioPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -22.0
 autoplay = true
+bus = &"music"
 
 [node name="TextRevealTimer" type="Timer" parent="."]
 

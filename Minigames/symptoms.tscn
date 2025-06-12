@@ -146,6 +146,7 @@ stream = ExtResource("2_mmel0")
 volume_db = -8.578
 autoplay = true
 parameters/looping = true
+bus = &"music"
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 40.0

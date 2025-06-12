@@ -759,6 +759,10 @@ func _update_patient_vitals():
 
 	# INCREASED: Degradation factor reaches 1 after 120 seconds (2 minutes) instead of 60 seconds.
 	var degradation_factor = clamp(time_elapsed / 120.0, 0, 1)
+	
+	# Increase degradation factor by 5x for COVID-19 patient (Patient Zero)
+	if current_patient_data.get("is_covid_patient", false):
+		degradation_factor = clamp(degradation_factor * 5.0, 0, 1)
 
 	# Update patient health based on time elapsed
 	patient_health = max(0.0, 100.0 - (degradation_factor * 100.0))
