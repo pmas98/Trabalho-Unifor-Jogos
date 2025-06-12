@@ -243,24 +243,30 @@ func _on_dialogue_finished():
 			var next_scene = find_scene_by_id(next_scene_id)
 			if next_scene.has("requires_flag"):
 				var required_flag = next_scene["requires_flag"]
+				print("DEBUG: Scene ", next_scene_id, " requires flag '", required_flag, "'")
+				print("DEBUG: Current flags in save system: ", save_system.flags)
+				print("DEBUG: Has flag '", required_flag, "': ", save_system.has_flag(required_flag))
+				
 				if not save_system.has_flag(required_flag):
-					# If we don't have the required flag, look for an alternative scene
-					print("Scene ", next_scene_id, " requires flag '", required_flag, "' which we don't have")
-					print("Looking for alternative scene...")
-					
-					# Search through all scenes to find one that matches our flags
-					var alternative_scene_id = find_alternative_scene_for_flags()
-					if alternative_scene_id >= 0:
-						print("Found alternative scene: ", alternative_scene_id)
-						start_scene_by_id(alternative_scene_id)
+					# Special handling for the records flags sequence (scenes 25, 26, 27)
+					if next_scene_id == 25 or next_scene_id == 26 or next_scene_id == 27:
+						print("Skipping records conditional scenes, going directly to scene 28")
+						start_scene_by_id(28)
 						return
 					else:
-						print("No alternative scene found, skipping to scene after ", next_scene_id)
-						# If no alternative found, try to find the next scene after the conditional one
+						# For other conditional scenes, find the next scene after the conditional one
+						print("Scene ", next_scene_id, " requires flag '", required_flag, "' which we don't have")
+						print("Skipping to scene after conditional...")
+						
 						var scene_after_conditional = find_next_scene_after_conditional(next_scene_id)
 						if scene_after_conditional >= 0:
+							print("Found scene after conditional: ", scene_after_conditional)
 							start_scene_by_id(scene_after_conditional)
 							return
+						else:
+							print("No scene found after conditional, this might be an error")
+				else:
+					print("DEBUG: Flag '", required_flag, "' found, proceeding to scene ", next_scene_id)
 			
 			print("Transitioning to next scene: ", next_scene_id)
 			start_scene_by_id(next_scene_id)
@@ -285,20 +291,6 @@ func _on_dialogue_finished():
 	
 	print("=== END DIALOGUE FINISHED DEBUG ===")
 
-# Helper function to find an alternative scene based on current flags
-func find_alternative_scene_for_flags() -> int:
-	var scenes = dialogue_data["chapters"][cur_chapter]["scenes"]
-	
-	# Look for scenes that have requires_flag and match our current flags
-	for scene in scenes:
-		if scene.has("requires_flag"):
-			var required_flag = scene["requires_flag"]
-			if save_system.has_flag(required_flag):
-				print("Found scene ", scene["id"], " that matches flag '", required_flag, "'")
-				return scene["id"]
-	
-	return -1
-
 # Helper function to find the next scene after a conditional scene
 func find_next_scene_after_conditional(conditional_scene_id: int) -> int:
 	var scenes = dialogue_data["chapters"][cur_chapter]["scenes"]
@@ -312,6 +304,7 @@ func find_next_scene_after_conditional(conditional_scene_id: int) -> int:
 
 func _on_choice_made(scene_id: int) -> void:
 	print("Choice made, transitioning to scene: ", scene_id)
+	print("DEBUG: Current flags after choice: ", save_system.flags)
 	# The 'scene_id' parameter directly holds the ID of the chosen scene.
 	# No need for an intermediate 'next_scene_id' variable here.
 	print("DEBUG: About to start scene by ID: ", scene_id)

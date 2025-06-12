@@ -296,36 +296,79 @@
 		},
 		{
 		  "id": 24,
+		  "background": "res://Assets/CorredorHospitalar.png",
+		  "speaker": "Liang Bo",
+		  "text": "Dr. Liu, Dr. Zhang. Preciso falar com vocês. Dr. Liu, venha comigo ao meu escritório. Agora.",
+		  "sprite": "res://Assets/Liang Bo.png",
+		  "transition": "fade_in",
+		  "position": "center",
+		  "next_scene": 25
+		},
+		{
+		  "id": 25,
+		  "background": "res://Assets/CorredorHospitalar.png",
+		  "speaker": "Dr. Zhang",
+		  "text": "Faça a escolha correta.",
+		  "sprite": "res://Assets/ZhangYu_main.png",
+		  "transition": "none",
+		  "position": "left",
+		  "requires_flag": "refused_records",
+		  "next_scene": 26
+		},
+		{
+		  "id": 26,
+		  "background": "res://Assets/CorredorHospitalar.png",
+		  "speaker": "Dr. Zhang",
+		  "text": "Você sabe o que fazer.",
+		  "sprite": "res://Assets/ZhangYu_main.png",
+		  "transition": "none",
+		  "position": "left",
+		  "requires_flag": "copied_records",
+		  "next_scene": 27
+		},
+		{
+		  "id": 27,
+		  "background": "res://Assets/CorredorHospitalar.png",
+		  "speaker": "Dr. Zhang",
+		  "text": "Não esqueça do que você viu hoje.",
+		  "sprite": "res://Assets/ZhangYu_main.png",
+		  "transition": "none",
+		  "position": "left",
+		  "requires_flag": "memorized_records",
+		  "next_scene": 28
+		},
+		{
+		  "id": 28,
 		  "background": "res://Assets/DiretorEscritorio.png",
 		  "speaker": "Você",
 		  "text": "Sr. Diretor, com todo respeito, precisamos falar sobre protocolos de contenção. O que vimos na 304... isso não pode ser tratado como caso isolado. As autoridades de saúde precisam ser notificadas imediatamente.",
 		  "sprite": "res://Assets/main_char.png",
 		  "transition": "fade_in",
 		  "position": "right",
-		  "next_scene": 25
+		  "next_scene": 29
 		},
 		{
-		  "id": 25,
+		  "id": 29,
 		  "background": "res://Assets/DiretorEscritorio.png",
 		  "speaker": "Liang Bo",
 		  "text": "Ah, Dr. Liu. Entre, entre. Vejo que está... preocupado. Compreensível para alguém da sua idade. Mas deixe-me tranquilizá-lo - já cuidei de tudo. O caso será registrado como pneumonia atípica severa. Lamentável, mas não incomum.",
 		  "sprite": "res://Assets/Liang Bo.png",
 		  "transition": "fade_in",
 		  "position": "left",
-		  "next_scene": 26
+		  "next_scene": 30
 		},
 		{
-		  "id": 26,
+		  "id": 30,
 		  "background": "res://Assets/DiretorEscritorio.png",
 		  "speaker": "Você",
 		  "text": "Pneumonia atípica? Senhor, com todo o respeito, aquela mulher morreu em questão de horas! O padrão radiológico, a progressão clínica... nada disso se encaixa em pneumonia comum!",
 		  "sprite": "res://Assets/main_char_angry.png",
 		  "transition": "none",
 		  "position": "right",
-		  "next_scene": 27
+		  "next_scene": 31
 		},
 		{
-		  "id": 27,
+		  "id": 31,
 		  "background": "res://Assets/DiretorEscritorio.png",
 		  "speaker": "Liang Bo",
 		  "text": "Doutor Liu, você é jovem, promissor. No nosso hospital, em nossa cidade. Não deixe que ideias imprudentes manchem um futuro brilhante. A escolha é simples: aceite minha decisão e continue crescendo aqui... ou procure crescer em outro lugar.",
@@ -335,67 +378,26 @@
 		  "choices": [
 			{
 			  "text": "Confrontar diretamente as implicações",
-			  "next_scene": 28,
+			  "next_scene": 32,
 			  "set_flag": "confronted_director"
 			},
 			{
 			  "text": "Aceitar externamente, mas guardar revolta",
-			  "next_scene": 30,
+			  "next_scene": 34,
 			  "set_flag": "accepted_angry"
 			},
 			{
 			  "text": "(Discreto) Gravar a conversa no celular",
-			  "next_scene": 32,
+			  "next_scene": 36,
 			  "set_flag": "recorded_conversation"
 			}
 		  ]
 		},
 		{
-		  "id": 28,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "Entendo perfeitamente, Sr. Diretor. O senhor está me pedindo para falsificar registros médicos e ignorar uma possível ameaça à saúde pública. Quantas vidas o senhor está disposto a sacrificar para manter essa... estabilidade?",
-		  "sprite": "res://Assets/main_char_angry.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 29
-		},
-		{
-		  "id": 29,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "Vidas? Garoto, eu estou salvando milhões de vidas evitando pânico desnecessário. Sua 'honestidade' médica pode destruir famílias, colapsar a economia local. Às vezes, a mentira certa protege mais que a verdade errada. Pense nisso.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 34
-		},
-		{
-		  "id": 30,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Você",
-		  "text": "(As palavras ficam presas na garganta. Assinto com a cabeça, mas sinto o gosto amargo da covardia. Cada fibra do meu ser grita em protesto, mas minha boca permanece fechada como um túmulo.)",
-		  "sprite": "res://Assets/main_char_depressed.png",
-		  "transition": "none",
-		  "position": "right",
-		  "next_scene": 31
-		},
-		{
-		  "id": 31,
-		  "background": "res://Assets/DiretorEscritorio.png",
-		  "speaker": "Liang Bo",
-		  "text": "Excelente. Vejo que compreende as nuances da nossa posição. A medicina não é só ciência, doutor - é também diplomacia. Agora volte ao trabalho. Temos um hospital para administrar.",
-		  "sprite": "res://Assets/Liang Bo.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 34
-		},
-		{
 		  "id": 32,
 		  "background": "res://Assets/DiretorEscritorio.png",
 		  "speaker": "Você",
-		  "text": "Deixe-me entender... O hospital vai oficialmente encobrir uma doença potencialmente nova? E quantos precisarão morrer antes que isso deixe de ser um 'incidente isolado' e vire uma crise real?",
-		  "//comment": "Ação: O jogador vê um pequeno ícone de gravação piscar na tela.",
+		  "text": "Entendo perfeitamente, Sr. Diretor. O senhor está me pedindo para falsificar registros médicos e ignorar uma possível ameaça à saúde pública. Quantas vidas o senhor está disposto a sacrificar para manter essa... estabilidade?",
 		  "sprite": "res://Assets/main_char_angry.png",
 		  "transition": "none",
 		  "position": "right",
@@ -405,34 +407,75 @@
 		  "id": 33,
 		  "background": "res://Assets/DiretorEscritorio.png",
 		  "speaker": "Liang Bo",
+		  "text": "Vidas? Garoto, eu estou salvando milhões de vidas evitando pânico desnecessário. Sua 'honestidade' médica pode destruir famílias, colapsar a economia local. Às vezes, a mentira certa protege mais que a verdade errada. Pense nisso.",
+		  "sprite": "res://Assets/Liang Bo.png",
+		  "transition": "none",
+		  "position": "left",
+		  "next_scene": 38
+		},
+		{
+		  "id": 34,
+		  "background": "res://Assets/DiretorEscritorio.png",
+		  "speaker": "Você",
+		  "text": "(As palavras ficam presas na garganta. Assinto com a cabeça, mas sinto o gosto amargo da covardia. Cada fibra do meu ser grita em protesto, mas minha boca permanece fechada como um túmulo.)",
+		  "sprite": "res://Assets/main_char_depressed.png",
+		  "transition": "none",
+		  "position": "right",
+		  "next_scene": 35
+		},
+		{
+		  "id": 35,
+		  "background": "res://Assets/DiretorEscritorio.png",
+		  "speaker": "Liang Bo",
+		  "text": "Excelente. Vejo que compreende as nuances da nossa posição. A medicina não é só ciência, doutor - é também diplomacia. Agora volte ao trabalho. Temos um hospital para administrar.",
+		  "sprite": "res://Assets/Liang Bo.png",
+		  "transition": "none",
+		  "position": "left",
+		  "next_scene": 38
+		},
+		{
+		  "id": 36,
+		  "background": "res://Assets/DiretorEscritorio.png",
+		  "speaker": "Você",
+		  "text": "Deixe-me entender... O hospital vai oficialmente encobrir uma doença potencialmente nova? E quantos precisarão morrer antes que isso deixe de ser um 'incidente isolado' e vire uma crise real?",
+		  "//comment": "Ação: O jogador vê um pequeno ícone de gravação piscar na tela.",
+		  "sprite": "res://Assets/main_char_angry.png",
+		  "transition": "none",
+		  "position": "right",
+		  "next_scene": 37
+		},
+		{
+		  "id": 37,
+		  "background": "res://Assets/DiretorEscritorio.png",
+		  "speaker": "Liang Bo",
 		  "text": "Dr. Liu, estou protegendo nossa comunidade do caos. Às vezes a estabilidade social vale mais que a transparência médica. Você pode chamar de encobrimento - eu chamo de liderança responsável. Um dia entenderá.",
 		  "sprite": "res://Assets/Liang Bo.png",
 		  "transition": "none",
 		  "position": "left",
-		  "next_scene": 34
+		  "next_scene": 38
 		},
 		{
-		  "id": 34,
+		  "id": 38,
 		  "background": "res://Assets/ApartamentoBanheiro.png",
 		  "speaker": "Você",
 		  "text": "(A água quente do chuveiro deveria lavar o cansaço do plantão, mas não consegue limpar o peso da conversa com o Diretor. Algumas manchas na alma não saem com água e sabão.)",
 		  "sprite": "",
 		  "transition": "fade_in",
 		  "position": "center",
-		  "next_scene": 35
+		  "next_scene": 39
 		},
 		{
-		  "id": 35,
+		  "id": 39,
 		  "background": "res://Assets/ApartamentoBanheiro.png",
 		  "speaker": "Narrador",
 		  "text": "Do quarto, o celular vibra insistentemente, o som cortando o ruído do ar condicionado como uma sirene de emergência que não para.",
 		  "sprite": "",
 		  "transition": "none",
 		  "position": "center",
-		  "next_scene": 36
+		  "next_scene": 40
 		},
 		{
-		  "id": 36,
+		  "id": 40,
 		  "background": "res://Assets/MensagemRecebida.png",
 		  "speaker": "Mensagem Anônima",
 		  "text": "Você viu o que aconteceu na 304. Isso não começou no mercado de frutos do mar. Não é mutação natural. Procure a verdade no laboratório P4. Escolha: aceitar o silêncio deles ou buscar sua própria verdade. O tempo está acabando.",
@@ -443,66 +486,25 @@
 		  "choices": [
 			{
 			  "text": "Responder: 'Quem é você? Como sabe disso?'",
-			  "next_scene": 37
+			  "next_scene": 41
 			},
 			{
 			  "text": "Deletar imediatamente e tentar esquecer",
-			  "next_scene": 39
+			  "next_scene": 43
 			},
 			{
 			  "text": "Ligar para Zhang Yu urgentemente",
-			  "next_scene": 41
+			  "next_scene": 45
 			}
 		  ]
 		},
 		{
-		  "id": 37,
+		  "id": 41,
 		  "background": "res://Assets/MensagemApagada.png",
 		  "speaker": "Narrador",
 		  "text": "Suas mãos tremem enquanto digita. Por um breve momento, você vê um avatar - silhueta feminina - antes que toda a conversa seja apagada como se nunca tivesse existido. A tela agora mostra apenas: 'Conversa não encontrada'.",
 		  "sprite": "",
 		  "transition": "none",
-		  "position": "center",
-		  "next_scene": 38
-		},
-		{
-		  "id": 38,
-		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você",
-		  "text": "(Uma silhueta de mulher... uma mensagem que se autodestrói... e agora Zhang não atende. Isso não é paranoia. Alguém está me observando, e talvez algo tenha acontecido com ele também.)",
-		  "sprite": "res://Assets/main_char_depressed.png",
-		  "transition": "none",
-		  "position": "center",
-		  "audio": "res://Assets/Audio/BGM/bgm_suppression.ogg",
-		  "next_scene": 43
-		},
-		{
-		  "id": 39,
-		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você",
-		  "text": "(Deleto a mensagem, mas as palavras se recusam a sair da minha mente: 'Laboratório P4... não começou no mercado...' Ignorar não vai fazer a verdade desaparecer. Só vai me tornar cúmplice dela.)",
-		  "sprite": "res://Assets/main_char_depressed.png",
-		  "transition": "fade_in",
-		  "position": "center",
-		  "next_scene": 40
-		},
-		{
-		  "id": 40,
-		  "background": "res://Assets/JanelaHospital.png",
-		  "speaker": "Você",
-		  "text": "(A mensagem sumiu, mas as perguntas continuam. E agora, com o silêncio de Zhang, tenho certeza: não sou mais apenas um espectador. Sou parte disso, querendo ou não.)",
-		  "sprite": "res://Assets/main_char_depressed.png",
-		  "transition": "none",
-		  "position": "left",
-		  "next_scene": 43
-		},
-		{
-		  "id": 41,
-		  "background": "res://Assets/CelularChamando.png",
-		  "speaker": "Narrador",
-		  "text": "O telefone toca no vazio. Uma, duas, três tentativas. A caixa postal responde com a voz familiar de Zhang, mas há algo estranho... um ruído de fundo, como metal sendo arrastado, antes da linha cair.",
-		  "sprite": "",
-		  "transition": "fade_in",
 		  "position": "center",
 		  "next_scene": 42
 		},
@@ -510,17 +512,18 @@
 		  "id": 42,
 		  "background": "res://Assets/JanelaHospital.png",
 		  "speaker": "Você",
-		  "text": "(Aquele ruído na ligação... não foi imaginação. Algo aconteceu com Zhang. A mensagem, o silêncio, e agora isso. Estou sozinho numa teia que não entendo, mas da qual não posso mais escapar.)",
+		  "text": "(Uma silhueta de mulher... uma mensagem que se autodestrói... e agora Zhang não atende. Isso não é paranoia. Alguém está me observando, e talvez algo tenha acontecido com ele também.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "none",
 		  "position": "center",
-		  "next_scene": 43
+		  "audio": "res://Assets/Audio/BGM/bgm_suppression.ogg",
+		  "next_scene": 47
 		},
 		{
 		  "id": 43,
 		  "background": "res://Assets/JanelaHospital.png",
 		  "speaker": "Você",
-		  "text": "(Lá fora, Wuhan dorme em paz, alheia ao que pode estar se aproximando. Mas eu não consigo mais dormir. O peso do que sei - e principalmente do que não sei - é grande demais para ignorar.)",
+		  "text": "(Deleto a mensagem, mas as palavras se recusam a sair da minha mente: 'Laboratório P4... não começou no mercado...' Ignorar não vai fazer a verdade desaparecer. Só vai me tornar cúmplice dela.)",
 		  "sprite": "res://Assets/main_char_depressed.png",
 		  "transition": "fade_in",
 		  "position": "center",
@@ -530,24 +533,64 @@
 		  "id": 44,
 		  "background": "res://Assets/JanelaHospital.png",
 		  "speaker": "Você",
+		  "text": "(A mensagem sumiu, mas as perguntas continuam. E agora, com o silêncio de Zhang, tenho certeza: não sou mais apenas um espectador. Sou parte disso, querendo ou não.)",
+		  "sprite": "res://Assets/main_char_depressed.png",
+		  "transition": "none",
+		  "position": "left",
+		  "next_scene": 47
+		},
+		{
+		  "id": 45,
+		  "background": "res://Assets/CelularChamando.png",
+		  "speaker": "Narrador",
+		  "text": "O telefone toca no vazio. Uma, duas, três tentativas. A caixa postal responde com a voz familiar de Zhang, mas há algo estranho... um ruído de fundo, como metal sendo arrastado, antes da linha cair.",
+		  "sprite": "",
+		  "transition": "fade_in",
+		  "position": "center",
+		  "next_scene": 46
+		},
+		{
+		  "id": 46,
+		  "background": "res://Assets/JanelaHospital.png",
+		  "speaker": "Você",
+		  "text": "(Aquele ruído na ligação... não foi imaginação. Algo aconteceu com Zhang. A mensagem, o silêncio, e agora isso. Estou sozinho numa teia que não entendo, mas da qual não posso mais escapar.)",
+		  "sprite": "res://Assets/main_char_depressed.png",
+		  "transition": "none",
+		  "position": "center",
+		  "next_scene": 47
+		},
+		{
+		  "id": 47,
+		  "background": "res://Assets/JanelaHospital.png",
+		  "speaker": "Você",
+		  "text": "(Lá fora, Wuhan dorme em paz, alheia ao que pode estar se aproximando. Mas eu não consigo mais dormir. O peso do que sei - e principalmente do que não sei - é grande demais para ignorar.)",
+		  "sprite": "res://Assets/main_char_depressed.png",
+		  "transition": "fade_in",
+		  "position": "center",
+		  "next_scene": 48
+		},
+		{
+		  "id": 48,
+		  "background": "res://Assets/JanelaHospital.png",
+		  "speaker": "Você",
 		  "text": "(A mensagem ecoava na minha mente: 'O silêncio deles ou sua verdade'. Como se fosse uma escolha simples...)",
 		  "sprite": "res://Assets/main_char_determined.png",
 		  "transition": "none",
 		  "position": "center",
-		  "next_scene": 45
+		  "next_scene": 49
 		},
 		{
-		  "id": 45,
+		  "id": 49,
 		  "background": "res://Assets/JanelaHospital.png",
 		  "speaker": "Você",
 		  "text": "(Mas talvez seja exatamente isso. Uma escolha. E talvez, no fundo, eu já tenha feito a minha.)",
 		  "sprite": "res://Assets/main_char_determined.png",
 		  "transition": "none",
 		  "position": "center",
-		  "next_scene": 46
+		  "next_scene": 50
 		},
 		{
-		  "id": 46,
+		  "id": 50,
 		  "background": "res://Assets/FichaSendoTriturada.png",
 		  "speaker": "Narrador",
 		  "text": "Primeira morte não registrada.\nWuhan, China — Dezembro de 2019.\nA História começou a ser escrita... e reescrita.",
@@ -555,10 +598,10 @@
 		  "transition": "fade_out",
 		  "position": "center",
 		  "audio": "res://Assets/Audio/BGM/bgm_suppression.ogg",
-		  "next_scene": 47
+		  "next_scene": 51
 		},
 		{
-		  "id": 47,
+		  "id": 51,
 		  "highlight": true,
 		  "speaker": "Narrador",
 		  "sprite": "res://Assets/placeholder.png",
